@@ -1,4 +1,4 @@
-import React, { useState, type JSX } from "react";
+import  { useState, type JSX } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
