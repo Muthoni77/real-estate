@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css'
 import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
+import Navbar from "./components/Navbar";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -11,7 +12,7 @@ function App() {
     <>
         <Router>
       <div className="w-full h-full">
-        {/* <Navbar /> */}
+        <Navbar />
         <div className="">
           <Routes>
             <Route path="/home" element={<HomePage />} />

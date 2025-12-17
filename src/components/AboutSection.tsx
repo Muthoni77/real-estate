@@ -11,16 +11,15 @@ const AboutSection = () => {
             
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <p className="text-sm text-muted-foreground leading-relaxed">
-                We are a modern housing agency that connects students and teachers with quality 
-                accommodation near their campuses. Over the years, we have earned a reputation 
-                as a trusted partner for those seeking not just property, but the right place 
-                to live, grow, and thrive.
+               Modern, secure, and fully furnished one-bedroom hostel apartments designed
+            exclusively for students. Peaceful living, convenient locations, and all
+            utilities included.
               </p>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Our team studies the market, follows new trends, and applies advanced tools to 
-                provide our clients with the most relevant and affordable options. Whether it's 
-                your first rental or your tenth, we guide you through every step with 
-                transparency and care.
+         Enjoy a vibrant student community with thoughtfully designed common areas, 
+  study spaces, and social lounges. With high-speed internet, on-site maintenance, 
+  and flexible lease options, your living experience is convenient, comfortable, 
+  and tailored to support your academic journey.
               </p>
             </div>
 
