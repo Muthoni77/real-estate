@@ -300,10 +300,10 @@ export default function LandingPage() {
           
           <div className="mt-12 grid md:grid-cols-4 gap-6">
             {[
-              { occupancy: "4 Students", price: "2,700", popular: false },
-              { occupancy: "3 Students", price: "3,600", popular: true },
-              { occupancy: "2 Students", price: "4,750", popular: false },
-              { occupancy: "1 Student", price: "9,000", popular: false },
+              { occupancy: "1 Bedroom 4 beds/4 students", price: "2,700", popular: false },
+              { occupancy: "1 Bedroom 3 beds/3 students", price: "3,600", popular: true },
+              { occupancy: "1 Bedroom 2 beds/2 students", price: "4,750", popular: false },
+              { occupancy: "1 Bedroom 1 bed/1 student", price: "9,000", popular: false },
             ].map((plan) => (
               <div 
                 key={plan.occupancy}

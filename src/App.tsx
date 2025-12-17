@@ -1,9 +1,13 @@
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css'
-import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
 import Navbar from "./components/Navbar";
+import FAQs from "./pages/FAQ";
+import TrustSafety from "./pages/TrustSafety";
+import { Apartments } from "./pages/Apartment";
+import { Amenities } from "./pages/Amenties";
+import RequestForm from "./pages/RequestForm";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -15,7 +19,11 @@ function App() {
         <Navbar />
         <div className="">
           <Routes>
-            <Route path="/home" element={<HomePage />} />
+            <Route path="/faqs" element={<FAQs />} />
+            <Route path="/trust-safety" element={<TrustSafety/>} />
+            <Route path="/apartments" element={<Apartments/>} />
+            <Route path="/amenities" element={<Amenities/>} />
+            <Route path="/request" element={<RequestForm/>} />
             <Route path="/" element={<LandingPage/>} />
           </Routes>
         </div>
