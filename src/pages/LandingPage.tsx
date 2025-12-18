@@ -1,4 +1,4 @@
-import { MapPin, Shield, Wifi, Dumbbell,  Star, ChevronRight, Phone, Mail, CheckCircle2, Waves, Flame, CircleDot } from "lucide-react";
+import {  Shield, Wifi, Dumbbell, Star, ChevronRight, Phone, Mail,  CheckCircle2, Waves, Flame, CircleDot } from "lucide-react";
 
 // Import images
 import heroImage from "../assets/hero-dubai.jpg";
@@ -11,6 +11,10 @@ import poolImage from "../assets/amenity-pool.jpg";
 import gymImage from "../assets/amenity-gym.jpg";
 import dubaiMarina from "../assets/dubai-marina.jpg";
 
+import { LocationHoverGallery } from "../components/LocationHoverGallery";
+import { Link } from "react-router-dom";
+
+
 const locations = [
   { name: "Al Barsha Heights (Tecom)", distance: "5 min to metro", image: apartment1 },
   { name: "Dubai Marina", distance: "2 min to beach", image: dubaiMarina },
@@ -20,12 +24,7 @@ const locations = [
   { name: "Academic City", distance: "Close to universities", image: apartment5 },
 ];
 
-// const amenities = [
-//   { name: "Swimming Pool", description: "Relax and unwind after classes", icon: Waves, image: poolImage },
-//   { name: "Fully Equipped Gym", description: "Stay fit and active", icon: Dumbbell, image: gymImage },
-//   { name: "Sauna", description: "Recharge after a busy day", icon: Flame, image: null },
-//   { name: "Basketball Court", description: "Recreation and sports on-site", icon: CircleDot, image: null },
-// ];
+
 
 const galleryImages = [
   { src: apartment1, title: "Premium Bedroom", category: "Bedroom" },
@@ -48,18 +47,18 @@ export default function LandingPage() {
     <main className="bg-background text-foreground">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroImage})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/80 via-primary/60 to-primary-dark/90" />
-        
+
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center py-20">
           <div className="inline-flex items-center gap-2 bg-secondary/20 backdrop-blur-sm border border-secondary/30 rounded-full px-4 py-2 mb-8 animate-fade-up">
             <Star className="w-4 h-4 text-yellow-500" fill="currentColor" />
             <span className="text-white text-sm font-medium">Student-Only Living in Dubai</span>
           </div>
-          
+
           <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white font-semibold tracking-tight leading-tight animate-fade-up" style={{ animationDelay: '0.1s' }}>
             Premium Student-Only
             <span className="block text-secondary">Hostel Apartments</span>
@@ -71,7 +70,7 @@ export default function LandingPage() {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.3s' }}>
-            <button className="px-8 py-4 rounded-xl bg-primary text-white font-semibold text-lg hover:shadow-accent transition-all duration-300 hover:-translate-y-1">
+            <button className="px-8 py-4 rounded-xl bg-gradient-accent text-white font-semibold text-lg hover:shadow-accent transition-all duration-300 hover:-translate-y-1">
               Request a Hostel
             </button>
             <button className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-medium text-lg hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2">
@@ -114,11 +113,11 @@ export default function LandingPage() {
                 Designed Exclusively for Students
               </h2>
               <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-                Modern, secure, and fully furnished one-bedroom hostel apartments designed 
-                exclusively for students. Conveniently located near universities and metro stations. 
+                Modern, secure, and fully furnished one-bedroom hostel apartments designed
+                exclusively for students. Conveniently located near universities and metro stations.
                 Peaceful environment with all utilities included.
               </p>
-              
+
               <div className="mt-8 space-y-4">
                 {["All utilities & WiFi included", "24/7 maintenance support", "Flexible payment plans", "Student community events"].map((item) => (
                   <div key={item} className="flex items-center gap-3">
@@ -128,11 +127,11 @@ export default function LandingPage() {
                 ))}
               </div>
             </div>
-            
+
             <div className="relative">
-              <img 
-                src={apartment2} 
-                alt="Luxury apartment interior" 
+              <img
+                src={apartment2}
+                alt="Luxury apartment interior"
                 className="rounded-3xl shadow-elevated w-full h-[500px] object-cover"
               />
               <div className="absolute -bottom-6 -left-6 bg-primary text-white p-6 rounded-2xl shadow-elevated">
@@ -159,18 +158,16 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {galleryImages.map((image, index) => (
-              <div 
+              <div
                 key={index}
-                className={`relative group overflow-hidden rounded-2xl cursor-pointer hover-lift ${
-                  index === 0 ? 'md:col-span-2 md:row-span-2' : ''
-                }`}
-              >
-                <img 
-                  src={image.src} 
-                  alt={image.title}
-                  className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
-                    index === 0 ? 'h-[300px] md:h-full' : 'h-[200px] md:h-[250px]'
+                className={`relative group overflow-hidden rounded-2xl cursor-pointer hover-lift ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''
                   }`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.title}
+                  className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${index === 0 ? 'h-[300px] md:h-full' : 'h-[200px] md:h-[250px]'
+                    }`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -198,35 +195,11 @@ export default function LandingPage() {
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {locations.map((location) => (
-              <div
+              <LocationHoverGallery
                 key={location.name}
-                className="group relative overflow-hidden rounded-2xl bg-card shadow-card hover-lift cursor-pointer"
-              >
-                <div className="h-48 overflow-hidden">
-                  <img 
-                    src={location.image} 
-                    alt={location.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="font-display text-xl font-semibold text-foreground">{location.name}</h3>
-                      <div className="flex items-center gap-2 mt-2 text-muted-foreground text-sm">
-                        <MapPin className="w-4 h-4 text-secondary" />
-                        <span>{location.distance}</span>
-                      </div>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary transition-colors">
-                      <ChevronRight className="w-5 h-5 text-secondary group-hover:text-white transition-colors" />
-                    </div>
-                  </div>
-                  <p className="mt-4 text-sm text-muted-foreground">
-                    Fully furnished • Max 4 students • All bills included
-                  </p>
-                </div>
-              </div>
+                location={location}
+                variant="landing"
+              />
             ))}
           </div>
         </div>
@@ -256,7 +229,7 @@ export default function LandingPage() {
                 <p className="text-white/70 mt-2">Relax and unwind after a busy day of classes</p>
               </div>
             </div>
-            
+
             <div className="relative group overflow-hidden rounded-3xl h-[400px]">
               <img src={gymImage} alt="Fitness Center" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
@@ -297,24 +270,23 @@ export default function LandingPage() {
             Pricing ranges from <span className="text-secondary font-semibold">AED 2,700</span> to <span className="text-secondary font-semibold">AED 9,000</span> per student depending on
             occupancy. All bills included — no hidden costs.
           </p>
-          
+
           <div className="mt-12 grid md:grid-cols-4 gap-6">
             {[
-              { occupancy: "1 Bedroom 4 beds/4 students", price: "2,700", popular: false },
-              { occupancy: "1 Bedroom 3 beds/3 students", price: "3,600", popular: true },
-              { occupancy: "1 Bedroom 2 beds/2 students", price: "4,750", popular: false },
-              { occupancy: "1 Bedroom 1 bed/1 student", price: "9,000", popular: false },
+              { occupancy: "1 Bedroom/4 beds/4 students", price: "2,700", popular: false },
+              { occupancy: "1 bedroom/3 beds/3 students", price: "3,600", popular: true },
+              { occupancy: "1 bedroom/2 beds/2 students", price: "4,750", popular: false },
+              { occupancy: "1 bedroom/1 bed/1 student", price: "9,000", popular: false },
             ].map((plan) => (
-              <div 
+              <div
                 key={plan.occupancy}
-                className={`relative rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 ${
-                  plan.popular 
-                    ? 'bg-secondary text-white shadow-accent' 
+                className={`relative rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 ${plan.popular
+                    ? 'bg-primary text-white shadow-accent'
                     : 'bg-card shadow-card border border-border'
-                }`}
+                  }`}
               >
                 {plan.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-semibold px-4 py-1 rounded-full">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-white text-xs font-semibold px-4 py-1 rounded-full">
                     Most Popular
                   </span>
                 )}
@@ -339,11 +311,10 @@ export default function LandingPage() {
                     Cleaning included
                   </li>
                 </ul>
-                <button className={`mt-6 w-full py-3 rounded-xl font-medium transition-all ${
-                  plan.popular 
-                    ? 'bg-white text-secondary hover:bg-white/90' 
+                <button className={`mt-6 w-full py-3 rounded-xl font-medium transition-all ${plan.popular
+                    ? 'bg-white text-secondary hover:bg-white/90'
                     : 'bg-secondary text-white hover:shadow-accent'
-                }`}>
+                  }`}>
                   Get Started
                 </button>
               </div>
@@ -357,23 +328,23 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="relative">
-              <img 
-                src={apartment1} 
-                alt="Secure apartment" 
+              <img
+                src={apartment1}
+                alt="Secure apartment"
                 className="rounded-3xl shadow-elevated w-full h-[500px] object-cover"
               />
             </div>
-            
+
             <div>
               <p className="text-secondary font-medium mb-4 tracking-wider uppercase text-sm">Trust & Safety</p>
               <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground leading-tight">
                 Your Safety is Our Priority
               </h2>
               <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-                At our student hostel apartments, the safety, security, and well-being of our residents are our top priority. 
+                At our student hostel apartments, the safety, security, and well-being of our residents are our top priority.
                 We ensure a worry-free living environment for both students and parents.
               </p>
-              
+
               <div className="mt-8 grid grid-cols-2 gap-4">
                 {["24/7 Security", "CCTV Monitoring", "Controlled Access", "Emergency Support", "Secure WiFi", "Parental Assurance"].map((item) => (
                   <div key={item} className="flex items-center gap-3 bg-muted rounded-xl p-4">
@@ -426,11 +397,11 @@ export default function LandingPage() {
 
       {/* CTA Section */}
       <section className="py-24 bg-primary text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 opacity-10">
           <img src={heroImage} alt="" className="w-full h-full object-cover" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary" />
-        
+        <div className="absolute inset-0  bg-gradient-to-b from-primary-dark/80 via-primary/60 to-primary-dark/90" />
+
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <h2 className="font-display text-3xl md:text-5xl font-semibold">
             Ready to Find Your
@@ -439,11 +410,14 @@ export default function LandingPage() {
           <p className="mt-6 text-white/70 text-lg max-w-xl mx-auto">
             Join 500+ students who have already made our residences their home in Dubai.
           </p>
-          
+
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 rounded-xl bg-secondary text-white font-semibold text-lg hover:shadow-accent transition-all duration-300 hover:-translate-y-1">
+            <Link
+              to="/request"
+              className="px-8 py-3 rounded-xl bg-secondary text-cream font-medium hover:bg-secondary/90 transition"
+            >
               Request a Hostel
-            </button>
+            </Link>
             <button className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-medium text-lg hover:bg-white/10 transition-all duration-300">
               Book a Virtual Tour
             </button>
@@ -454,33 +428,16 @@ export default function LandingPage() {
               <Phone className="w-5 h-5" />
               <span>+971 54 559 4940</span>
             </a>
-            <a href="mailto:info@dubaistudenthomes.com" className="flex items-center gap-2 hover:text-secondary transition-colors">
+            <a href="mailto:info@dubaistudenthostels.com" className="flex items-center gap-2 hover:text-secondary transition-colors">
               <Mail className="w-5 h-5" />
-              <span>info@dubaistudenthomes.com</span>
+              <span>info@dubaistudenthostels.com</span>
             </a>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      {/* <footer className="py-12 bg-primary text-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <p className="font-display text-xl font-semibold">Dubai Student Homes</p>
-              <p className="text-white/70 text-sm mt-1">Premium student living in Dubai</p>
-            </div>
-            <div className="flex items-center gap-6 text-sm text-white/70">
-              <a href="#" className="hover:text-secondary transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-secondary transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-secondary transition-colors">Contact</a>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-white/10 text-center text-sm text-white/50">
-            © 2024 Dubai Student Homes. All rights reserved.
-          </div>
-        </div>
-      </footer> */}
+
     </main>
   );
 }
+

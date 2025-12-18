@@ -3,6 +3,7 @@ import { Home, ChevronRight, CheckCircle, Phone, Mail, MapPin, Users } from "luc
 import { Link } from "react-router-dom";
 import heroImage from "../assets/apartment-2.jpg";
 
+
 interface RequestFormData {
   fullName: string;
   email: string;
@@ -208,7 +209,7 @@ export default function RequestForm() {
                       required
                     >
                       <option value="">Number of Students *</option>
-                      <option value="1">1 Student - AED 9,000/month</option>
+                      <option value="1">live alone - AED 9,000/month</option>
                       <option value="2">2 Students - AED 4,750/student</option>
                       <option value="3">3 Students - AED 3,600/student</option>
                       <option value="4">4 Students - AED 2,700/student</option>
@@ -329,7 +330,7 @@ export default function RequestForm() {
                     <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
                       <Mail className="w-5 h-5 text-secondary" />
                     </div>
-                    <span>info..studenthostels.ae</span>
+                    <span>info@dubaistudenthostels.com</span>
                   </a>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">

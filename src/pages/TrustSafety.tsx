@@ -178,9 +178,14 @@ export default function TrustSafety() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-primary text-primary-foreground text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-semibold">
+         <section className="py-24 bg-primary text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <img src={heroImage} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute inset-0  bg-gradient-to-b from-primary-dark/80 via-primary/60 to-primary-dark/90" />
+        
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+           <h2 className="text-2xl md:text-3xl font-semibold">
             Your Safety is Our Commitment
           </h2>
           <p className="mt-4 text-primary-foreground/80 max-w-2xl mx-auto">
@@ -189,7 +194,7 @@ export default function TrustSafety() {
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/request"
-              className="px-8 py-3 rounded-xl bg-background text-secondary font-medium hover:bg-background/90 transition"
+              className="px-8 py-3 rounded-xl bg-secondary text-cream font-medium hover:bg-secondary/90 transition"
             >
               Request a Hostel
             </Link>
@@ -200,8 +205,11 @@ export default function TrustSafety() {
               Request a Callback
             </a>
           </div>
+
+        
         </div>
       </section>
+      
     </main>
   );
 }

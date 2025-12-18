@@ -9,6 +9,7 @@ import Apartments  from "./pages/Apartment";
 import  Amenities  from "./pages/Amenties";
 import RequestForm from "./pages/RequestForm";
 import Footer from "./components/Footer";
+import NotFound from "./pages/NotFound";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -26,6 +27,7 @@ function App() {
             <Route path="/amenities" element={<Amenities/>} />
             <Route path="/request" element={<RequestForm/>} />
             <Route path="/" element={<LandingPage/>} />
+              <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         <Footer/>

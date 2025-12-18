@@ -1,4 +1,5 @@
 import { Home, ChevronRight, CheckCircle, Waves, Dumbbell, Sparkles, Dribbble, Wifi, ShieldCheck, Bus, Tv, UtensilsCrossed, Bath } from "lucide-react";
+import heroImage from "../assets/dubai-marina.jpg";
 import { Link } from "react-router-dom";
 
 import amenityPool from "../assets/amenity-pool.jpg";
@@ -190,18 +191,24 @@ export default function Amenities() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-primary text-primary-foreground text-center">
-        <div className="max-w-4xl mx-auto px-6">
+         <section className="py-24 bg-primary text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <img src={heroImage} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute inset-0  bg-gradient-to-b from-primary-dark/80 via-primary/60 to-primary-dark/90" />
+        
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-2xl md:text-3xl font-semibold">
             Everything You Need to Live Well
           </h2>
           <p className="mt-4 text-primary-foreground/80 max-w-2xl mx-auto">
             Our student hostel apartments are designed to support a healthy, balanced, and enjoyable lifestyle.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
+          
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+             <Link
               to="/request"
-              className="px-8 py-3 rounded-xl bg-background text-secondary font-medium hover:bg-background/90 transition"
+              className="px-8 py-3 rounded-xl bg-secondary text-white font-medium hover:bg-background/90 transition"
             >
               Request a Hostel
             </Link>
@@ -211,9 +218,12 @@ export default function Amenities() {
             >
               Request a Callback
             </a>
+          
           </div>
+
         </div>
       </section>
+    
     </main>
   );
 }
