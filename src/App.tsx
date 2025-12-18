@@ -5,9 +5,10 @@ import LandingPage from './pages/LandingPage';
 import Navbar from "./components/Navbar";
 import FAQs from "./pages/FAQ";
 import TrustSafety from "./pages/TrustSafety";
-import { Apartments } from "./pages/Apartment";
-import { Amenities } from "./pages/Amenties";
+import Apartments  from "./pages/Apartment";
+import  Amenities  from "./pages/Amenties";
 import RequestForm from "./pages/RequestForm";
+import Footer from "./components/Footer";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -27,7 +28,7 @@ function App() {
             <Route path="/" element={<LandingPage/>} />
           </Routes>
         </div>
-        {/* <Footer/> */}
+        <Footer/>
       </div>
     </Router>
        

@@ -71,7 +71,7 @@ export default function LandingPage() {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.3s' }}>
-            <button className="px-8 py-4 rounded-xl bg-gradient-accent text-white font-semibold text-lg hover:shadow-accent transition-all duration-300 hover:-translate-y-1">
+            <button className="px-8 py-4 rounded-xl bg-primary text-white font-semibold text-lg hover:shadow-accent transition-all duration-300 hover:-translate-y-1">
               Request a Hostel
             </button>
             <button className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-medium text-lg hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2">
@@ -441,7 +441,7 @@ export default function LandingPage() {
           </p>
           
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 rounded-xl bg-gradient-accent text-white font-semibold text-lg hover:shadow-accent transition-all duration-300 hover:-translate-y-1">
+            <button className="px-8 py-4 rounded-xl bg-secondary text-white font-semibold text-lg hover:shadow-accent transition-all duration-300 hover:-translate-y-1">
               Request a Hostel
             </button>
             <button className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-medium text-lg hover:bg-white/10 transition-all duration-300">
@@ -463,7 +463,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-primary text-white">
+      {/* <footer className="py-12 bg-primary text-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
@@ -480,7 +480,7 @@ export default function LandingPage() {
             © 2024 Dubai Student Homes. All rights reserved.
           </div>
         </div>
-      </footer>
+      </footer> */}
     </main>
   );
 }
