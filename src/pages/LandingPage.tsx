@@ -10,18 +10,17 @@ import apartment5 from "../assets/apartment-5.jpg";
 import poolImage from "../assets/amenity-pool.jpg";
 import gymImage from "../assets/amenity-gym.jpg";
 import dubaiMarina from "../assets/dubai-marina.jpg";
-
 import { LocationHoverGallery } from "../components/LocationHoverGallery";
 import { Link } from "react-router-dom";
 
 
 const locations = [
-  { name: "Al Barsha Heights (Tecom)", distance: "5 min to metro", image: apartment1 },
-  { name: "Dubai Marina", distance: "2 min to beach", image: dubaiMarina },
-  { name: "JLT", distance: "Walking distance to JLT metro", image: apartment2 },
-  { name: "Mall of the Emirates", distance: "3 min walk", image: apartment3 },
-  { name: "Ibn Battuta", distance: "Near Ibn Battuta Mall", image: apartment4 },
-  { name: "Academic City", distance: "Close to universities", image: apartment5 },
+  { name: "Al Barsha Heights (Tecom)", distance: "2 min to metro", image: apartment1 },
+  { name: "Dubai Marina", distance: "2 min to metro", image: dubaiMarina },
+  { name: "JLT", distance: "4 min to metro", image: apartment2 },
+  { name: "Mall of the Emirates", distance: "3 min to metro", image: apartment3 },
+  { name: "Ibn Battuta", distance: "1 min to metro", image: apartment4 },
+  { name: "Academic City", distance: "4 min to metro", image: apartment5 },
 ];
 
 
@@ -135,7 +134,7 @@ export default function LandingPage() {
                 className="rounded-3xl shadow-elevated w-full h-[500px] object-cover"
               />
               <div className="absolute -bottom-6 -left-6 bg-primary text-white p-6 rounded-2xl shadow-elevated">
-                <p className="text-4xl font-display font-bold text-secondary">5+</p>
+                <p className="text-4xl font-display font-bold text-secondary">15+</p>
                 <p className="text-sm mt-1">Years Experience</p>
               </div>
             </div>
@@ -435,8 +434,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-
     </main>
   );
 }

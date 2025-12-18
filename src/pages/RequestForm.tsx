@@ -208,7 +208,7 @@ export default function RequestForm() {
                       className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
                       required
                     >
-                      <option value="">Number of Students *</option>
+                      <option value="">Share number of Students *</option>
                       <option value="1">live alone - AED 9,000/month</option>
                       <option value="2">2 Students - AED 4,750/student</option>
                       <option value="3">3 Students - AED 3,600/student</option>
