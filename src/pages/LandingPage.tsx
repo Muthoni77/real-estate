@@ -92,7 +92,7 @@ export default function LandingPage() {
               <p className="text-white/70 text-sm mt-1">Happy Students</p>
             </div>
             <div className="text-center border-x border-white/20">
-              <p className="text-3xl md:text-4xl font-display font-bold text-secondary">6</p>
+              <p className="text-3xl md:text-4xl font-display font-bold text-secondary">9</p>
               <p className="text-white/70 text-sm mt-1">Prime Locations</p>
             </div>
             <div className="text-center">

@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { MapPin, Users, Wifi, Home, ChevronRight, CheckCircle, Search, X, Building2, GraduationCap, SlidersHorizontal, ChevronDown } from "lucide-react";
+import { MapPin, Users, Wifi, Home, ChevronRight, CheckCircle, GraduationCap, Bed, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
 import locationMarina from "../assets/location-marina.jpg";
 import locationBarsha from "../assets/location-barsha.jpg";
@@ -98,16 +98,19 @@ const apartmentLocations = [
   },
 ];
 
-const dubaiAreas = [
-  "All Areas",
-  "Al Barsha",
-  "Dubai Marina",
-  "JLT",
-  "Jebel Ali",
-  "Academic City",
-  "Production City",
-  "DIP",
-  "Remraam",
+const livingPreferences = [
+  { id: "all", label: "All Options", beds: null },
+  { id: "solo", label: "Live Alone", beds: 1, description: "Private 1 bedroom" },
+  { id: "shared-2", label: "Shared (2 students)", beds: 2, description: "Share with 1 roommate" },
+  { id: "shared-3", label: "Shared (3 students)", beds: 3, description: "Share with 2 roommates" },
+  { id: "shared-4", label: "Shared (4 students)", beds: 4, description: "Share with 3 roommates" },
+];
+
+const priceRanges = [
+  { id: "all", label: "Any Budget", min: 0, max: Infinity },
+  { id: "budget", label: "Under AED 3,000", min: 0, max: 3000 },
+  { id: "mid", label: "AED 3,000 - 5,000", min: 3000, max: 5000 },
+  { id: "premium", label: "Above AED 5,000", min: 5000, max: Infinity },
 ];
 
 const allUniversities = [
@@ -126,41 +129,55 @@ const allUniversities = [
   "Manipal Academy",
 ];
 
-const propertyTypes = ["All", "Furnished", "Unfurnished"];
+// Price per bed count (for filtering)
+const priceByBeds: Record<number, number> = {
+  1: 9000,
+  2: 4750,
+  3: 3600,
+  4: 2700,
+};
 
 export default function Apartments() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedArea, setSelectedArea] = useState("All Areas");
+  const [selectedLiving, setSelectedLiving] = useState("all");
+  const [selectedPrice, setSelectedPrice] = useState("all");
   const [selectedUniversity, setSelectedUniversity] = useState("All Universities");
-  const [showFilters, setShowFilters] = useState(false);
-  const [selectedType, setSelectedType] = useState("All");
 
   const filteredLocations = useMemo(() => {
-    return apartmentLocations.filter((apt) => {
-      const matchesSearch =
-        apt.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        apt.area.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        apt.nearbyUniversities.some((uni) =>
-          uni.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      const matchesArea = selectedArea === "All Areas" || apt.area === selectedArea;
+    let results = apartmentLocations.filter((apt) => {
       const matchesUniversity = 
         selectedUniversity === "All Universities" || 
         apt.nearbyUniversities.some((uni) => 
           uni.toLowerCase().includes(selectedUniversity.toLowerCase())
         );
-      return matchesSearch && matchesArea && matchesUniversity;
+      return matchesUniversity;
     });
-  }, [searchQuery, selectedArea, selectedUniversity]);
 
-  const clearFilters = () => {
-    setSearchQuery("");
-    setSelectedArea("All Areas");
-    setSelectedUniversity("All Universities");
-    setSelectedType("All");
+    // If no results, show all (nearby suggestion)
+    if (results.length === 0) {
+      results = apartmentLocations;
+    }
+
+    return results;
+  }, [selectedUniversity]);
+
+  // Check if selected price range matches any bed option
+  const matchesPriceFilter = (priceRangeId: string) => {
+    if (priceRangeId === "all") return true;
+    const range = priceRanges.find(p => p.id === priceRangeId);
+    if (!range) return true;
+    
+    // Check if any bed price falls in range
+    return Object.values(priceByBeds).some(price => price >= range.min && price < range.max);
   };
 
-  const hasActiveFilters = searchQuery || selectedArea !== "All Areas" || selectedUniversity !== "All Universities";
+  const clearFilters = () => {
+    setSelectedLiving("all");
+    setSelectedPrice("all");
+    setSelectedUniversity("All Universities");
+    console.log({matchesPriceFilter});
+  };
+
+  const hasActiveFilters = selectedLiving !== "all" || selectedPrice !== "all" || selectedUniversity !== "All Universities";
 
   return (
     <main className="bg-background text-foreground">
@@ -199,139 +216,104 @@ export default function Apartments() {
         </div>
       </section>
 
-      {/* Dubizzle-Style Search & Filter Section */}
-      <section className="py-6 bg-card border-b border-border sticky top-0 z-40 shadow-sm">
+      {/* Simplified Filter Section */}
+      <section className="py-8 bg-card border-b border-border shadow-sm">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Main Filter Row */}
-          <div className="flex flex-wrap gap-3 items-center">
-            {/* Search Bar */}
-            <div className="relative flex-1 min-w-[250px]">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Search location, area, or university..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-10 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all"
-              />
-              {searchQuery && (
+          {/* Filter Header */}
+          <div className="text-center mb-6">
+            <p className="text-sm text-secondary">Find your perfect student accommodation</p>
+          </div>
+
+          {/* Living Preference Filter */}
+          <div className="mb-6">
+            <div className="flex items-center gap-2 mb-3">
+              <Bed className="w-4 h-4 text-secondary" />
+              <span className="text-sm font-medium text-foreground">How do you want to live?</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {livingPreferences.map((pref) => (
                 <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  key={pref.id}
+                  onClick={() => setSelectedLiving(pref.id)}
+                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                    selectedLiving === pref.id
+                      ? "bg-secondary text-white shadow-md"
+                      : "bg-muted hover:bg-muted/80 text-foreground"
+                  }`}
                 >
-                  <X className="w-4 h-4" />
+                  <span>{pref.label}</span>
+                  {pref.description && selectedLiving === pref.id && (
+                    <span className="block text-xs opacity-80 mt-0.5">{pref.description}</span>
+                  )}
                 </button>
-              )}
+              ))}
             </div>
+          </div>
 
-            {/* Area Dropdown */}
-            <div className="relative">
-              <select
-                value={selectedArea}
-                onChange={(e) => setSelectedArea(e.target.value)}
-                className="appearance-none px-4 py-3 pr-10 rounded-xl border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary cursor-pointer min-w-[160px]"
-              >
-                {dubaiAreas.map((area) => (
-                  <option key={area} value={area}>
-                    {area}
-                  </option>
+          {/* Price Range & University Row */}
+          <div className="flex flex-wrap gap-4 items-end">
+            {/* Price Range */}
+            <div className="flex-1 min-w-[200px]">
+              <div className="flex items-center gap-2 mb-3">
+                <DollarSign className="w-4 h-4 text-secondary" />
+                <span className="text-sm font-medium text-foreground">Budget</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {priceRanges.map((range) => (
+                  <button
+                    key={range.id}
+                    onClick={() => setSelectedPrice(range.id)}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                      selectedPrice === range.id
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted hover:bg-muted/80 text-foreground"
+                    }`}
+                  >
+                    {range.label}
+                  </button>
                 ))}
-              </select>
-              <Building2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+              </div>
             </div>
 
-            {/* University Dropdown */}
-            <div className="relative">
-              <select
-                value={selectedUniversity}
-                onChange={(e) => setSelectedUniversity(e.target.value)}
-                className="appearance-none px-4 py-3 pr-10 rounded-xl border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary cursor-pointer min-w-[200px]"
-              >
-                {allUniversities.map((uni) => (
-                  <option key={uni} value={uni}>
-                    {uni}
-                  </option>
-                ))}
-              </select>
-              <GraduationCap className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+            {/* University Filter */}
+            <div className="min-w-[220px]">
+              <div className="flex items-center gap-2 mb-3">
+                <GraduationCap className="w-4 h-4 text-secondary" />
+                <span className="text-sm font-medium text-foreground">Near Your Campus</span>
+              </div>
+              <div className="relative">
+                <select
+                  value={selectedUniversity}
+                  onChange={(e) => setSelectedUniversity(e.target.value)}
+                  className="w-full appearance-none px-4 py-2.5 pr-10 rounded-xl border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary cursor-pointer"
+                >
+                  {allUniversities.map((uni) => (
+                    <option key={uni} value={uni}>
+                      {uni}
+                    </option>
+                  ))}
+                </select>
+                <GraduationCap className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+              </div>
             </div>
-
-            {/* More Filters Button */}
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className={`flex items-center gap-2 px-4 py-3 rounded-xl border transition-all ${
-                showFilters 
-                  ? "border-secondary bg-secondary/5 text-secondary" 
-                  : "border-border hover:border-secondary/50"
-              }`}
-            >
-              <SlidersHorizontal className="w-4 h-4" />
-              <span className="hidden sm:inline">Filters</span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${showFilters ? "rotate-180" : ""}`} />
-            </button>
 
             {/* Clear Filters */}
             {hasActiveFilters && (
               <button
                 onClick={clearFilters}
-                className="px-4 py-3 rounded-xl bg-destructive/10 text-destructive hover:bg-destructive/20 transition-colors text-sm font-medium"
+                className="px-4 py-2.5 rounded-xl bg-destructive/10 text-destructive hover:bg-destructive/20 transition-colors text-sm font-medium whitespace-nowrap"
               >
-                Clear Filters
+                Clear All
               </button>
             )}
           </div>
 
-          {/* Extended Filters */}
-          {showFilters && (
-            <div className="mt-4 pt-4 border-t border-border">
-              <div className="flex flex-wrap gap-2">
-                <span className="text-sm text-muted-foreground py-2">Type:</span>
-                {propertyTypes.map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => setSelectedType(type)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                      selectedType === type
-                        ? "bg-secondary text-secondary-foreground"
-                        : "bg-muted hover:bg-muted/80"
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Results Count & Quick Tags */}
-          <div className="mt-4 flex flex-wrap items-center gap-2">
+          {/* Results Count */}
+          <div className="mt-6 pt-4 border-t border-border">
             <span className="text-sm text-muted-foreground">
-              {filteredLocations.length} apartments found
+              {filteredLocations.length} Apartments Near you
+              {selectedUniversity !== "All Universities" && ` near ${selectedUniversity}`}
             </span>
-            <span className="text-muted-foreground">•</span>
-            <div className="flex gap-2 overflow-x-auto pb-2">
-              {dubaiAreas.slice(1, 6).map((area) => (
-                <button
-                  key={area}
-                  onClick={() => setSelectedArea(area)}
-                  className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
-                    selectedArea === area
-                      ? "bg-secondary text-secondary-foreground"
-                      : "bg-muted hover:bg-muted/80"
-                  }`}
-                >
-                  {area}
-                </button>
-              ))}
-              {dubaiAreas.length > 6 && (
-                <button
-                  onClick={() => setShowFilters(true)}
-                  className="px-3 py-1 rounded-full text-xs font-medium bg-muted hover:bg-muted/80 whitespace-nowrap"
-                >
-                  View More
-                </button>
-              )}
-            </div>
           </div>
         </div>
       </section>
@@ -341,19 +323,19 @@ export default function Apartments() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-wrap justify-center gap-8 md:gap-16">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
                 <Users className="w-5 h-5 text-secondary" />
               </div>
               <span className="text-sm font-medium">Up to 4 Students</span>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
                 <Wifi className="w-5 h-5 text-secondary" />
               </div>
               <span className="text-sm font-medium">All Bills Included</span>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
                 <MapPin className="w-5 h-5 text-secondary" />
               </div>
               <span className="text-sm font-medium">Near Metro & Universities</span>
@@ -372,38 +354,24 @@ export default function Apartments() {
                 : `${filteredLocations.length} Location${filteredLocations.length !== 1 ? "s" : ""} Found`}
             </h2>
             <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-              Each location offers the same premium amenities and comfort. Use arrows to explore interior.
+              Each location offers the same premium amenities. Hover on bed options to see pricing and interiors.
             </p>
           </div>
 
-          {filteredLocations.length > 0 ? (
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {filteredLocations.map((apt) => (
-                <ApartmentCarousel
-                  key={apt.name}
-                  location={apt}
-                  variant="apartments"
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20">
-              <p className="text-muted-foreground text-lg">
-                No apartments found matching your search.
-              </p>
-              <button
-                onClick={clearFilters}
-                className="mt-4 px-6 py-2 rounded-xl bg-secondary text-secondary-foreground font-medium hover:opacity-90 transition"
-              >
-                Clear Filters
-              </button>
-            </div>
-          )}
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {filteredLocations.map((apt) => (
+              <ApartmentCarousel
+                key={apt.name}
+                location={apt}
+                variant="apartments"
+              />
+            ))}
+          </div>
         </div>
       </section>
 
       {/* CTA */}
-     <section className="py-24 bg-primary text-white relative overflow-hidden">
+       <section className="py-24 bg-primary text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <img src={heroImage} alt="" className="w-full h-full object-cover" />
         </div>
@@ -418,31 +386,25 @@ export default function Apartments() {
             Request a hostel and we'll assign the most convenient option based on your university location.
           </p>
           
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-             <Link
+         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
               to="/request"
-              className="px-8 py-3 rounded-xl bg-secondary text-cream font-medium hover:bg-secondary/90 transition"
+              className="px-8 py-3 rounded-xl bg-background text-secondary font-medium hover:bg-primary/90 transition"
             >
               Request a Hostel
             </Link>
-        
-             <a
-              href="tel:+971545594940"
-              className="px-8 py-3 rounded-xl border border-white/30 text-white hover:bg-white/10 transition"
+            <Link
+              to="/virtual-tours"
+              className="px-8 py-3 rounded-xl border-2 border-white/40 text-white font-medium hover:bg-white/10 transition"
             >
-              Call +971 54 559 4940
-            </a>
-          </div>
-
-         
+              Virtual Tours
+            </Link>
+          </div>         
         </div>
       </section>
-    
 
-    
     </main>
   );
 }
-
 
 

@@ -6,14 +6,17 @@ import { Link, useLocation } from "react-router-dom";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Apartments", href: "/apartments" },
+   { label: "Virtual Tours", href: "/virtual-tours" },
   { label: "Amenities", href: "/amenities" },
   { label: "FAQs", href: "/faqs" },
   { label: "Trust & Safety", href: "/trust-safety" },
 ];
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
+const [menuOpen, setMenuOpen] = useState(false);
+const location = useLocation();
+const [isScrolledUp, setIsScrolledUp] = useState(false);
+// const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
   document.body.style.overflow = menuOpen ? "hidden" : "auto";
@@ -22,9 +25,30 @@ const Navbar = () => {
   };
 }, [menuOpen]);
 
+useEffect(() => {
+  let lastY = window.scrollY;
+
+  const handleScroll = () => {
+    const currentY = window.scrollY;
+    setIsScrolledUp(currentY < lastY && currentY > 10);
+    lastY = currentY;
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+
   return (
     <>
-      <nav className="w-full sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border pointer-events-auto">
+  <nav
+  className={`w-full sticky top-0 z-50 transition-colors duration-300 ${
+    isScrolledUp
+      ? "bg-white border-b border-gray-200 shadow-sm"
+      : "bg-background/95 backdrop-blur-sm border-b border-border"
+  }`}
+>
+
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-10 py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">

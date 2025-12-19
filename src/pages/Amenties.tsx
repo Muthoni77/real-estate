@@ -19,6 +19,14 @@ import amenityPrayer3 from "../assets/amenity-prayer3.jpg";
 import amenityPrayer4 from "../assets/amenity-prayer4.jpg";
 import interiorKitchen from "../assets/interior-kitchen.jpg";
 import interiorSitting from "../assets/interior-sitting.jpg";
+import laundry from "../assets/laundry.jpg";
+import mall from "../assets/mall.jpg";
+import grocery from "../assets/grocery-shop.jpeg";
+import pool from "../assets/pool.jpg";
+import sauna from "../assets/sauna2.jpg";
+import gym from "../assets/gym.jpg";
+import basketball from "../assets/basketball.jpg";
+import dubaimetro from "../assets/dubaimetro.jpeg"
 import apartment1 from "../assets/apartment-1.jpg";
 import apartment2 from "../assets/apartment-2.jpg";
 
@@ -28,28 +36,28 @@ const buildingAmenities = [
     description: "Relax and unwind in our temperature-controlled rooftop pool with stunning city views.",
     image: amenityPool,
     icon: Waves,
-    galleryImages: [amenityPool, amenityPool],
+    galleryImages: [amenityPool, pool],
   },
   {
     name: "Fully Equipped Gym",
     description: "Stay fit and active with modern fitness equipment available 24/7.",
     image: amenityGym,
     icon: Dumbbell,
-    galleryImages: [amenityGym, amenityGym],
+    galleryImages: [amenityGym, gym],
   },
   {
     name: "Sauna & Wellness",
     description: "Recharge after a busy day of studies in our relaxing sauna facilities.",
     image: amenitySauna,
     icon: Sparkles,
-    galleryImages: [amenitySauna, amenitySauna],
+    galleryImages: [amenitySauna, sauna],
   },
   {
     name: "Basketball Court",
     description: "Recreation and sports on-site for an active student lifestyle.",
     image: amenityBasketball,
     icon: Dribbble,
-    galleryImages: [amenityBasketball, amenityBasketball],
+    galleryImages: [amenityBasketball, basketball],
   },
 ];
 
@@ -66,7 +74,7 @@ const serviceAmenities = [
     description: "On-site laundry facilities with modern washing machines and dryers.",
     image: amenityLaundry,
     icon: WashingMachine,
-    galleryImages: [amenityLaundry, amenityLaundry],
+    galleryImages: [amenityLaundry, laundry],
   },
 ];
 
@@ -76,21 +84,21 @@ const nearbyAmenities = [
     description: "Supermarkets and grocery stores within walking distance.",
     image: amenityGrocery,
     icon: ShoppingCart,
-    galleryImages: [amenityGrocery, amenityGrocery],
+    galleryImages: [amenityGrocery, grocery],
   },
   {
     name: "Nearby Malls",
     description: "Major shopping malls and entertainment centers close by.",
     image: amenityMall,
     icon: Building2,
-    galleryImages: [amenityMall, amenityMall],
+    galleryImages: [amenityMall, mall],
   },
   {
     name: "Metro Station",
     description: "Direct access to Dubai Metro for convenient transportation.",
     image: amenityMetro,
     icon: Train,
-    galleryImages: [amenityMetro, amenityMetro],
+    galleryImages: [amenityMetro, dubaimetro],
   },
   {
     name: "Prayer Areas",

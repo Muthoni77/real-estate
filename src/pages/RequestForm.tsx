@@ -72,12 +72,45 @@ export default function RequestForm() {
     }
   };
 
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   // In a real app, this would send the data to a backend
+  //   console.log("Form submitted:", formData);
+  //   setSubmitted(true);
+  // };
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real app, this would send the data to a backend
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
-  };
+  e.preventDefault();
+
+  const emailTo = "Fredrick1peace@gmail.com";
+  const subject = "New Student Apartment Request";
+
+  const body = `
+NEW HOSTEL REQUEST
+
+Name: ${formData.fullName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Preferred Contact: ${formData.contactMethod}
+
+University: ${formData.university}
+Students: ${formData.numberOfStudents}
+
+Transport Needed: ${formData.transportRequest ? "Yes" : "No"}
+Virtual Tour: ${formData.virtualTourRequest ? "Yes" : "No"}
+
+Message:
+${formData.message || "—"}
+  `;
+console.log("LEAD_CAPTURE", formData);
+
+  const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+
+  window.location.href = mailtoLink;
+  setSubmitted(true);
+};
+
 
   const selectedPricing = pricingInfo.find(
     (p) => p.students === formData.numberOfStudents
@@ -218,10 +251,10 @@ export default function RequestForm() {
                       required
                     >
                       <option value="">Number of Students *</option>
-                      <option value="1">1 Student - AED 9,000/month</option>
-                      <option value="2">2 Students - AED 4,750/student</option>
-                      <option value="3">3 Students - AED 3,600/student</option>
-                      <option value="4">4 Students - AED 2,700/student</option>
+                      <option value="1">live alone - AED 9,000/month</option>
+                      <option value="2">Shared 2(students)- AED 4,750/student</option>
+                      <option value="3"> Shared 3 (students)- AED 3,600/student</option>
+                      <option value="4">Shared 4 (students) - AED 2,700/student</option>
                     </select>
                   </div>
 

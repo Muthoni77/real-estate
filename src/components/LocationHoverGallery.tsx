@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { MapPin, ChevronRight, Users, Bed } from "lucide-react";
 
-import interior4beds from "../assets/interior-4beds.jpg";
-import interior3beds from "../assets/interior-3beds.jpg";
-import interior2beds from "../assets/interior-2beds.jpg";
-import interior1bed from "../assets/interior-1bed.jpg";
+import interior4beds from "@/assets/interior-4beds.jpg";
+import interior3beds from "@/assets/interior-3beds.jpg";
+import interior2beds from "@/assets/interior-2beds.jpg";
+import interior1bed from "@/assets/interior-1bed.jpg";
 
 interface LocationCardProps {
   location: {
@@ -18,10 +18,10 @@ interface LocationCardProps {
 }
 
 const interiorImages = [
-  { beds: 4, price: "2,700", image: interior4beds, label: "4 Students" },
-  { beds: 3, price: "3,600", image: interior3beds, label: "3 Students" },
-  { beds: 2, price: "4,750", image: interior2beds, label: "2 Students" },
-  { beds: 1, price: "9,000", image: interior1bed, label: "1 Student" },
+  { beds: 4, price: "2,700", image: interior4beds, label: "Shared (4 Students)" },
+  { beds: 3, price: "3,600", image: interior3beds, label: "Shared (3 Students)" },
+  { beds: 2, price: "4,750", image: interior2beds, label: "Shared (2 Students)" },
+  { beds: 1, price: "9,000", image: interior1bed, label: "Live Alone " },
 ];
 
 export function LocationHoverGallery({ location, variant = "landing" }: LocationCardProps) {
@@ -62,7 +62,7 @@ export function LocationHoverGallery({ location, variant = "landing" }: Location
                 }}
                 className={`flex-1 p-2 rounded-lg backdrop-blur-sm transition-all ${
                   activeImage === index
-                    ? "bg-secondary text-white"
+                    ? "bg-soft-green text-white"
                     : "bg-white/20 text-white hover:bg-white/30"
                 }`}
               >
@@ -102,13 +102,13 @@ export function LocationHoverGallery({ location, variant = "landing" }: Location
             <h3 className="font-display text-xl font-semibold text-foreground">{location.name}</h3>
             {location.distance && (
               <div className="flex items-center gap-2 mt-2 text-muted-foreground text-sm">
-                <MapPin className="w-4 h-4 text-secondary" />
+                <MapPin className="w-4 h-4 text-soft-green" />
                 <span>{location.distance}</span>
               </div>
             )}
           </div>
-          <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary transition-colors">
-            <ChevronRight className="w-5 h-5 text-secondary group-hover:text-white transition-colors" />
+          <div className="w-10 h-10 rounded-full bg-soft-green/10 flex items-center justify-center group-hover:bg-soft-green transition-colors">
+            <ChevronRight className="w-5 h-5 text-soft-green group-hover:text-white transition-colors" />
           </div>
         </div>
         
@@ -120,7 +120,7 @@ export function LocationHoverGallery({ location, variant = "landing" }: Location
         
         <p className="mt-4 text-sm text-muted-foreground">
           <span className="inline-flex items-center gap-1">
-            <Users className="w-4 h-4 text-secondary" />
+            <Users className="w-4 h-4 text-soft-green" />
             Hover to see room configurations
           </span>
         </p>
@@ -128,5 +128,4 @@ export function LocationHoverGallery({ location, variant = "landing" }: Location
     </div>
   );
 }
-
 

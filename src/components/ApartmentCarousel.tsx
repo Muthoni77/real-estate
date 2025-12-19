@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, MapPin, Users } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin, Users, Bed } from "lucide-react";
 import { Link } from "react-router-dom";
+
 // Import interior images
 import interiorKitchen from "../assets/interior-kitchen.jpg";
 import interiorBalcony from "../assets/interior-balcony.jpg";
@@ -8,6 +9,9 @@ import interiorWashroom from "../assets/interior-washroom.jpg";
 import interiorSitting from "../assets/interior-sitting.jpg";
 import interiorCorridor from "../assets/interior-corridor.jpg";
 import interior4beds from "../assets/interior-4beds.jpg";
+import interior3beds from "../assets/interior-3beds.jpg";
+import interior2beds from "../assets/interior-2beds.jpg";
+import interior1bed from "../assets/interior-1bed.jpg";
 
 interface ApartmentCarouselProps {
   location: {
@@ -28,26 +32,46 @@ const carouselImages = [
   { src: interiorBalcony, label: "Balcony" },
   { src: interiorWashroom, label: "Washroom" },
   { src: interiorCorridor, label: "Corridor" },
-  { src: interior4beds, label: "Bedroom" },
+];
+
+const bedOptions = [
+  { beds: 4, label: "4 beds / 1 bedroom", price: "2,700", image: interior4beds },
+  { beds: 3, label: "3 beds / 1 bedroom", price: "3,600", image: interior3beds },
+  { beds: 2, label: "2 beds / 1 bedroom", price: "4,750", image: interior2beds },
+  { beds: 1, label: "1 bed / 1 bedroom", price: "9,000", image: interior1bed },
 ];
 
 export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeBedOption, setActiveBedOption] = useState<number | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   // Replace default exterior with location image
   const images = carouselImages.map((img) =>
     img.isDefault ? { ...img, src: location.image } : img
   );
 
+  // Show bed image if hovering on a bed option
+  const displayImage = activeBedOption !== null 
+    ? bedOptions[activeBedOption].image 
+    : images[currentIndex].src;
+
+  const displayLabel = activeBedOption !== null 
+    ? bedOptions[activeBedOption].label 
+    : images[currentIndex].label;
+
   const nextImage = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    setActiveBedOption(null);
+    console.log('Next image clicked', isHovered);
     setCurrentIndex((prev) => (prev + 1) % images.length);
   };
 
   const prevImage = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    setActiveBedOption(null);
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
@@ -56,12 +80,17 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
       className={`group relative overflow-hidden rounded-2xl bg-card shadow-card hover-lift cursor-pointer ${
         variant === "apartments" ? "border border-border" : ""
       }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setActiveBedOption(null);
+      }}
     >
       {/* Image Container */}
       <div className={`overflow-hidden relative ${variant === "apartments" ? "aspect-[4/3]" : "h-48"}`}>
         <img
-          src={images[currentIndex].src}
-          alt={`${location.name} - ${images[currentIndex].label}`}
+          src={displayImage}
+          alt={`${location.name} - ${displayLabel}`}
           className="w-full h-full object-cover transition-all duration-500"
         />
         
@@ -73,18 +102,18 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
           onClick={prevImage}
           className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10"
         >
-          <ChevronLeft className="w-5 h-5 text-primary" />
+          <ChevronLeft className="w-5 h-5 text-deep-blue" />
         </button>
         <button
           onClick={nextImage}
           className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10"
         >
-          <ChevronRight className="w-5 h-5 text-primary" />
+          <ChevronRight className="w-5 h-5 text-deep-blue" />
         </button>
 
         {/* Image Label */}
         <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/60 text-white text-xs font-medium">
-          {images[currentIndex].label}
+          {displayLabel}
         </div>
 
         {/* Dot Indicators */}
@@ -95,10 +124,11 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                setActiveBedOption(null);
                 setCurrentIndex(index);
               }}
               className={`w-2 h-2 rounded-full transition-all ${
-                index === currentIndex
+                index === currentIndex && activeBedOption === null
                   ? "bg-white w-4"
                   : "bg-white/50 hover:bg-white/70"
               }`}
@@ -108,11 +138,11 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
 
         {/* Image Counter */}
         <div className="absolute top-3 right-3 px-2 py-1 rounded-md bg-black/60 text-white text-xs font-medium">
-          {currentIndex + 1} / {images.length}
+          {activeBedOption !== null ? `Bed ${activeBedOption + 1}` : `${currentIndex + 1} / ${images.length}`}
         </div>
 
         {/* Features badges (apartments variant) */}
-        {variant === "apartments" && location.features && currentIndex === 0 && (
+        {variant === "apartments" && location.features && currentIndex === 0 && activeBedOption === null && (
           <div className="absolute bottom-10 left-4 right-4">
             <div className="flex flex-wrap gap-2">
               {location.features.map((feature) => (
@@ -147,16 +177,34 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
             Request
           </Link>
         </div>
+
+        {/* Bed Options with Pricing */}
+        <div className="mt-4 grid grid-cols-4 gap-2">
+          {bedOptions.map((option, index) => (
+            <button
+              key={option.beds}
+              onMouseEnter={() => setActiveBedOption(index)}
+              onMouseLeave={() => setActiveBedOption(null)}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+              className={`flex flex-col items-center p-2 rounded-lg border transition-all text-center ${
+                activeBedOption === index
+                  ? "border-secondary bg-secondary/10"
+                  : "border-border hover:border-secondary/50"
+              }`}
+            >
+              <Bed className={`w-4 h-4 mb-1 ${activeBedOption === index ? "text-secondary" : "text-muted-foreground"}`} />
+              <span className="text-xs font-medium text-foreground">{option.beds} bed</span>
+              <span className="text-xs text-secondary font-semibold">AED {option.price}</span>
+            </button>
+          ))}
+        </div>
         
-        {location.description && (
-          <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
-            {location.description}
-          </p>
-        )}
-        
-        <p className="mt-4 text-xs text-muted-foreground flex items-center gap-1">
+        <p className="mt-3 text-xs text-muted-foreground flex items-center gap-1">
           <Users className="w-3 h-3 text-secondary" />
-          Use arrows to explore interior
+          Hover bed options to preview • Use arrows for interior
         </p>
       </div>
     </div>

@@ -11,6 +11,7 @@ import RequestForm from "./pages/RequestForm";
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import VirtualTours from "./pages/VirtualTours";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/apartments" element={<Apartments />} />
+        <Route path="/virtual-tours" element={<VirtualTours />} />
         <Route path="/amenities" element={<Amenities />} />
         <Route path="/faqs" element={<FAQs />} />
         <Route path="/trust-safety" element={<TrustSafety />} />
