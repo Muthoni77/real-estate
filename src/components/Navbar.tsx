@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
@@ -14,6 +14,13 @@ const navLinks = [
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+  document.body.style.overflow = menuOpen ? "hidden" : "auto";
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, [menuOpen]);
 
   return (
     <>
@@ -38,11 +45,10 @@ const Navbar = () => {
               <Link
                 key={link.label}
                 to={link.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  location.pathname === link.href
+                className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === link.href
                     ? "text-primary"
                     : "text-muted-foreground"
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>
@@ -70,7 +76,7 @@ const Navbar = () => {
           <button
             onClick={() => setMenuOpen((s) => !s)}
             aria-label="menu"
-            className="lg:hidden p-2 rounded-lg hover:bg-muted transition bg-cream"
+            className="lg:hidden p-2 rounded-lg hover:bg-muted transition "
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -80,44 +86,63 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
-         <motion.div
-  initial={{ height: 0, opacity: 0, pointerEvents: "none" }}
-  animate={{ height: "auto", opacity: 1, pointerEvents: "auto" }}
-  exit={{ height: 0, opacity: 0, pointerEvents: "none" }}
-  transition={{ duration: 0.25 }}
-className="lg:hidden bg-white text-black border-b border-gray-200 fixed top-[73px] left-0 right-0 z-40 shadow-lg">
+          <motion.div
+            initial={{ height: 0, opacity: 0, pointerEvents: "none" }}
+            animate={{ height: "auto", opacity: 1, pointerEvents: "auto" }}
+            exit={{ height: 0, opacity: 0, pointerEvents: "none" }}
+            transition={{ duration: 0.25 }}
+            className="lg:hidden fixed inset-0 z-[100] bg-white text-black">
 
-            <div className="flex flex-col px-6 py-4 gap-1">
+<div className="flex items-center justify-between px-6 pt-6">
+  {/* Logo (optional,  */}
+  <div className="flex items-center gap-2">
+    <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
+      <span className="text-white font-bold text-sm">SH</span>
+    </div>
+    <span className="font-semibold text-base">Student Hostels</span>
+  </div>
+
+  {/* Close button */}
+  <button
+    onClick={() => setMenuOpen(false)}
+    aria-label="Close menu"
+    className="p-2 rounded-lg hover:bg-gray-100 transition"
+  >
+    <X className="w-6 h-6 text-black" />
+  </button>
+</div>
+
+            <div className="mt-6 px-6 pb-6 flex flex-col gap-1">
+
               {navLinks.map((link) => (
-               <Link
-  key={link.label}
-  to={link.href}
-  className={`py-3 px-4 rounded-lg transition ${
-    location.pathname === link.href
-      ? "bg-gray-100 text-black font-medium"
-      : "text-gray-700 hover:bg-gray-100"
-  }`}
-  onClick={() => setMenuOpen(false)}
->
-  {link.label}
-</Link>
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className={`py-3 px-4 rounded-lg transition ${location.pathname === link.href
+                      ? "bg-gray-100 text-black font-medium"
+                      : "text-gray-700 hover:bg-gray-100"
+                    }`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
               ))}
 
               <div className="pt-4 border-t border-border mt-2">
                 <a
                   href="tel:+971545594940"
-  className="flex items-center gap-2 py-3 px-4 text-gray-700"
+                  className="flex items-center gap-2 py-3 px-4 text-gray-700"
                 >
                   <Phone className="w-4 h-4" />
                   <span>+971 54 559 4940</span>
                 </a>
-               <Link
-  to="/request"
-  className="block text-center py-3 rounded-xl bg-primary text-white font-medium mt-2"
-  onClick={() => setMenuOpen(false)}
->
-  Request a Hostel
-</Link>
+                <Link
+                  to="/request"
+                  className="block text-center py-3 rounded-xl bg-primary text-white font-medium mt-2"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Request a Hostel
+                </Link>
 
               </div>
             </div>
