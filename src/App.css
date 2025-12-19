@@ -1,2 +1,8 @@
 
 
+@media (hover: none) {
+  .arrow-btn {
+    opacity: 0.85;
+    backdrop-filter: blur(6px);
+  }
+}
