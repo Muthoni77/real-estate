@@ -70,7 +70,7 @@ const Navbar = () => {
           <button
             onClick={() => setMenuOpen((s) => !s)}
             aria-label="menu"
-            className="lg:hidden p-2 rounded-lg hover:bg-muted transition"
+            className="lg:hidden p-2 rounded-lg hover:bg-muted transition bg-cream"
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -85,40 +85,40 @@ const Navbar = () => {
   animate={{ height: "auto", opacity: 1, pointerEvents: "auto" }}
   exit={{ height: 0, opacity: 0, pointerEvents: "none" }}
   transition={{ duration: 0.25 }}
-  className="lg:hidden bg-background border-b border-border fixed top-[73px] left-0 right-0 z-40"
->
+className="lg:hidden bg-white text-black border-b border-gray-200 fixed top-[73px] left-0 right-0 z-40 shadow-lg">
 
             <div className="flex flex-col px-6 py-4 gap-1">
               {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  className={`py-3 px-4 rounded-lg transition ${
-                    location.pathname === link.href
-                      ? "bg-primary/10 text-primary font-medium"
-                      : "text-muted-foreground hover:bg-muted"
-                  }`}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
+               <Link
+  key={link.label}
+  to={link.href}
+  className={`py-3 px-4 rounded-lg transition ${
+    location.pathname === link.href
+      ? "bg-gray-100 text-black font-medium"
+      : "text-gray-700 hover:bg-gray-100"
+  }`}
+  onClick={() => setMenuOpen(false)}
+>
+  {link.label}
+</Link>
               ))}
 
               <div className="pt-4 border-t border-border mt-2">
                 <a
                   href="tel:+971545594940"
-                  className="flex items-center gap-2 py-3 px-4 text-muted-foreground"
+  className="flex items-center gap-2 py-3 px-4 text-gray-700"
                 >
                   <Phone className="w-4 h-4" />
                   <span>+971 54 559 4940</span>
                 </a>
-                <Link
-                  to="/request"
-                  className="block text-center py-3 rounded-xl bg-primary text-primary-foreground font-medium mt-2"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  Request a Hostel
-                </Link>
+               <Link
+  to="/request"
+  className="block text-center py-3 rounded-xl bg-primary text-white font-medium mt-2"
+  onClick={() => setMenuOpen(false)}
+>
+  Request a Hostel
+</Link>
+
               </div>
             </div>
           </motion.div>
