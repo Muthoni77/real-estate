@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Instagram, Facebook, Twitter, Linkedin } from "lucide-react";
 
 const Footer = () => {
@@ -49,12 +48,12 @@ const Footer = () => {
                 { label: "Trust & Safety", href: "/trust-safety" },
               ].map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.href}
+                  <a
+                    href={link.href}
                     className="text-white/70 hover:text-secondary transition-colors"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

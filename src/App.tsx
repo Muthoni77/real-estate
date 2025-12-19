@@ -15,26 +15,27 @@ function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    <>
-        <Router>
-      <div className="w-full h-full">
-        <Navbar />
-        <div className="">
-          <Routes>
-            <Route path="/faqs" element={<FAQs />} />
-            <Route path="/trust-safety" element={<TrustSafety/>} />
-            <Route path="/apartments" element={<Apartments/>} />
-            <Route path="/amenities" element={<Amenities/>} />
-            <Route path="/request" element={<RequestForm/>} />
-            <Route path="/" element={<LandingPage/>} />
-              <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-        <Footer/>
-      </div>
-    </Router>
-       
-    </>
+   <Router>
+  <div className="min-h-screen flex flex-col">
+    <Navbar />
+
+    {/* Main content grows */}
+    <main className="flex-1">
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/apartments" element={<Apartments />} />
+        <Route path="/amenities" element={<Amenities />} />
+        <Route path="/faqs" element={<FAQs />} />
+        <Route path="/trust-safety" element={<TrustSafety />} />
+        <Route path="/request" element={<RequestForm />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </main>
+
+    <Footer />
+  </div>
+</Router>
+
   )
 }
 

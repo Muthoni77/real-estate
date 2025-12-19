@@ -1,5 +1,4 @@
 import { Home, ChevronRight, CheckCircle, Shield, Camera, Lock, Sparkles, HeadphonesIcon, Wifi, FileCheck, Users } from "lucide-react";
-import { Link } from "react-router-dom";
 import securityImage from "../assets/security-monitoring.jpg";
 import heroImage from "../assets/dubai-marina.jpg";
 
@@ -53,10 +52,10 @@ export default function TrustSafety() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
           {/* Breadcrumb */}
           <nav className="flex items-center justify-center gap-2 text-white/70 text-sm mb-8">
-            <Link to="/" className="flex items-center gap-1 hover:text-white transition-colors">
+            <a href="/" className="flex items-center gap-1 hover:text-white transition-colors">
               <Home className="w-4 h-4" />
               <span>Home</span>
-            </Link>
+            </a>
             <ChevronRight className="w-4 h-4" />
             <span className="text-secondary font-medium">Trust & Safety</span>
           </nav>
@@ -167,12 +166,12 @@ export default function TrustSafety() {
                 We provide transparency and regular updates for parents concerned about their child's living environment. Our team is always available to address any concerns and create a trustworthy, reliable experience for the whole family.
               </p>
             </div>
-            <Link
-              to="/request"
+            <a
+              href="/request"
               className="px-6 py-3 rounded-xl bg-secondary text-secondary-foreground font-medium hover:bg-secondary/90 transition flex-shrink-0"
             >
               Contact Us
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -192,12 +191,12 @@ export default function TrustSafety() {
             Experience worry-free student living in Dubai with our secure, monitored accommodations.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/request"
+            <a
+              href="/request"
               className="px-8 py-3 rounded-xl bg-secondary text-cream font-medium hover:bg-secondary/90 transition"
             >
               Request a Hostel
-            </Link>
+            </a>
             <a
               href="tel:+971545594940"
               className="px-8 py-3 rounded-xl border border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10 transition"

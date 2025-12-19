@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Home, ChevronRight, CheckCircle, Phone, Mail, MapPin, Users } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import heroImage from "../assets/apartment-2.jpg";
-
+import Footer from "../components/Footer";
 
 interface RequestFormData {
   fullName: string;
@@ -48,8 +48,17 @@ const pricingInfo = [
 ];
 
 export default function RequestForm() {
+  const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState<RequestFormData>(initialState);
   const [submitted, setSubmitted] = useState(false);
+
+  // Prefill from URL params (e.g., from pricing section)
+  useEffect(() => {
+    const studentsParam = searchParams.get("students");
+    if (studentsParam && ["1", "2", "3", "4"].includes(studentsParam)) {
+      setFormData((prev) => ({ ...prev, numberOfStudents: studentsParam }));
+    }
+  }, [searchParams]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -78,8 +87,8 @@ export default function RequestForm() {
     return (
       <main className="bg-background text-foreground min-h-screen flex items-center justify-center">
         <div className="max-w-lg mx-auto px-6 text-center py-20">
-          <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-10 h-10 text-accent" />
+          <div className="w-20 h-20 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-6">
+            <CheckCircle className="w-10 h-10 text-secondary" />
           </div>
           <h1 className="text-2xl md:text-3xl font-semibold mb-4">
             Request Submitted Successfully!
@@ -208,8 +217,8 @@ export default function RequestForm() {
                       className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
                       required
                     >
-                      <option value="">Share number of Students *</option>
-                      <option value="1">live alone - AED 9,000/month</option>
+                      <option value="">Number of Students *</option>
+                      <option value="1">1 Student - AED 9,000/month</option>
                       <option value="2">2 Students - AED 4,750/student</option>
                       <option value="3">3 Students - AED 3,600/student</option>
                       <option value="4">4 Students - AED 2,700/student</option>
@@ -217,8 +226,8 @@ export default function RequestForm() {
                   </div>
 
                   {selectedPricing && (
-                    <div className="mt-4 p-4 rounded-xl bg-accent/10 border border-accent/20">
-                      <div className="flex items-center gap-2 text-accent">
+                    <div className="mt-4 p-4 rounded-xl bg-secondary/10 border border-secondary/20">
+                      <div className="flex items-center gap-2 text-secondary">
                         <CheckCircle className="w-5 h-5" />
                         <span className="font-medium">
                           Price: AED {selectedPricing.price}/student per month
@@ -274,7 +283,7 @@ export default function RequestForm() {
                 {/* Submit */}
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-secondary/90 transition text-lg"
+                  className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition text-lg"
                 >
                   Submit Request
                 </button>
@@ -324,13 +333,13 @@ export default function RequestForm() {
                     <span>+971 54 559 4940</span>
                   </a>
                   <a
-                    href="mailto:info..studenthostels.ae"
+                    href="mailto:info@studenthostels.ae"
                     className="flex items-center gap-3 text-sm hover:text-secondary transition"
                   >
                     <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
                       <Mail className="w-5 h-5 text-secondary" />
                     </div>
-                    <span>info@dubaistudenthostels.com</span>
+                    <span>info@studenthostels.ae</span>
                   </a>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
@@ -353,7 +362,8 @@ export default function RequestForm() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </main>
   );
 }
-

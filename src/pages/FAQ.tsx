@@ -199,35 +199,18 @@ export default function FAQs() {
           </p>
           
          <div className="mt-8">
-            <Link
-              to="/request"
+            <a
+              href="/request"
               className="inline-block px-8 py-3 rounded-xl bg-secondary text-cream font-medium hover:bg-secondary/90 transition"
             >
               Request a Hostel
-            </Link>
+            </a>
           </div>
 
         
         </div>
       </section>
-      <section className="py-24 bg-primary text-primary-foreground text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-semibold">
-            Ready to Find Your Student Home?
-          </h2>
-          <p className="mt-4 text-primary-foreground/80">
-            Submit a request and our team will match you with the perfect apartment.
-          </p>
-          <div className="mt-8">
-            <Link
-              to="/request"
-              className="inline-block px-8 py-3 rounded-xl bg-background text-secondary font-medium hover:bg-background/90 transition"
-            >
-              Request a Hostel
-            </Link>
-          </div>
-        </div>
-      </section>
+     
     </main>
   );
 }

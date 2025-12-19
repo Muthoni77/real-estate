@@ -1,7 +1,6 @@
 
 import { useState, useMemo } from "react";
 import { MapPin, Users, Wifi, Home, ChevronRight, CheckCircle, Search, X, } from "lucide-react";
-import { Link } from "react-router-dom";
 
 import locationMarina from "../assets/location-marina.jpg";
 import locationBarsha from "../assets/location-barsha.jpg";
@@ -107,10 +106,10 @@ export default function Apartments() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
           {/* Breadcrumb */}
           <nav className="flex items-center justify-center gap-2 text-white/70 text-sm mb-8">
-            <Link to="/" className="flex items-center gap-1 hover:text-white transition-colors">
+            <a href="/" className="flex items-center gap-1 hover:text-white transition-colors">
               <Home className="w-4 h-4" />
               <span>Home</span>
-            </Link>
+            </a>
             <ChevronRight className="w-4 h-4" />
             <span className="text-secondary font-medium">Apartments</span>
           </nav>
@@ -259,12 +258,12 @@ export default function Apartments() {
           </p>
           
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-             <Link
-              to="/request"
+             <a
+              href="/request"
               className="px-8 py-3 rounded-xl bg-secondary text-cream font-medium hover:bg-secondary/90 transition"
             >
               Request a Hostel
-            </Link>
+            </a>
         
              <a
               href="tel:+971545594940"

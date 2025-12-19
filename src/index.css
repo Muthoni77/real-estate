@@ -1,21 +1,20 @@
 @import "tailwindcss";
-    
-   
-    @theme {  
-    --color-card: oklch(97.7% 0.017 320.058);
-    --color-card-foreground: oklch(90.3% 0.076 319.62);
-   --shadow-card: 0 4px 20px -4px hsl(220 25% 12% / 0.08);
-   /* Cream palette in OKLCH */
---color-cream: oklch(0.962 0.013 96.6);       /* Light cream */
---color-cream-dark: oklch(0.902 0.016 93.0); 
+
+
+@theme {
+  --color-card: oklch(97.7% 0.017 320.058);
+  --color-card-foreground: oklch(90.3% 0.076 319.62);
+  --shadow-card: 0 4px 20px -4px hsl(220 25% 12% / 0.08);
+  /* Cream palette in OKLCH */
+  --color-cream: oklch(0.962 0.013 96.6);
+  --color-cream-dark: oklch(0.902 0.016 93.0);
+  --light-grey: oklch(96% 0.007 210);
+  --medium-grey: oklch(85% 0.012 210);
   --color-primary: oklch(20.8% 0.042 265.755);
   --color-secondary: oklch(71% 0.12 155);
   --color-primary-foreground: oklch(97.7% 0.017 320.058);
---color-border: oklch(86.9% 0.022 252.894);
-    --color-input: 40 15% 88%;
-    --color-ring: 220 25% 12%;
-  
-  }
+  --color-border: oklch(86.9% 0.022 252.894);
+  --color-input: 40 15% 88%;
+  --color-ring: 220 25% 12%;
 
-
-   
+}
