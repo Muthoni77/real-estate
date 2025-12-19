@@ -191,7 +191,7 @@ export default function LandingPage() {
       </section>
 
       {/* Locations Section */}
-      <section className="py-24 bg-light-grey">
+      <section className="py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <p className="text-secondary font-medium mb-4 tracking-wider uppercase text-sm">Locations</p>
@@ -203,7 +203,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 bg-cream ">
             {locations.map((location) => (
               <ApartmentCarousel
                 key={location.name}

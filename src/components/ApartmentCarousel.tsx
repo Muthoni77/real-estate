@@ -67,6 +67,7 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
     console.log('Next image clicked', isHovered);
     setCurrentIndex((prev) => (prev + 1) % images.length);
   };
+  
 
   const prevImage = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -83,8 +84,9 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
         setIsHovered(false);
-        setActiveBedOption(null);
+        setActiveBedOption(null);   
       }}
+        onClick={() => setIsHovered((prev) => !prev)}
     >
       {/* Image Container */}
       <div className={`overflow-hidden relative ${variant === "apartments" ? "aspect-[4/3]" : "h-48"}`}>
@@ -102,13 +104,13 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
           onClick={prevImage}
           className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10"
         >
-          <ChevronLeft className="w-5 h-5 text-deep-blue" />
+          <ChevronLeft className="w-5 h-5 text-primary" />
         </button>
         <button
           onClick={nextImage}
           className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10"
         >
-          <ChevronRight className="w-5 h-5 text-deep-blue" />
+          <ChevronRight className="w-5 h-5 text-primary" />
         </button>
 
         {/* Image Label */}
