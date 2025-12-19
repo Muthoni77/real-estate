@@ -322,8 +322,8 @@ export default function LandingPage() {
                     Cleaning included
                   </li>
                 </ul>
-                <a
-                  href={`/request?students=${plan.students}`}
+                <Link
+                  to={`/request?students=${plan.students}`}
                   className={`mt-6 w-full py-3 rounded-xl font-medium transition-all block text-center ${
                     plan.popular 
                       ? 'bg-white text-secondary hover:bg-white/90' 
@@ -331,7 +331,7 @@ export default function LandingPage() {
                   }`}
                 >
                   Get Started
-                </a>
+                </Link>
               </div>
             ))}
           </div>
