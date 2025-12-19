@@ -14,11 +14,11 @@ import {ApartmentCarousel}  from "../components/ApartmentCarousel";
 
 const locations = [
   { name: "Al Barsha Heights (Tecom)", distance: "5 min to metro", image: apartment1 },
-  { name: "Dubai Marina", distance: "2 min to beach", image: dubaiMarina },
+  { name: "Dubai Marina", distance: "2 min to metro", image: dubaiMarina },
   { name: "JLT", distance: "Walking distance to JLT metro", image: apartment2 },
-  { name: "Mall of the Emirates", distance: "3 min walk", image: apartment3 },
-  { name: "Ibn Battuta", distance: "Near Ibn Battuta Mall", image: apartment4 },
-  { name: "Academic City", distance: "Close to universities", image: apartment5 },
+  { name: "Mall of the Emirates", distance: "3 min to metro", image: apartment3 },
+  { name: "Ibn Battuta", distance: "3 min to metro", image: apartment4 },
+  { name: "Academic City", distance: "4 min to metro", image: apartment5 },
 ];
 
 // const amenities = [
@@ -57,7 +57,7 @@ export default function LandingPage() {
         
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center py-20">
           <div className="inline-flex items-center gap-2 bg-secondary/20 backdrop-blur-sm border border-secondary/30 rounded-full px-4 py-2 mb-8 animate-fade-up">
-            <Star className="w-4 h-4 text-secondary" fill="currentColor" />
+            <Star className="w-4 h-4 text-yellow-500" fill="currentColor" />
             <span className="text-white text-sm font-medium">Student-Only Living in Dubai</span>
           </div>
           
@@ -141,7 +141,7 @@ export default function LandingPage() {
                 className="rounded-3xl shadow-elevated w-full h-[500px] object-cover"
               />
               <div className="absolute -bottom-6 -left-6 bg-primary text-white p-6 rounded-2xl shadow-elevated">
-                <p className="text-4xl font-display font-bold text-secondary">5+</p>
+                <p className="text-4xl font-display font-bold text-secondary">15+</p>
                 <p className="text-sm mt-1">Years Experience</p>
               </div>
             </div>

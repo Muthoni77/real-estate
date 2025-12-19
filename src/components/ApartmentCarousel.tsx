@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, MapPin, Users } from "lucide-react";
 
+
 // Import interior images
 import interiorKitchen from "../assets/interior-kitchen.jpg";
 import interiorBalcony from "../assets/interior-balcony.jpg";
@@ -73,13 +74,13 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
           onClick={prevImage}
           className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10"
         >
-          <ChevronLeft className="w-5 h-5 text-deep-blue" />
+          <ChevronLeft className="w-5 h-5 text-primary" />
         </button>
         <button
           onClick={nextImage}
           className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10"
         >
-          <ChevronRight className="w-5 h-5 text-deep-blue" />
+          <ChevronRight className="w-5 h-5 text-primary" />
         </button>
 
         {/* Image Label */}
@@ -135,14 +136,14 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
             <h3 className="font-display text-xl font-semibold text-foreground">{location.name}</h3>
             {location.distance && (
               <div className="flex items-center gap-2 mt-2 text-muted-foreground text-sm">
-                <MapPin className="w-4 h-4 text-soft-green" />
+                <MapPin className="w-4 h-4 text-secondary" />
                 <span>{location.distance}</span>
               </div>
             )}
           </div>
           <a
             href="/request"
-            className="px-4 py-2 rounded-xl bg-soft-green text-white text-sm font-medium hover:bg-soft-green/90 transition flex-shrink-0"
+            className="px-4 py-2 rounded-xl bg-secondary text-white text-sm font-medium hover:bg-secondary/90 transition flex-shrink-0"
           >
             Request
           </a>
@@ -155,7 +156,7 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
         )}
         
         <p className="mt-4 text-xs text-muted-foreground flex items-center gap-1">
-          <Users className="w-3 h-3 text-soft-green" />
+          <Users className="w-3 h-3 text-secondary" />
           Use arrows to explore interior
         </p>
       </div>

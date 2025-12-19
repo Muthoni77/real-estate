@@ -128,3 +128,5 @@ export function LocationHoverGallery({ location, variant = "landing" }: Location
     </div>
   );
 }
+
+

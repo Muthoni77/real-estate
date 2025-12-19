@@ -1,10 +1,24 @@
-import { Home, ChevronRight, CheckCircle, Waves, Dumbbell, Sparkles, Dribbble, Wifi, ShieldCheck, Bus, Tv, UtensilsCrossed, Bath } from "lucide-react";
-import heroImage from "../assets/dubai-marina.jpg";
+import { useState } from "react";
+import { Home, ChevronRight, CheckCircle, Waves, Dumbbell, Sparkles, Dribbble, Wifi, ShieldCheck, Bus, Tv, UtensilsCrossed, Bath, WashingMachine, ShoppingCart, Building2, Train, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
+import heroImage from "../assets/hero-dubai.jpg";
+import { AmenityGalleryPopup } from "../components/AmenityGalleryPopup";
 
 import amenityPool from "../assets/amenity-pool.jpg";
 import amenityGym from "../assets/amenity-gym.jpg";
 import amenitySauna from "../assets/amenity-sauna.jpg";
 import amenityBasketball from "../assets/amenity-basketball.jpg";
+import amenityCleaning from "../assets/amenity-cleaning.jpg";
+import amenityLaundry from "../assets/amenity-laundry.jpg";
+import amenityGrocery from "../assets/amenity-grocery.jpg";
+import amenityMall from "../assets/amenity-mall.jpg";
+import amenityMetro from "../assets/amenity-metro.jpg";
+import amenityPrayer1 from "../assets/amenity-prayer1.jpg";
+import amenityPrayer2 from "../assets/amenity-prayer2.jpg";
+import amenityPrayer3 from "../assets/amenity-prayer3.jpg";
+import amenityPrayer4 from "../assets/amenity-prayer4.jpg";
+import interiorKitchen from "../assets/interior-kitchen.jpg";
+import interiorSitting from "../assets/interior-sitting.jpg";
 import apartment1 from "../assets/apartment-1.jpg";
 import apartment2 from "../assets/apartment-2.jpg";
 
@@ -14,37 +28,98 @@ const buildingAmenities = [
     description: "Relax and unwind in our temperature-controlled rooftop pool with stunning city views.",
     image: amenityPool,
     icon: Waves,
+    galleryImages: [amenityPool, amenityPool],
   },
   {
     name: "Fully Equipped Gym",
     description: "Stay fit and active with modern fitness equipment available 24/7.",
     image: amenityGym,
     icon: Dumbbell,
+    galleryImages: [amenityGym, amenityGym],
   },
   {
     name: "Sauna & Wellness",
     description: "Recharge after a busy day of studies in our relaxing sauna facilities.",
     image: amenitySauna,
     icon: Sparkles,
+    galleryImages: [amenitySauna, amenitySauna],
   },
   {
     name: "Basketball Court",
     description: "Recreation and sports on-site for an active student lifestyle.",
     image: amenityBasketball,
     icon: Dribbble,
+    galleryImages: [amenityBasketball, amenityBasketball],
+  },
+];
+
+const serviceAmenities = [
+  {
+    name: "Cleaning Services",
+    description: "Professional housekeeping included with regular apartment cleaning.",
+    image: amenityCleaning,
+    icon: Sparkles,
+    galleryImages: [amenityCleaning, apartment1, apartment2],
+  },
+  {
+    name: "Laundry Services",
+    description: "On-site laundry facilities with modern washing machines and dryers.",
+    image: amenityLaundry,
+    icon: WashingMachine,
+    galleryImages: [amenityLaundry, amenityLaundry],
+  },
+];
+
+const nearbyAmenities = [
+  {
+    name: "Nearby Groceries",
+    description: "Supermarkets and grocery stores within walking distance.",
+    image: amenityGrocery,
+    icon: ShoppingCart,
+    galleryImages: [amenityGrocery, amenityGrocery],
+  },
+  {
+    name: "Nearby Malls",
+    description: "Major shopping malls and entertainment centers close by.",
+    image: amenityMall,
+    icon: Building2,
+    galleryImages: [amenityMall, amenityMall],
+  },
+  {
+    name: "Metro Station",
+    description: "Direct access to Dubai Metro for convenient transportation.",
+    image: amenityMetro,
+    icon: Train,
+    galleryImages: [amenityMetro, amenityMetro],
+  },
+  {
+    name: "Prayer Areas",
+    description: "Nearby mosques, churches, temples, and other places of worship.",
+    image: amenityPrayer1,
+    icon: Heart,
+    galleryImages: [amenityPrayer1, amenityPrayer2, amenityPrayer3, amenityPrayer4, amenityPrayer1, amenityPrayer2],
   },
 ];
 
 const inApartmentAmenities = [
-  { name: "Fully Furnished Living Room", icon: Tv },
-  { name: "Equipped Kitchen", icon: UtensilsCrossed },
-  { name: "High-Speed WiFi", icon: Wifi },
-  { name: "Two Washrooms", icon: Bath },
-  { name: "24/7 Security", icon: ShieldCheck },
-  { name: "Cleaning Included", icon: Sparkles },
+  { name: "Fully Furnished Living Room", icon: Tv, images: [interiorSitting, apartment1] },
+  { name: "Equipped Kitchen", icon: UtensilsCrossed, images: [interiorKitchen, interiorKitchen] },
+  { name: "High-Speed WiFi", icon: Wifi, images: [apartment1, apartment2] },
+  { name: "Two Washrooms", icon: Bath, images: [apartment2, apartment1] },
+  { name: "24/7 Security", icon: ShieldCheck, images: [apartment1, apartment2] },
+  { name: "Cleaning Included", icon: Sparkles, images: [amenityCleaning, apartment1] },
 ];
 
 export default function Amenities() {
+  const [selectedAmenity, setSelectedAmenity] = useState<{
+    title: string;
+    images: string[];
+  } | null>(null);
+
+  const handleAmenityClick = (title: string, images: string[]) => {
+    setSelectedAmenity({ title, images });
+  };
+
   return (
     <main className="bg-background text-foreground">
       {/* Hero Section */}
@@ -59,18 +134,17 @@ export default function Amenities() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
-          {/* Breadcrumb */}
           <nav className="flex items-center justify-center gap-2 text-white/70 text-sm mb-8">
-            <a href="/" className="flex items-center gap-1 hover:text-white transition-colors">
+            <Link to="/" className="flex items-center gap-1 hover:text-white transition-colors">
               <Home className="w-4 h-4" />
               <span>Home</span>
-            </a>
+            </Link>
             <ChevronRight className="w-4 h-4" />
             <span className="text-secondary font-medium">Amenities</span>
           </nav>
 
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 backdrop-blur-sm border border-secondary/30 mb-6">
-            <CheckCircle className="w-4 h-4 text-accent" />
+            <CheckCircle className="w-4 h-4 text-secondary" />
             <span className="text-white/90 text-sm font-medium">Premium Lifestyle</span>
           </div>
 
@@ -92,19 +166,20 @@ export default function Amenities() {
                 In-Apartment Amenities
               </h2>
               <p className="text-muted-foreground mb-8">
-                Each apartment comes fully equipped with everything you need for comfortable student living. No extra costs, no surprises.
+                Each apartment comes fully equipped with everything you need for comfortable student living. Click on any item to see photos.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 {inApartmentAmenities.map((item) => (
-                  <div
+                  <button
                     key={item.name}
-                    className="flex items-center gap-3 p-4 rounded-xl bg-background border border-border"
+                    onClick={() => handleAmenityClick(item.name, item.images)}
+                    className="flex items-center gap-3 p-4 rounded-xl bg-background border border-border hover:border-secondary/50 hover:shadow-lg transition-all text-left"
                   >
                     <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
                       <item.icon className="w-5 h-5 text-secondary" />
                     </div>
                     <span className="text-sm font-medium">{item.name}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
@@ -112,12 +187,14 @@ export default function Amenities() {
               <img
                 src={apartment1}
                 alt="Apartment interior"
-                className="rounded-2xl w-full h-48 object-cover"
+                className="rounded-2xl w-full h-48 object-cover cursor-pointer hover:opacity-90 transition"
+                onClick={() => handleAmenityClick("Living Room", [apartment1, apartment2])}
               />
               <img
                 src={apartment2}
                 alt="Apartment living room"
-                className="rounded-2xl w-full h-48 object-cover mt-8"
+                className="rounded-2xl w-full h-48 object-cover mt-8 cursor-pointer hover:opacity-90 transition"
+                onClick={() => handleAmenityClick("Kitchen", [apartment2, interiorKitchen])}
               />
             </div>
           </div>
@@ -132,15 +209,16 @@ export default function Amenities() {
               Building & Community Amenities
             </h2>
             <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-              Shared facilities designed to enhance your lifestyle beyond the apartment.
+              Shared facilities designed to enhance your lifestyle. Click to view gallery.
             </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
             {buildingAmenities.map((amenity) => (
-              <div
+              <button
                 key={amenity.name}
-                className="group rounded-2xl overflow-hidden border border-border bg-card hover:shadow-xl transition-all duration-300"
+                onClick={() => handleAmenityClick(amenity.name, amenity.galleryImages)}
+                className="group rounded-2xl overflow-hidden border border-border bg-card hover:shadow-xl transition-all duration-300 text-left"
               >
                 <div className="aspect-[16/10] overflow-hidden relative">
                   <img
@@ -154,12 +232,105 @@ export default function Amenities() {
                       <amenity.icon className="w-6 h-6 text-secondary" />
                     </div>
                   </div>
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-primary text-xs font-medium">
+                    Click to view
+                  </div>
                 </div>
                 <div className="p-6">
                   <h3 className="font-semibold text-lg mb-2">{amenity.name}</h3>
                   <p className="text-sm text-muted-foreground">{amenity.description}</p>
                 </div>
-              </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="py-20 bg-muted">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-semibold">
+              Included Services
+            </h2>
+            <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
+              Professional services included in your monthly rent.
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            {serviceAmenities.map((amenity) => (
+              <button
+                key={amenity.name}
+                onClick={() => handleAmenityClick(amenity.name, amenity.galleryImages)}
+                className="group rounded-2xl overflow-hidden border border-border bg-card hover:shadow-xl transition-all duration-300 text-left"
+              >
+                <div className="aspect-[16/10] overflow-hidden relative">
+                  <img
+                    src={amenity.image}
+                    alt={amenity.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <amenity.icon className="w-6 h-6 text-secondary" />
+                    </div>
+                  </div>
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-primary text-xs font-medium">
+                    Click to view
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-semibold text-lg mb-2">{amenity.name}</h3>
+                  <p className="text-sm text-muted-foreground">{amenity.description}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Nearby Amenities */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-semibold">
+              Nearby Conveniences
+            </h2>
+            <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
+              Essential services and amenities just steps away from your apartment.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {nearbyAmenities.map((amenity) => (
+              <button
+                key={amenity.name}
+                onClick={() => handleAmenityClick(amenity.name, amenity.galleryImages)}
+                className="group rounded-2xl overflow-hidden border border-border bg-card hover:shadow-xl transition-all duration-300 text-left"
+              >
+                <div className="aspect-square overflow-hidden relative">
+                  <img
+                    src={amenity.image}
+                    alt={amenity.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <div className="w-10 h-10 rounded-lg bg-secondary/20 backdrop-blur-sm flex items-center justify-center">
+                      <amenity.icon className="w-5 h-5 text-secondary" />
+                    </div>
+                  </div>
+                  <div className="absolute top-3 right-3 px-2 py-1 rounded-full bg-primary text-primary-foreground text-xs font-medium">
+                    {amenity.galleryImages.length} photos
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold mb-1">{amenity.name}</h3>
+                  <p className="text-xs text-muted-foreground">{amenity.description}</p>
+                </div>
+              </button>
             ))}
           </div>
         </div>
@@ -175,22 +346,22 @@ export default function Amenities() {
             <div className="text-center md:text-left">
               <h3 className="text-xl font-semibold mb-2">Student Transportation</h3>
               <p className="text-muted-foreground max-w-2xl">
-                Optional student transportation buses to and from universities available upon request. 
+                Optional student transportation buses to and from universities available upon request.
                 Never worry about your commute — we've got you covered.
               </p>
             </div>
-            <a
-              href="/request"
+            <Link
+              to="/request"
               className="px-6 py-3 rounded-xl bg-secondary text-secondary-foreground font-medium hover:bg-secondary/90 transition flex-shrink-0"
             >
               Request Transport
-            </a>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-         <section className="py-24 bg-primary text-white relative overflow-hidden">
+        <section className="py-24 bg-primary text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <img src={heroImage} alt="" className="w-full h-full object-cover" />
         </div>
@@ -222,7 +393,17 @@ export default function Amenities() {
 
         </div>
       </section>
-    
+
+
+
+      {/* Gallery Popup */}
+      <AmenityGalleryPopup
+        isOpen={!!selectedAmenity}
+        onClose={() => setSelectedAmenity(null)}
+        title={selectedAmenity?.title || ""}
+        images={selectedAmenity?.images || []}
+      />
     </main>
   );
 }
+
