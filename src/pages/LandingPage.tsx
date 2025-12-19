@@ -11,6 +11,7 @@ import poolImage from "../assets/amenity-pool.jpg";
 import gymImage from "../assets/amenity-gym.jpg";
 import dubaiMarina from "../assets/dubai-marina.jpg";
 import {ApartmentCarousel}  from "../components/ApartmentCarousel";
+import { Link } from "react-router-dom";
 
 const locations = [
   { name: "Al Barsha Heights (Tecom)", distance: "5 min to metro", image: apartment1 },
@@ -73,16 +74,16 @@ export default function LandingPage() {
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.3s' }}>
          
-            <a href="/request">
+            <Link to="/request">
   <button className="px-8 py-4 rounded-xl bg-primary text-white font-semibold text-lg hover:shadow-primary transition-all duration-300 hover:-translate-y-1">
     Request a Hostel
   </button>
-</a>
+</Link>
 
-     <a href="/request" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-medium text-lg hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2">
+         <Link to="/request" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-medium text-lg hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2">
               Book a Virtual Tour
               <ChevronRight className="w-5 h-5" />
-            </a>
+           </Link>
           </div>
 
           <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto animate-fade-up" style={{ animationDelay: '0.4s' }}>
@@ -110,7 +111,7 @@ export default function LandingPage() {
       </section>
 
       {/* About Section */}
-      <section className="py-24 bg-light-grey">
+       <section className="py-24 bg-light-grey">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
@@ -133,6 +134,7 @@ export default function LandingPage() {
                 ))}
               </div>
             </div>
+            
             
             <div className="relative">
               <img 
@@ -409,7 +411,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-    <section className="py-24 bg-primary text-white relative overflow-hidden">
+    <section className="py-24 bg-primary text-white relative  overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <img src={heroImage} alt="" className="w-full h-full object-cover" />
         </div>
@@ -425,15 +427,15 @@ export default function LandingPage() {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/request"
+            <Link
+              to="/request"
               className="px-8 py-4 rounded-xl text-lg bg-secondary text-cream font-medium hover:bg-secondary/90 transition"
             >
               Request a Hostel
-            </a>
-            <a href="/request" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-medium text-lg hover:bg-white/10 transition-all duration-300">
+            </Link>
+            <Link to="/request" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-medium text-lg hover:bg-white/10 transition-all duration-300">
               Book a Virtual Tour
-            </a>
+            </Link>
           </div>
 
           <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8 text-white/70">

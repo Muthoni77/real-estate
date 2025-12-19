@@ -376,12 +376,12 @@ export default function Amenities() {
           </p>
           
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-             <a
-              href="/request"
+             <Link
+              to="/request"
               className="px-8 py-3 rounded-xl bg-secondary text-white font-medium hover:bg-background/90 transition"
             >
               Request a Hostel
-            </a>
+            </Link>
             <a
               href="tel:+971545594940"
               className="px-8 py-3 rounded-xl border border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10 transition"

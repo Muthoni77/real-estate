@@ -10,12 +10,14 @@ import  Amenities  from "./pages/Amenties";
 import RequestForm from "./pages/RequestForm";
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
    <Router>
+      <ScrollToTop />
   <div className="min-h-screen flex flex-col">
     <Navbar />
 

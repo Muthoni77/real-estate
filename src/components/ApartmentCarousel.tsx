@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, MapPin, Users } from "lucide-react";
-
-
+import { Link } from "react-router-dom";
 // Import interior images
 import interiorKitchen from "../assets/interior-kitchen.jpg";
 import interiorBalcony from "../assets/interior-balcony.jpg";
@@ -141,12 +140,12 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
               </div>
             )}
           </div>
-          <a
-            href="/request"
+          <Link
+            to="/request"
             className="px-4 py-2 rounded-xl bg-secondary text-white text-sm font-medium hover:bg-secondary/90 transition flex-shrink-0"
           >
             Request
-          </a>
+          </Link>
         </div>
         
         {location.description && (

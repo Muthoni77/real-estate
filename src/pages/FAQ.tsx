@@ -199,12 +199,12 @@ export default function FAQs() {
           </p>
           
          <div className="mt-8">
-            <a
-              href="/request"
+            <Link
+              to="/request"
               className="inline-block px-8 py-3 rounded-xl bg-secondary text-cream font-medium hover:bg-secondary/90 transition"
             >
               Request a Hostel
-            </a>
+            </Link>
           </div>
 
         

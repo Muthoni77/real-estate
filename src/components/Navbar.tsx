@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -17,10 +17,10 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+      <nav className="w-full sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border pointer-events-auto">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-10 py-4">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-md">
               <span className="text-primary-foreground font-bold text-sm">SH</span>
             </div>
@@ -30,14 +30,14 @@ const Navbar = () => {
               </span>
               <span className="text-xs text-muted-foreground">Dubai</span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Links */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
+                to={link.href}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   location.pathname === link.href
                     ? "text-primary"
@@ -45,7 +45,7 @@ const Navbar = () => {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -58,12 +58,12 @@ const Navbar = () => {
               <Phone className="w-4 h-4" />
               <span>+971 54 559 4940</span>
             </a>
-            <a
-              href="/request"
+            <Link
+              to="/request"
               className="px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition shadow-sm"
             >
               Request a Hostel
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -80,18 +80,19 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="lg:hidden bg-background border-b border-border overflow-hidden fixed top-[73px] left-0 right-0 z-40"
-          >
+         <motion.div
+  initial={{ height: 0, opacity: 0, pointerEvents: "none" }}
+  animate={{ height: "auto", opacity: 1, pointerEvents: "auto" }}
+  exit={{ height: 0, opacity: 0, pointerEvents: "none" }}
+  transition={{ duration: 0.25 }}
+  className="lg:hidden bg-background border-b border-border fixed top-[73px] left-0 right-0 z-40"
+>
+
             <div className="flex flex-col px-6 py-4 gap-1">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
+                  to={link.href}
                   className={`py-3 px-4 rounded-lg transition ${
                     location.pathname === link.href
                       ? "bg-primary/10 text-primary font-medium"
@@ -100,7 +101,7 @@ const Navbar = () => {
                   onClick={() => setMenuOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
 
               <div className="pt-4 border-t border-border mt-2">
@@ -111,13 +112,13 @@ const Navbar = () => {
                   <Phone className="w-4 h-4" />
                   <span>+971 54 559 4940</span>
                 </a>
-                <a
-                  href="/request"
+                <Link
+                  to="/request"
                   className="block text-center py-3 rounded-xl bg-primary text-primary-foreground font-medium mt-2"
                   onClick={() => setMenuOpen(false)}
                 >
                   Request a Hostel
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>
