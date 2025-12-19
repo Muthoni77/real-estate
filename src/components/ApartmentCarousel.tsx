@@ -101,17 +101,37 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
 
         {/* Navigation Arrows */}
         <button
-          onClick={prevImage}
-          className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10"
-        >
-          <ChevronLeft className="w-5 h-5 text-primary" />
-        </button>
-        <button
-          onClick={nextImage}
-          className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10"
-        >
-          <ChevronRight className="w-5 h-5 text-primary" />
-        </button>
+  onClick={prevImage}
+  className="
+    absolute left-3 top-1/2 -translate-y-1/2
+    w-10 h-10 rounded-full
+    bg-white/90 shadow-lg
+    flex items-center justify-center
+    opacity-0 group-hover:opacity-100
+    transition-opacity hover:bg-white
+    z-10
+    arrow-btn
+  "
+>
+  <ChevronLeft className="w-5 h-5 text-primary" />
+</button>
+
+<button
+  onClick={nextImage}
+  className="
+    absolute right-3 top-1/2 -translate-y-1/2
+    w-10 h-10 rounded-full
+    bg-white/90 shadow-lg
+    flex items-center justify-center
+    opacity-0 group-hover:opacity-100
+    transition-opacity hover:bg-white
+    z-10
+    arrow-btn
+  "
+>
+  <ChevronRight className="w-5 h-5 text-primary" />
+</button>
+
 
         {/* Image Label */}
         <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/60 text-white text-xs font-medium">
