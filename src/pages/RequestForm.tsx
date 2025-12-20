@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Home, ChevronRight, CheckCircle, Phone, Mail, MapPin, Users } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
-import heroImage from "../assets/apartment-2.jpg";
+import heroImage from "../assets/apartment-2.webp";
 
 
 interface RequestFormData {

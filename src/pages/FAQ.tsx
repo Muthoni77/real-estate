@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, CheckCircle, Home, ChevronRight, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "../assets/dubai-marina.jpg";
+import heroImage from "../assets/dubai-marina.webp";
 
 interface FAQItem {
   question: string;

@@ -1,16 +1,16 @@
 import { Home, ChevronRight, Play, MapPin, Compass, Eye, Camera } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "../assets/dubai-marina.jpg";
-import apartment1 from "../assets/apartment-1.jpg";
-import apartment2 from "../assets/apartment-2.jpg";
-import apartment3 from "../assets/apartment-3.jpg";
-import apartment5 from "../assets/apartment-5.jpg";
-import interiorSitting from "../assets/interior-sitting.jpg";
-import interiorKitchen from "../assets/interior-kitchen.jpg";
-import interiorBalcony from "../assets/interior-balcony.jpg";
-import interiorWashroom from "../assets/interior-washroom.jpg";
-import poolImage from "../assets/amenity-pool.jpg";
-import gymImage from "../assets/amenity-gym.jpg";
+import heroImage from "../assets/dubai-marina.webp";
+import apartment1 from "../assets/apartment-1.webp";
+import apartment2 from "../assets/apartment-2.webp";
+import apartment3 from "../assets/apartment-3.webp";
+import apartment5 from "../assets/apartment-5.webp";
+import interiorSitting from "../assets/interior-sitting.webp";
+import interiorKitchen from "../assets/interior-kitchen.webp";
+import interiorBalcony from "../assets/interior-balcony.webp";
+import interiorWashroom from "../assets/interior-washroom.webp";
+import poolImage from "../assets/amenity-pool.webp";
+import gymImage from "../assets/amenity-gym.webp";
 
 
 const tourLocations = [

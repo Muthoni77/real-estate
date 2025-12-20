@@ -1,16 +1,16 @@
 import { useState, useMemo } from "react";
 import { MapPin, Users, Wifi, Home, ChevronRight, CheckCircle, GraduationCap, Bed, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
-import locationMarina from "../assets/location-marina.jpg";
-import locationBarsha from "../assets/location-barsha.jpg";
-import locationJlt from "../assets/location-jlt.jpg";
-import locationMoe from "../assets/location-moe.jpg";
-import locationIbn from "../assets/location-ibn.jpg";
-import locationAcademic from "../assets/location-academic.jpg";
-import locationProduction from "../assets/location-production.jpg";
-import locationDip from "../assets/location-dip.jpg";
-import locationRemraam from "../assets/location-remraam.jpg";
-import heroImage from "../assets/dubai-marina.jpg";
+import locationMarina from "../assets/location-marina.webp";
+import locationBarsha from "../assets/location-barsha.webp";
+import locationJlt from "../assets/location-jlt.webp";
+import locationMoe from "../assets/location-moe.webp";
+import locationIbn from "../assets/location-ibn.webp";
+import locationAcademic from "../assets/location-academic.webp";
+import locationProduction from "../assets/location-production.webp";
+import locationDip from "../assets/location-dip.webp";
+import locationRemraam from "../assets/location-remraam.webp";
+import heroImage from "../assets/dubai-marina.webp";
 import { ApartmentCarousel } from "../components/ApartmentCarousel";
 
 

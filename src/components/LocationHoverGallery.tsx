@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { MapPin, ChevronRight, Users, Bed } from "lucide-react";
 
-import interior4beds from "@/assets/interior-4beds.jpg";
-import interior3beds from "@/assets/interior-3beds.jpg";
-import interior2beds from "@/assets/interior-2beds.jpg";
-import interior1bed from "@/assets/interior-1bed.jpg";
+import interior4beds from "@/assets/interior-4beds.webp";
+import interior3beds from "@/assets/interior-3beds.webp";
+import interior2beds from "@/assets/interior-2beds.webp";
+import interior1bed from "@/assets/interior-1bed.webp";
 
 interface LocationCardProps {
   location: {

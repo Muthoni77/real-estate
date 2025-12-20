@@ -3,15 +3,15 @@ import { ChevronLeft, ChevronRight, MapPin, Users, Bed } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Import interior images
-import interiorKitchen from "../assets/interior-kitchen.jpg";
-import interiorBalcony from "../assets/interior-balcony.jpg";
-import interiorWashroom from "../assets/interior-washroom.jpg";
-import interiorSitting from "../assets/interior-sitting.jpg";
-import interiorCorridor from "../assets/interior-corridor.jpg";
-import interior4beds from "../assets/interior-4beds.jpg";
-import interior3beds from "../assets/interior-3beds.jpg";
-import interior2beds from "../assets/interior-2beds.jpg";
-import interior1bed from "../assets/interior-1bed.jpg";
+import interiorKitchen from "../assets/interior-kitchen.webp";
+import interiorBalcony from "../assets/interior-balcony.webp";
+import interiorWashroom from "../assets/interior-washroom.webp";
+import interiorSitting from "../assets/interior-sitting.webp";
+import interiorCorridor from "../assets/interior-corridor.webp";
+import interior4beds from "../assets/interior-4beds.webp";
+import interior3beds from "../assets/interior-3beds.webp";
+import interior2beds from "../assets/interior-2beds.webp";
+import interior1bed from "../assets/interior-1bed.webp";
 
 interface ApartmentCarouselProps {
   location: {

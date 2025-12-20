@@ -1,7 +1,7 @@
 import { Home, ChevronRight, CheckCircle, Shield, Camera, Lock, Sparkles, HeadphonesIcon, Wifi, FileCheck, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import securityImage from "../assets/security-monitoring.jpg";
-import heroImage from "../assets/dubai-marina.jpg";
+import securityImage from "../assets/security-monitoring.webp";
+import heroImage from "../assets/dubai-marina.webp";
 
 const safetyFeatures = [
   {

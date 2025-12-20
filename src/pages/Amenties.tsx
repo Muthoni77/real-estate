@@ -1,34 +1,34 @@
 import { useState } from "react";
 import { Home, ChevronRight, CheckCircle, Waves, Dumbbell, Sparkles, Dribbble, Wifi, ShieldCheck, Bus, Tv, UtensilsCrossed, Bath, WashingMachine, ShoppingCart, Building2, Train, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "../assets/hero-dubai.jpg";
+import heroImage from "../assets/hero-dubai.webp";
 import { AmenityGalleryPopup } from "../components/AmenityGalleryPopup";
 
-import amenityPool from "../assets/amenity-pool.jpg";
-import amenityGym from "../assets/amenity-gym.jpg";
-import amenitySauna from "../assets/amenity-sauna.jpg";
-import amenityBasketball from "../assets/amenity-basketball.jpg";
-import amenityCleaning from "../assets/amenity-cleaning.jpg";
-import amenityLaundry from "../assets/amenity-laundry.jpg";
-import amenityGrocery from "../assets/amenity-grocery.jpg";
-import amenityMall from "../assets/amenity-mall.jpg";
-import amenityMetro from "../assets/amenity-metro.jpg";
-import amenityPrayer1 from "../assets/amenity-prayer1.jpg";
-import amenityPrayer2 from "../assets/amenity-prayer2.jpg";
-import amenityPrayer3 from "../assets/amenity-prayer3.jpg";
-import amenityPrayer4 from "../assets/amenity-prayer4.jpg";
-import interiorKitchen from "../assets/interior-kitchen.jpg";
-import interiorSitting from "../assets/interior-sitting.jpg";
-import laundry from "../assets/laundry.jpg";
-import mall from "../assets/mall.jpg";
-import grocery from "../assets/grocery-shop.jpeg";
-import pool from "../assets/pool.jpg";
-import sauna from "../assets/sauna2.jpg";
-import gym from "../assets/gym.jpg";
-import basketball from "../assets/basketball.jpg";
-import dubaimetro from "../assets/dubaimetro.jpeg"
-import apartment1 from "../assets/apartment-1.jpg";
-import apartment2 from "../assets/apartment-2.jpg";
+import amenityPool from "../assets/amenity-pool.webp";
+import amenityGym from "../assets/amenity-gym.webp";
+import amenitySauna from "../assets/amenity-sauna.webp";
+import amenityBasketball from "../assets/amenity-basketball.webp";
+import amenityCleaning from "../assets/amenity-cleaning.webp";
+import amenityLaundry from "../assets/amenity-laundry.webp";
+import amenityGrocery from "../assets/amenity-grocery.webp";
+import amenityMall from "../assets/amenity-mall.webp";
+import amenityMetro from "../assets/amenity-metro.webp";
+import amenityPrayer1 from "../assets/amenity-prayer1.webp";
+import amenityPrayer2 from "../assets/amenity-prayer2.webp";
+import amenityPrayer3 from "../assets/amenity-prayer3.webp";
+import amenityPrayer4 from "../assets/amenity-prayer4.webp";
+import interiorKitchen from "../assets/interior-kitchen.webp";
+import interiorSitting from "../assets/interior-sitting.webp";
+import laundry from "../assets/laundry.webp";
+import mall from "../assets/mall.webp";
+import grocery from "../assets/grocery-shop.webp";
+import pool from "../assets/pool.webp";
+import sauna from "../assets/sauna2.webp";
+import gym from "../assets/gym.webp";
+import basketball from "../assets/basketball.webp";
+import dubaimetro from "../assets/dubaimetro.webp"
+import apartment1 from "../assets/apartment-1.webp";
+import apartment2 from "../assets/apartment-2.webp";
 
 const buildingAmenities = [
   {

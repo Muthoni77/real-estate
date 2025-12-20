@@ -1,16 +1,16 @@
-import {  Shield, Wifi, Dumbbell,  Star, ChevronRight, Phone, Mail,  CheckCircle2, Waves, Flame, CircleDot } from "lucide-react";
+import { Shield, Wifi, Dumbbell, Star, ChevronRight, Phone, Mail, CheckCircle2, Waves, Flame, CircleDot } from "lucide-react";
 
 // Import images
-import heroImage from "../assets/hero-dubai.jpg";
-import apartment1 from "../assets/apartment-1.jpg";
-import apartment2 from "../assets/apartment-2.jpg";
-import apartment3 from "../assets/apartment-3.jpg";
-import apartment4 from "../assets/apartment-4.jpg";
-import apartment5 from "../assets/apartment-5.jpg";
-import poolImage from "../assets/amenity-pool.jpg";
-import gymImage from "../assets/amenity-gym.jpg";
-import dubaiMarina from "../assets/dubai-marina.jpg";
-import {ApartmentCarousel}  from "../components/ApartmentCarousel";
+import heroImage from "../assets/hero-dubai.webp";
+import apartment1 from "../assets/apartment-1.webp";
+import apartment2 from "../assets/apartment-2.webp";
+import apartment3 from "../assets/apartment-3.webp";
+import apartment4 from "../assets/apartment-4.webp";
+import apartment5 from "../assets/apartment-5.webp";
+import poolImage from "../assets/amenity-pool.webp";
+import gymImage from "../assets/amenity-gym.webp";
+import dubaiMarina from "../assets/dubai-marina.webp";
+import { ApartmentCarousel } from "../components/ApartmentCarousel";
 import { Link } from "react-router-dom";
 
 const locations = [
@@ -22,12 +22,7 @@ const locations = [
   { name: "Academic City", distance: "4 min to metro", image: apartment5 },
 ];
 
-// const amenities = [
-//   { name: "Swimming Pool", description: "Relax and unwind after classes", icon: Waves, image: poolImage },
-//   { name: "Fully Equipped Gym", description: "Stay fit and active", icon: Dumbbell, image: gymImage },
-//   { name: "Sauna", description: "Recharge after a busy day", icon: Flame, image: null },
-//   { name: "Basketball Court", description: "Recreation and sports on-site", icon: CircleDot, image: null },
-// ];
+
 
 const galleryImages = [
   { src: apartment1, title: "Premium Bedroom", category: "Bedroom" },
@@ -50,18 +45,18 @@ export default function LandingPage() {
     <main className="bg-background text-foreground">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroImage})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/80 via-primary/60 to-primary-dark/90" />
-        
+
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center py-20">
           <div className="inline-flex items-center gap-2 bg-secondary/20 backdrop-blur-sm border border-secondary/30 rounded-full px-4 py-2 mb-8 animate-fade-up">
             <Star className="w-4 h-4 text-yellow-500" fill="currentColor" />
             <span className="text-white text-sm font-medium">Student-Only Living in Dubai</span>
           </div>
-          
+
           <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white font-semibold tracking-tight leading-tight animate-fade-up" style={{ animationDelay: '0.1s' }}>
             Premium Student-Only
             <span className="block text-secondary">Hostel Apartments</span>
@@ -72,19 +67,33 @@ export default function LandingPage() {
             Starting from <span className="text-secondary font-semibold">AED 2,700/month</span> — all bills included.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.3s' }}>
-         
-            <Link to="/request">
-  <button className="px-8 py-4 rounded-xl bg-primary text-white font-semibold text-lg hover:shadow-primary transition-all duration-300 hover:-translate-y-1">
-    Request a Hostel
-  </button>
-</Link>
+       <div
+  className="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-fade-up"
+  style={{ animationDelay: "0.3s" }}
+>
+  <Link
+    to="/request"
+    className="w-full sm:w-auto"
+  >
+    <button
+      className="w-full px-8 py-4 rounded-xl bg-primary text-white font-semibold text-lg
+                 hover:shadow-primary transition-all duration-300 hover:-translate-y-1"
+    >
+      Request a Hostel
+    </button>
+  </Link>
 
-         <Link to="/request" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-medium text-lg hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2">
-              Book a Virtual Tour
-              <ChevronRight className="w-5 h-5" />
-           </Link>
-          </div>
+  <Link
+    to="/request"
+    className="w-full sm:w-auto px-8 py-4 rounded-xl border-2 border-white/30
+               text-white font-medium text-lg hover:bg-white/10
+               transition-all duration-300 flex items-center justify-center gap-2"
+  >
+    Book a Virtual Tour
+    <ChevronRight className="w-5 h-5" />
+  </Link>
+</div>
+
 
           <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto animate-fade-up" style={{ animationDelay: '0.4s' }}>
             <div className="text-center">
@@ -111,7 +120,7 @@ export default function LandingPage() {
       </section>
 
       {/* About Section */}
-       <section className="py-24 bg-light-grey">
+      <section className="py-24 bg-light-grey">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
@@ -120,11 +129,11 @@ export default function LandingPage() {
                 Designed Exclusively for Students
               </h2>
               <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-                Modern, secure, and fully furnished one-bedroom hostel apartments designed 
-                exclusively for students. Conveniently located near universities and metro stations. 
+                Modern, secure, and fully furnished one-bedroom hostel apartments designed
+                exclusively for students. Conveniently located near universities and metro stations.
                 Peaceful environment with all utilities included.
               </p>
-              
+
               <div className="mt-8 space-y-4">
                 {["All utilities & WiFi included", "24/7 maintenance support", "Flexible payment plans", "Student community events"].map((item) => (
                   <div key={item} className="flex items-center gap-3">
@@ -134,12 +143,12 @@ export default function LandingPage() {
                 ))}
               </div>
             </div>
-            
-            
+
+
             <div className="relative">
-              <img 
-                src={apartment2} 
-                alt="Luxury apartment interior" 
+              <img
+                src={apartment2}
+                alt="Luxury apartment interior"
                 className="rounded-3xl shadow-elevated w-full h-[500px] object-cover"
               />
               <div className="absolute -bottom-6 -left-6 bg-primary text-white p-6 rounded-2xl shadow-elevated">
@@ -166,18 +175,16 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {galleryImages.map((image, index) => (
-              <div 
+              <div
                 key={index}
-                className={`relative group overflow-hidden rounded-2xl cursor-pointer hover-lift ${
-                  index === 0 ? 'md:col-span-2 md:row-span-2' : ''
-                }`}
-              >
-                <img 
-                  src={image.src} 
-                  alt={image.title}
-                  className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
-                    index === 0 ? 'h-[300px] md:h-full' : 'h-[200px] md:h-[250px]'
+                className={`relative group overflow-hidden rounded-2xl cursor-pointer hover-lift ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''
                   }`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.title}
+                  className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${index === 0 ? 'h-[300px] md:h-full' : 'h-[200px] md:h-[250px]'
+                    }`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -239,7 +246,7 @@ export default function LandingPage() {
                 <p className="text-white/70 mt-2">Relax and unwind after a busy day of classes</p>
               </div>
             </div>
-            
+
             <div className="relative group overflow-hidden rounded-3xl h-[400px]">
               <img src={gymImage} alt="Fitness Center" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
@@ -280,7 +287,7 @@ export default function LandingPage() {
             Pricing ranges from <span className="text-secondary font-semibold">AED 2,700</span> to <span className="text-secondary font-semibold">AED 9,000</span> per student depending on
             occupancy. All bills included — no hidden costs.
           </p>
-          
+
           <div className="mt-12 grid md:grid-cols-4 gap-6">
             {[
               { occupancy: "1 Bedroom 4 beds/ 4 students", price: "2,700", popular: false, students: "4" },
@@ -288,13 +295,12 @@ export default function LandingPage() {
               { occupancy: "1 Bedroom 2 beds/ 2 students", price: "4,750", popular: false, students: "2" },
               { occupancy: "1 Bedroom 1 bed/ 1 student", price: "9,000", popular: false, students: "1" },
             ].map((plan) => (
-              <div 
+              <div
                 key={plan.occupancy}
-                className={`relative rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 ${
-                  plan.popular 
-                    ? 'bg-primary text-white shadow-primary' 
+                className={`relative rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 ${plan.popular
+                    ? 'bg-primary text-white shadow-primary'
                     : 'bg-card shadow-card border border-border'
-                }`}
+                  }`}
               >
                 {plan.popular && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-white text-xs font-semibold px-4 py-1 rounded-full">
@@ -324,11 +330,10 @@ export default function LandingPage() {
                 </ul>
                 <Link
                   to={`/request?students=${plan.students}`}
-                  className={`mt-6 w-full py-3 rounded-xl font-medium transition-all block text-center ${
-                    plan.popular 
-                      ? 'bg-white text-secondary hover:bg-white/90' 
+                  className={`mt-6 w-full py-3 rounded-xl font-medium transition-all block text-center ${plan.popular
+                      ? 'bg-white text-secondary hover:bg-white/90'
                       : 'bg-secondary text-white hover:shadow-secondary'
-                  }`}
+                    }`}
                 >
                   Get Started
                 </Link>
@@ -343,23 +348,23 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="relative">
-              <img 
-                src={apartment1} 
-                alt="Secure apartment" 
+              <img
+                src={apartment1}
+                alt="Secure apartment"
                 className="rounded-3xl shadow-elevated w-full h-[500px] object-cover"
               />
             </div>
-            
+
             <div>
               <p className="text-secondary font-medium mb-4 tracking-wider uppercase text-sm">Trust & Safety</p>
               <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground leading-tight">
                 Your Safety is Our Priority
               </h2>
               <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-                At our student hostel apartments, the safety, security, and well-being of our residents are our top priority. 
+                At our student hostel apartments, the safety, security, and well-being of our residents are our top priority.
                 We ensure a worry-free living environment for both students and parents.
               </p>
-              
+
               <div className="mt-8 grid grid-cols-2 gap-4">
                 {["24/7 Security", "CCTV Monitoring", "Controlled Access", "Emergency Support", "Secure WiFi", "Parental Assurance"].map((item) => (
                   <div key={item} className="flex items-center gap-3 bg-muted rounded-xl p-4">
@@ -411,7 +416,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-    <section className="py-24 bg-primary text-white relative  overflow-hidden">
+      <section className="py-24 bg-primary text-white relative  overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <img src={heroImage} alt="" className="w-full h-full object-cover" />
         </div>
@@ -451,7 +456,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      
+
     </main>
   );
 }
