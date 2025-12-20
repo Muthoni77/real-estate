@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, MapPin, Users, Bed } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -45,11 +45,13 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeBedOption, setActiveBedOption] = useState<number | null>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true); // track image fade-in
 
   // Replace default exterior with location image
   const images = carouselImages.map((img) =>
     img.isDefault ? { ...img, src: location.image } : img
   );
+console.log('Next image clicked', isHovered);
 
   // Show bed image if hovering on a bed option
   const displayImage = activeBedOption !== null 
@@ -60,21 +62,13 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
     ? bedOptions[activeBedOption].label 
     : images[currentIndex].label;
 
-  const nextImage = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setActiveBedOption(null);
-    console.log('Next image clicked', isHovered);
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
-  
-
-  const prevImage = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setActiveBedOption(null);
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
+  // Preload next and previous images for smooth navigation
+  useEffect(() => {
+    const nextIndex = (currentIndex + 1) % images.length;
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    new Image().src = images[nextIndex].src;
+    new Image().src = images[prevIndex].src;
+  }, [currentIndex, images]);
 
   return (
     <div
@@ -86,52 +80,44 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
         setIsHovered(false);
         setActiveBedOption(null);   
       }}
-        onClick={() => setIsHovered((prev) => !prev)}
+      onClick={() => setIsHovered((prev) => !prev)}
     >
       {/* Image Container */}
       <div className={`overflow-hidden relative ${variant === "apartments" ? "aspect-[4/3]" : "h-48"}`}>
         <img
           src={displayImage}
           alt={`${location.name} - ${displayLabel}`}
-          className="w-full h-full object-cover transition-all duration-500"
+          className={`w-full h-full object-cover transition-opacity duration-300 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+          onLoad={() => setIsLoaded(true)}
         />
-        
+
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
         {/* Navigation Arrows */}
         <button
-  onClick={prevImage}
-  className="
-    absolute left-3 top-1/2 -translate-y-1/2
-    w-10 h-10 rounded-full
-    bg-white/90 shadow-lg
-    flex items-center justify-center
-    opacity-0 group-hover:opacity-100
-    transition-opacity hover:bg-white
-    z-10
-    arrow-btn
-  "
->
-  <ChevronLeft className="w-5 h-5 text-primary" />
-</button>
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setActiveBedOption(null);
+            setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+          }}
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10 arrow-btn"
+        >
+          <ChevronLeft className="w-5 h-5 text-primary" />
+        </button>
 
-<button
-  onClick={nextImage}
-  className="
-    absolute right-3 top-1/2 -translate-y-1/2
-    w-10 h-10 rounded-full
-    bg-white/90 shadow-lg
-    flex items-center justify-center
-    opacity-0 group-hover:opacity-100
-    transition-opacity hover:bg-white
-    z-10
-    arrow-btn
-  "
->
-  <ChevronRight className="w-5 h-5 text-primary" />
-</button>
-
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setActiveBedOption(null);
+            setCurrentIndex((prev) => (prev + 1) % images.length);
+          }}
+          className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10 arrow-btn"
+        >
+          <ChevronRight className="w-5 h-5 text-primary" />
+        </button>
 
         {/* Image Label */}
         <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/60 text-white text-xs font-medium">
