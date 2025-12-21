@@ -126,12 +126,19 @@ const Footer = () => {
               © {currentYear} Student Hostels — All rights reserved
             </p>
             <div className="flex gap-6 text-sm">
-              <a href="#" className="text-white/60 hover:text-secondary transition-colors">
-                Privacy Policy
-              </a>
-              <a href="#" className="text-white/60 hover:text-secondary transition-colors">
-                Terms of Service
-              </a>
+              <Link
+    to="/privacy-policy"
+    className="text-white/60 hover:text-secondary transition-colors"
+  >
+    Privacy Policy
+  </Link>
+
+  <Link
+    to="/terms-of-service"
+    className="text-white/60 hover:text-secondary transition-colors"
+  >
+    Terms of Service
+  </Link>
             </div>
           </div>
         </div>

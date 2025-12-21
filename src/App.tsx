@@ -13,6 +13,8 @@ import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import VirtualTours from "./pages/VirtualTours";
 import { ModalProvider } from "./components/context/ModalContext";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsofService";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -34,6 +36,8 @@ function App() {
         <Route path="/faqs" element={<FAQs />} />
         <Route path="/trust-safety" element={<TrustSafety />} />
         <Route path="/request" element={<RequestForm />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+<Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </main>
