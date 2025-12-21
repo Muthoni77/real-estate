@@ -3,7 +3,7 @@ import { Home, ChevronRight, CheckCircle, Waves, Dumbbell, Sparkles, Dribbble, W
 import { Link } from "react-router-dom";
 import heroImage from "../assets/hero-dubai.webp";
 import { AmenityGalleryPopup } from "../components/AmenityGalleryPopup";
-
+import { useModal } from "../components/context/ModalContext";
 import amenityPool from "../assets/amenity-pool.webp";
 import amenityGym from "../assets/amenity-gym.webp";
 import amenitySauna from "../assets/amenity-sauna.webp";
@@ -127,7 +127,8 @@ export default function Amenities() {
   const handleAmenityClick = (title: string, images: string[]) => {
     setSelectedAmenity({ title, images });
   };
-
+  // callback
+  const { openCallback } = useModal();
   return (
     <main className="bg-background text-foreground">
       {/* Hero Section */}
@@ -390,12 +391,12 @@ export default function Amenities() {
             >
               Request a Hostel
             </Link>
-            <a
-              href="tel:+971545594940"
-              className="px-8 py-3 rounded-xl border border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10 transition"
+            <button
+             onClick={openCallback}
+              className="px-8 py-3 rounded-xl bg-background text-secondary font-medium hover:bg-primary/90 transition"
             >
-              Request a Callback
-            </a>
+              Request a Call Back
+            </button>
           
           </div>
 

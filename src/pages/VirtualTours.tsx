@@ -11,6 +11,7 @@ import interiorBalcony from "../assets/interior-balcony.webp";
 import interiorWashroom from "../assets/interior-washroom.webp";
 import poolImage from "../assets/amenity-pool.webp";
 import gymImage from "../assets/amenity-gym.webp";
+import { useModal } from "../components/context/ModalContext";
 
 
 const tourLocations = [
@@ -50,6 +51,8 @@ const interiorGallery = [
 ];
 
 export default function VirtualTours() {
+    // callback
+    const { openCallback } = useModal();
   return (
     <main className="bg-background text-foreground">
       {/* Hero Section */}
@@ -281,12 +284,12 @@ export default function VirtualTours() {
             >
               Request a Hostel
             </Link>
-            <a
-              href="tel:+971545594940"
-              className="px-8 py-3 rounded-xl border border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10 transition"
+            <button
+             onClick={openCallback}
+              className="px-8 py-3 rounded-xl bg-background text-secondary font-medium hover:bg-primary/90 transition"
             >
-              Request a Callback
-            </a>
+              Request a Call Back
+            </button>
           
           </div>
 

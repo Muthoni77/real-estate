@@ -40,11 +40,13 @@ const universities = [
   "Other",
 ];
 
+   
+
 const pricingInfo = [
-  { students: "4", price: "2,700" },
-  { students: "3", price: "3,600" },
-  { students: "2", price: "4,750" },
-  { students: "1", price: "9,000" },
+  { students: "4 shared", price: "2,700/month" },
+  { students: "3 shared", price: "3,600/month" },
+  { students: "2 shared", price: "4,750/month" },
+  { students: "Live alone", price: "9,000/month" },
 ];
 
 export default function RequestForm() {

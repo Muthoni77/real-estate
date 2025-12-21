@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, MapPin, Users, Bed } from "lucide-react";
 import { Link } from "react-router-dom";
-
 // Import interior images
 import interiorKitchen from "../assets/interior-kitchen.webp";
 import interiorBalcony from "../assets/interior-balcony.webp";
@@ -33,12 +32,12 @@ const carouselImages = [
   { src: interiorWashroom, label: "Washroom" },
   { src: interiorCorridor, label: "Corridor" },
 ];
-
+   
 const bedOptions = [
-  { beds: 4, label: "4 beds / 1 bedroom", price: "2,700", image: interior4beds },
-  { beds: 3, label: "3 beds / 1 bedroom", price: "3,600", image: interior3beds },
-  { beds: 2, label: "2 beds / 1 bedroom", price: "4,750", image: interior2beds },
-  { beds: 1, label: "1 bed / 1 bedroom", price: "9,000", image: interior1bed },
+  { beds: 4, label: "4 beds / 1 bedroom", price: "2,500", image: interior4beds },
+  { beds: 3, label: "3 beds / 1 bedroom", price: "3,400", image: interior3beds },
+  { beds: 2, label: "2 beds / 1 bedroom", price: "4,550", image: interior2beds },
+  { beds: 1, label: "1 bed / 1 bedroom", price: "6,550", image: interior1bed },
 ];
 
 export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCarouselProps) {
@@ -205,7 +204,7 @@ console.log('Next image clicked', isHovered);
             >
               <Bed className={`w-4 h-4 mb-1 ${activeBedOption === index ? "text-secondary" : "text-muted-foreground"}`} />
               <span className="text-xs font-medium text-foreground">{option.beds} bed</span>
-              <span className="text-xs text-secondary font-semibold">AED {option.price}</span>
+              <span className="text-xs text-secondary font-semibold">{option.price}K</span>
             </button>
           ))}
         </div>

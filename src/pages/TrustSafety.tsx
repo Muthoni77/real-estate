@@ -2,6 +2,7 @@ import { Home, ChevronRight, CheckCircle, Shield, Camera, Lock, Sparkles, Headph
 import { Link } from "react-router-dom";
 import securityImage from "../assets/security-monitoring.webp";
 import heroImage from "../assets/dubai-marina.webp";
+import { useModal } from "../components/context/ModalContext";
 
 const safetyFeatures = [
   {
@@ -37,6 +38,8 @@ const safetyFeatures = [
 ];
 
 export default function TrustSafety() {
+    // callback
+  const { openCallback } = useModal();
   return (
     <main className="bg-background text-foreground">
       {/* Hero Section */}
@@ -198,12 +201,12 @@ export default function TrustSafety() {
             >
               Request a Hostel
             </Link>
-            <a
-              href="tel:+971545594940"
-              className="px-8 py-3 rounded-xl border border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10 transition"
+              <button
+             onClick={openCallback}
+              className="px-8 py-3 rounded-xl bg-background text-secondary font-medium hover:bg-primary/90 transition"
             >
-              Request a Callback
-            </a>
+              Request a Call Back
+            </button>
           </div>
 
         

@@ -18,85 +18,92 @@ const apartmentLocations = [
   {
     name: "Al Barsha Heights (Tecom)",
     image: locationBarsha,
-    description: "Spacious one-bedroom apartment with balcony, fully equipped kitchen, and two washrooms. Ideal for up to 4 students.",
+    description:
+      "Spacious, fully furnished apartments ideal for students who want metro access and convenience.",
     features: ["Near Metro", "City View", "Modern Design"],
     area: "Al Barsha",
-    nearbyUniversities: ["University of Dubai", "Canadian University Dubai"],
-    distance: "5 min to metro",
+    nearbyUniversities: [
+      "University of Dubai",
+      "Canadian University Dubai",
+    ],
+    distance: "5 mins walk to metro",
+   
   },
+
   {
     name: "Dubai Marina",
     image: locationMarina,
-    description: "Modern interiors, high-speed WiFi, and premium facilities in one of Dubai's most vibrant areas.",
+    description:
+      "Modern student apartments in a premium waterfront location with vibrant city life.",
     features: ["Waterfront", "Premium Location", "Nightlife"],
     area: "Dubai Marina",
-    nearbyUniversities: ["Dubai Marina Campus", "SP Jain School"],
-    distance: "2 min to beach",
+    nearbyUniversities: ["SP Jain School", "Dubai Marina Campus"],
+    distance: "12 mins walk to metro",
+  
   },
+
   {
     name: "JLT (Jumeirah Lake Towers)",
     image: locationJlt,
-    description: "Bright, fully furnished apartments near metro stations and universities.",
+    description:
+      "Bright, fully furnished apartments close to metro stations and key universities.",
     features: ["Lake View", "Metro Access", "Parks"],
     area: "JLT",
-    nearbyUniversities: ["Murdoch University Dubai", "BITS Pilani Dubai"],
-    distance: "Walking distance to metro",
+    nearbyUniversities: [
+      "Murdoch University Dubai",
+      "BITS Pilani Dubai",
+    ],
+    distance: "13 mins walk to metro",
+   
   },
-  {
-    name: "Mall of the Emirates",
-    image: locationMoe,
-    description: "Comfort, security, and convenience combined for student living.",
-    features: ["Shopping", "Entertainment", "Central"],
-    area: "Al Barsha",
-    nearbyUniversities: ["University of Wollongong", "Middlesex University Dubai"],
-    distance: "3 min walk to mall",
-  },
+
   {
     name: "Ibn Battuta",
     image: locationIbn,
-    description: "Fully furnished apartments designed for focused and peaceful student life.",
-    features: ["Quiet Area", "Near Mall", "Affordable"],
+    description:
+      "Affordable, fully furnished student apartments with easy bus access to universities.",
+    features: ["Near Mall", "Affordable", "Quiet Area"],
     area: "Jebel Ali",
-    nearbyUniversities: ["Heriot-Watt University Dubai", "Amity University Dubai"],
-    distance: "Near Ibn Battuta Mall",
+    nearbyUniversities: [
+      "Heriot-Watt University Dubai",
+      "Amity University Dubai",
+    ],
+    distance: "Recommended for bus transport to university",
+  
   },
-  {
-    name: "Academic City",
-    image: locationAcademic,
-    description: "Close to major universities with flexible sharing options and modern design.",
-    features: ["Near Universities", "Student Hub", "Modern"],
-    area: "Academic City",
-    nearbyUniversities: ["University of Birmingham Dubai", "Manipal Academy", "Amity University"],
-    distance: "Walking distance to universities",
-  },
+
   {
     name: "Production City",
     image: locationProduction,
-    description: "Affordable student apartments in a growing community with excellent connectivity.",
+    description:
+      "Budget-friendly student housing in a growing community with good connectivity.",
     features: ["Affordable", "Growing Area", "Good Transport"],
     area: "Production City",
-    nearbyUniversities: ["Middlesex University Dubai", "University of Dubai"],
-    distance: "15 min to Dubai Media City",
+    nearbyUniversities: [
+      "Middlesex University Dubai",
+      "University of Dubai",
+    ],
+    distance: "Recommended for bus transport to university",
+   
   },
+
   {
-    name: "Dubai Investments Park (DIP)",
-    image: locationDip,
-    description: "Peaceful community with green spaces, perfect for focused student living.",
-    features: ["Green Spaces", "Peaceful", "Family-Friendly"],
-    area: "DIP",
-    nearbyUniversities: ["BITS Pilani Dubai", "Amity University Dubai"],
-    distance: "Near Sheikh Zayed Road",
-  },
-  {
-    name: "Remraam Community",
-    image: locationRemraam,
-    description: "Modern townhouse-style living with community amenities and secure environment.",
-    features: ["Community Living", "Secure", "Modern"],
-    area: "Remraam",
-    nearbyUniversities: ["Heriot-Watt University Dubai", "University of Wollongong"],
-    distance: "Near Al Qudra Road",
+    name: "Academic City",
+    image: locationAcademic,
+    description:
+      "Student-focused apartments located close to major universities with flexible sharing options.",
+    features: ["Near Universities", "Student Hub", "Modern"],
+    area: "Academic City",
+    nearbyUniversities: [
+      "University of Birmingham Dubai",
+      "Manipal Academy",
+      "Amity University",
+    ],
+    distance: "Recommended for bus transport to university",
+  
   },
 ];
+
 
 const livingPreferences = [
   { id: "all", label: "All Options", beds: null },
@@ -131,12 +138,12 @@ const allUniversities = [
 
 // Price per bed count (for filtering)
 const priceByBeds: Record<number, number> = {
-  1: 9000,
-  2: 4750,
-  3: 3600,
-  4: 2700,
+  1: 6550,
+  2: 3400,
+  3: 4550,
+  4: 2500,
 };
-
+   
 export default function Apartments() {
   const [selectedLiving, setSelectedLiving] = useState("all");
   const [selectedPrice, setSelectedPrice] = useState("all");

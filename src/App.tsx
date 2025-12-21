@@ -12,11 +12,13 @@ import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import VirtualTours from "./pages/VirtualTours";
+import { ModalProvider } from "./components/context/ModalContext";
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
+     <ModalProvider>
    <Router>
       <ScrollToTop />
   <div className="min-h-screen flex flex-col">
@@ -39,6 +41,7 @@ function App() {
     <Footer />
   </div>
 </Router>
+</ModalProvider>
 
   )
 }
