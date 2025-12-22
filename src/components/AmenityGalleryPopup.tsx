@@ -31,13 +31,14 @@ const Thumbnail = memo(({
     }`}
     aria-label={`View image ${index + 1}`}
   >
-    <img 
-      src={src} 
-      alt="" 
-      loading="eager"
-      decoding="async"
-      className="w-full h-full object-cover" 
-    />
+  <img
+  src={src}
+  alt=""
+  loading="lazy"
+  decoding="async"
+  className="w-full h-full object-cover"
+/>
+
   </button>
 ));
 
@@ -163,13 +164,13 @@ useEffect(() => {
               <div className="absolute inset-0 bg-muted animate-pulse" />
             )}
             
-            <img
+    <img
   key={currentIndex}
   src={images[currentIndex]}
   alt={`${title} ${currentIndex + 1}`}
-  loading="eager"
+  loading={currentIndex === 0 ? "eager" : "lazy"}
+  fetchPriority={currentIndex === 0 ? "high" : "low"}
   decoding="async"
-  fetchPriority="high"
   onLoad={() => setIsImageLoaded(true)}
   className={`w-full h-full object-cover transition-opacity duration-300 ${
     isImageLoaded ? "opacity-100" : "opacity-0"
@@ -215,6 +216,7 @@ useEffect(() => {
                   key={index}
                   src={img}
                   index={index}
+                  
                   isActive={index === currentIndex}
                   onClick={() => handleThumbnailClick(index)}
                 />

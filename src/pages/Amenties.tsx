@@ -207,8 +207,6 @@ export default function Amenities() {
                 src={amenityGalleries.cleaning[0]}
                 alt="Apartment interior"
                 className="rounded-xl sm:rounded-2xl w-full h-36 sm:h-48 object-cover cursor-pointer hover:opacity-90 transition"
-                loading="eager"
-                fetchPriority="high"
                 onClick={() => handleAmenityClick("Living Room", amenityGalleries.cleaning)}
               />
               <OptimizedImage
@@ -246,9 +244,7 @@ export default function Amenities() {
                   <OptimizedImage
                     src={amenity.image}
                     alt={amenity.name}
-                    loading="eager"
-                    fetchPriority="high"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4">
@@ -293,7 +289,7 @@ export default function Amenities() {
                   <OptimizedImage
                     src={amenity.image}
                     alt={amenity.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4">
@@ -338,7 +334,7 @@ export default function Amenities() {
                   <OptimizedImage
                     src={amenity.image}
                     alt={amenity.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4">

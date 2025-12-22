@@ -46,15 +46,29 @@ const getBedOptions = (locationName: string) => {
 
 
 // Optimized image component with lazy loading
-const OptimizedImage = memo(({ src, alt, className }: { src: string; alt: string; className?: string }) => (
-  <img
-    src={src}
-    alt={alt}
-    loading="eager"
-    decoding="async"
-    className={className}
-  />
-));
+const OptimizedImage = memo(
+  ({
+    src,
+    alt,
+    className,
+    eager = false,
+  }: {
+    src: string;
+    alt: string;
+    className?: string;
+    eager?: boolean;
+  }) => (
+    <img
+      key={src} // 👈 forces repaint when src changes
+      src={src}
+      alt={alt}
+      loading={eager ? "eager" : "lazy"}
+      decoding="async"
+      className={className}
+    />
+  )
+);
+
 
 OptimizedImage.displayName = "OptimizedImage";
 
@@ -130,11 +144,13 @@ const prevImage = (e: React.MouseEvent) => {
     >
       {/* Image Container */}
       <div className={`overflow-hidden relative ${variant === "apartments" ? "aspect-[4/3]" : "h-48 sm:h-52 md:h-48"}`}>
-        <OptimizedImage
-          src={displayImage}
-          alt={`${location.name} - ${displayLabel}`}
-          className="w-full h-full object-cover transition-all duration-500"
-        />
+      <OptimizedImage
+  src={displayImage}
+  alt={`${location.name} - ${displayLabel}`}
+  eager={currentIndex === 0 && activeBedOption === null}
+  className="w-full h-full object-cover transition-opacity duration-300"
+/>
+
         
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
