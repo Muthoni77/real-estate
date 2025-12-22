@@ -23,8 +23,23 @@ import prayerMosque2 from "../assets/amenities/prayer-mosque-2.webp";
 import prayerChurch from "../assets/amenities/prayer-church.webp";
 import prayerTemple from "../assets/amenities/prayer-temple.webp";
 import prayerGurdwara from "../assets/amenities/prayer-gurdwara.webp";
+import living1 from "../assets/apartments/academic/living.webp";
+import living2 from "../assets/apartments/remraam/living.webp";
+import kitchen1 from "../assets/apartments/academic/kitchen.webp";
+import kitchen2 from "../assets/apartments/remraam/kitchen.webp";
+import washroom1 from "../assets/apartments/academic/washroom.webp";
+import washroom2 from "../assets/apartments/remraam/washroom.webp";
+import security from "../assets/security-monitoring.webp";
+import security2 from "../assets/amenities/security.webp";
+import wifi1 from "../assets/amenities/wifi 2.webp"
+import wifi2 from "../assets/amenities/high-speed-internet.webp"
 
 export const amenityGalleries = {
+  security: [security, security2],
+  wifi: [wifi1, wifi2],
+  living: [living1, living2],
+  kitchen: [kitchen1, kitchen2],
+  washroom: [washroom1, washroom2],
   pool: [pool1, pool2],
   gym: [gym1, gym2],
   sauna: [sauna1, sauna2],

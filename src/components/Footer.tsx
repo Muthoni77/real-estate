@@ -68,7 +68,7 @@ const Footer = () => {
                 "Al Barsha Heights (Tecom)",
                 "Dubai Marina",
                 "JLT",
-                "Mall of the Emirates",
+                "Production City",
                 "Ibn Battuta",
                 "Academic City",
               ].map((location) => (

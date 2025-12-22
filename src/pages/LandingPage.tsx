@@ -8,18 +8,18 @@ import apartment3 from "../assets/apartment-3.webp";
 import apartment4 from "../assets/apartment-4.webp";
 import apartment5 from "../assets/apartment-5.webp";
 import poolImage from "../assets/amenity-pool.webp";
-import gymImage from "../assets/amenity-gym.webp";
+import gymImage from "../assets/amenities/gym-1.webp";
 import dubaiMarina from "../assets/dubai-marina.webp";
 import { ApartmentCarousel } from "../components/ApartmentCarousel";
 import { Link } from "react-router-dom";
 
 const locations = [
-  { name: "Al Barsha Heights (Tecom)", distance: "5 min to metro", image: apartment1 },
-  { name: "Dubai Marina", distance: "2 min to metro", image: dubaiMarina },
-  { name: "JLT (Jumeirah Lake Towers)", distance: "Walking distance to JLT metro", image: apartment2 },
-  { name: "Mall of the Emirates", distance: "3 min to metro", image: apartment3 },
-  { name: "Ibn Battuta", distance: "3 min to metro", image: apartment4 },
-  { name: "Academic City", distance: "4 min to metro", image: apartment5 },
+  { name: "Al Barsha Heights ", distance: "5 min to metro", image: apartment1 },
+  { name: "Dubai Marina", distance: "12mins walk to metro", image: dubaiMarina },
+  { name: "JLT (Jumeirah Lake Towers)", distance: "13mins walk to metro", image: apartment2 },
+  { name: "IBN Battuta", distance: "Recommended for bus transport to university", image: apartment3 },
+  { name: "Production City", distance: "Recommended for bus transport to university", image: apartment4 },
+  { name: "Academic City", distance: "Recommended for bus transport to university", image: apartment5 },
 ];
 
 
@@ -290,10 +290,10 @@ export default function LandingPage() {
 
           <div className="mt-12 grid md:grid-cols-4 gap-6">
             {[
-              { occupancy: "1 Bedroom 4 beds/ 4 students", price: "2,700", popular: false, students: "4" },
-              { occupancy: "1 Bedroom 3 beds/ 3 students", price: "3,600", popular: true, students: "3" },
-              { occupancy: "1 Bedroom 2 beds/ 2 students", price: "4,750", popular: false, students: "2" },
-              { occupancy: "1 Bedroom 1 bed/ 1 student", price: "9,000", popular: false, students: "1" },
+              { occupancy: "1 Bedroom 4 beds/ 4 students", price: "3,000", popular: false, students: "4" },
+              { occupancy: "1 Bedroom 3 beds/ 3 students", price: "3,900", popular: true, students: "3" },
+              { occupancy: "1 Bedroom 2 beds/ 2 students", price: "4,900", popular: false, students: "2" },
+              { occupancy: "1 Bedroom 1 bed/ 1 student", price: "6,950", popular: false, students: "1" },
             ].map((plan) => (
               <div
                 key={plan.occupancy}
@@ -311,7 +311,7 @@ export default function LandingPage() {
                   {plan.occupancy}
                 </p>
                 <p className="mt-4">
-                  <span className="text-3xl font-display font-bold">AED {plan.price}</span>
+                  <span className="text-3xl font-display font-bold">{plan.price}K</span>
                   <span className={`text-sm ${plan.popular ? 'text-white/70' : 'text-muted-foreground'}`}>/month</span>
                 </p>
                 <ul className={`mt-6 space-y-3 text-sm text-left ${plan.popular ? 'text-white/90' : 'text-muted-foreground'}`}>

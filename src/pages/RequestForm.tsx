@@ -43,10 +43,10 @@ const universities = [
    
 
 const pricingInfo = [
-  { students: "4 shared", price: "2,700/month" },
-  { students: "3 shared", price: "3,600/month" },
-  { students: "2 shared", price: "4,750/month" },
-  { students: "Live alone", price: "9,000/month" },
+  { students: "4 shared", price: "3,000K/month" },
+  { students: "3 shared", price: "3,900K/month" },
+  { students: "2 shared", price: "4,950K/month" },
+  { students: "Live alone", price: "6,950K/month" },
 ];
 
 export default function RequestForm() {
@@ -253,10 +253,10 @@ console.log("LEAD_CAPTURE", formData);
                       required
                     >
                       <option value="">Number of Students *</option>
-                      <option value="1">live alone - AED 9,000/month</option>
-                      <option value="2">Shared 2(students)- AED 4,750/student</option>
-                      <option value="3"> Shared 3 (students)- AED 3,600/student</option>
-                      <option value="4">Shared 4 (students) - AED 2,700/student</option>
+                      <option value="1">live alone - 6,950K/month</option>
+                      <option value="2">Shared 2(students)- 4,950K/student</option>
+                      <option value="3"> Shared 3 (students)- 3,900K/student</option>
+                      <option value="4">Shared 4 (students) - 3,000K/student</option>
                     </select>
                   </div>
 
@@ -265,7 +265,7 @@ console.log("LEAD_CAPTURE", formData);
                       <div className="flex items-center gap-2 text-secondary">
                         <CheckCircle className="w-5 h-5" />
                         <span className="font-medium">
-                          Price: AED {selectedPricing.price}/student per month
+                          Price: {selectedPricing.price} K/student per month
                         </span>
                       </div>
                       <p className="text-sm text-muted-foreground mt-1">
@@ -342,7 +342,7 @@ console.log("LEAD_CAPTURE", formData);
                       <span className="text-muted-foreground">
                         {item.students} {item.students === "1" ? "Student" : "Students"}
                       </span>
-                      <span className="font-semibold">AED {item.price}</span>
+                      <span className="font-semibold">{item.price}</span>
                     </div>
                   ))}
                 </div>

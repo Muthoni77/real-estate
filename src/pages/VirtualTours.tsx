@@ -10,7 +10,7 @@ import interiorKitchen from "../assets/interior-kitchen.webp";
 import interiorBalcony from "../assets/interior-balcony.webp";
 import interiorWashroom from "../assets/interior-washroom.webp";
 import poolImage from "../assets/amenity-pool.webp";
-import gymImage from "../assets/amenity-gym.webp";
+import gymImage from "../assets/amenities/gym-1.webp";
 import { useModal } from "../components/context/ModalContext";
 
 
