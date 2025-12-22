@@ -4,12 +4,11 @@ import { Link } from "react-router-dom";
 import locationMarina from "../assets/location-marina.webp";
 import locationBarsha from "../assets/location-barsha.webp";
 import locationJlt from "../assets/location-jlt.webp";
-import locationMoe from "../assets/location-moe.webp";
+
 import locationIbn from "../assets/location-ibn.webp";
 import locationAcademic from "../assets/location-academic.webp";
 import locationProduction from "../assets/location-production.webp";
-import locationDip from "../assets/location-dip.webp";
-import locationRemraam from "../assets/location-remraam.webp";
+
 import heroImage from "../assets/dubai-marina.webp";
 import { ApartmentCarousel } from "../components/ApartmentCarousel";
 

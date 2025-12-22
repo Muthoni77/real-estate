@@ -62,7 +62,7 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeBedOption, setActiveBedOption] = useState<number | null>(null);
   const [isHovered, setIsHovered] = useState(false);
-
+console.log(isHovered);
   // Get location-specific interior images
     const bedOptions = getBedOptions(location.name);
   const interiors: ApartmentInteriorImages | undefined = apartmentInteriors[location.name];
