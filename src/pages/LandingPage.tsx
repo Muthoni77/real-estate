@@ -14,10 +14,10 @@ import { ApartmentCarousel } from "../components/ApartmentCarousel";
 import { Link } from "react-router-dom";
 
 const locations = [
-  { name: "Al Barsha Heights ", distance: "5 min to metro", image: apartment1 },
+  { name: "Al Barsha Heights (Tecom)", distance: "5 min to metro", image: apartment1 },
   { name: "Dubai Marina", distance: "12mins walk to metro", image: dubaiMarina },
   { name: "JLT (Jumeirah Lake Towers)", distance: "13mins walk to metro", image: apartment2 },
-  { name: "IBN Battuta", distance: "Recommended for bus transport to university", image: apartment3 },
+  { name: "Ibn Battuta", distance: "Recommended for bus transport to university", image: apartment3 },
   { name: "Production City", distance: "Recommended for bus transport to university", image: apartment4 },
   { name: "Academic City", distance: "Recommended for bus transport to university", image: apartment5 },
 ];
