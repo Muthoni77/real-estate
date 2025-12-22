@@ -9,6 +9,7 @@ interface AmenityGalleryPopupProps {
   images: string[];
 }
 
+
 // Optimized thumbnail component
 const Thumbnail = memo(({ 
   src, 
@@ -33,7 +34,7 @@ const Thumbnail = memo(({
     <img 
       src={src} 
       alt="" 
-      loading="lazy"
+      loading="eager"
       decoding="async"
       className="w-full h-full object-cover" 
     />
@@ -47,13 +48,35 @@ export function AmenityGalleryPopup({ isOpen, onClose, title, images }: AmenityG
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const thumbnailsRef = useRef<HTMLDivElement>(null);
 
-  // Reset index when popup opens with new images
+// Reset index when popup opens with new images
   useEffect(() => {
     if (isOpen) {
       setCurrentIndex(0);
       setIsImageLoaded(false);
     }
   }, [isOpen, images]);
+
+  // bulk preloading of images
+  useEffect(() => {
+  if (!isOpen || images.length === 0) return;
+
+  images.forEach((src) => {
+    const img = new Image();
+    img.src = src;
+  });
+}, [isOpen, images]);
+
+// adjacent image preloading
+useEffect(() => {
+  if (!images.length) return;
+
+  const next = new Image();
+  next.src = images[(currentIndex + 1) % images.length];
+
+  const prev = new Image();
+  prev.src = images[(currentIndex - 1 + images.length) % images.length];
+}, [currentIndex, images]);
+
 
   // Keyboard navigation
   useEffect(() => {
@@ -141,16 +164,18 @@ export function AmenityGalleryPopup({ isOpen, onClose, title, images }: AmenityG
             )}
             
             <img
-              key={currentIndex}
-              src={images[currentIndex]}
-              alt={`${title} ${currentIndex + 1}`}
-              loading="eager"
-              decoding="async"
-              onLoad={() => setIsImageLoaded(true)}
-              className={`w-full h-full object-cover transition-opacity duration-300 ${
-                isImageLoaded ? "opacity-100" : "opacity-0"
-              }`}
-            />
+  key={currentIndex}
+  src={images[currentIndex]}
+  alt={`${title} ${currentIndex + 1}`}
+  loading="eager"
+  decoding="async"
+  fetchPriority="high"
+  onLoad={() => setIsImageLoaded(true)}
+  className={`w-full h-full object-cover transition-opacity duration-300 ${
+    isImageLoaded ? "opacity-100" : "opacity-0"
+  }`}
+/>
+
 
             {/* Navigation Arrows */}
             {images.length > 1 && (

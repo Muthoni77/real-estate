@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState, memo ,useEffect} from "react";
 import { ChevronLeft, ChevronRight, MapPin, Users, Bed } from "lucide-react";
 import { Link } from "react-router-dom";
 import { apartmentInteriors, type ApartmentInteriorImages } from "../data/apartmentimages";
@@ -50,7 +50,7 @@ const OptimizedImage = memo(({ src, alt, className }: { src: string; alt: string
   <img
     src={src}
     alt={alt}
-    loading="lazy"
+    loading="eager"
     decoding="async"
     className={className}
   />
@@ -76,6 +76,17 @@ console.log(isHovered);
     { src: interiors?.washroom || location.image, label: "Washroom" },
     { src: interiors?.bedroom || location.image, label: "Bedroom" },
   ];
+useEffect(() => {
+  carouselImages.forEach((img) => {
+    const image = new Image();
+    image.src = img.src;
+  });
+
+  bedOptions.forEach((option) => {
+    const image = new Image();
+    image.src = option.image;
+  });
+}, [location.name]);
 
   // Show bedroom image when hovering on bed options
   const displayImage =
@@ -90,19 +101,21 @@ console.log(isHovered);
     : carouselImages[currentIndex].label;
 
 
-  const nextImage = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setActiveBedOption(null);
-    setCurrentIndex((prev) => (prev + 1) % carouselImages.length);
-  };
+ const nextImage = (e: React.MouseEvent) => {
+  e.preventDefault();
+  e.stopPropagation();
 
-  const prevImage = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setActiveBedOption(null);
-    setCurrentIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
-  };
+  setCurrentIndex((prev) => (prev + 1) % carouselImages.length);
+  setActiveBedOption(null);
+};
+
+const prevImage = (e: React.MouseEvent) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  setCurrentIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  setActiveBedOption(null);
+};
 
   return (
     <div
@@ -129,14 +142,19 @@ console.log(isHovered);
         {/* Navigation Arrows */}
         <button
           onClick={prevImage}
-          className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10"
+         className={`absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center transition-opacity hover:bg-white z-10
+  ${isTouchDevice ? "opacity-100" : "opacity-0 group-hover:opacity-100"}
+`}
           aria-label="Previous image"
         >
           <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-deep-blue" />
         </button>
         <button
           onClick={nextImage}
-          className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white z-10"
+         className={`absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center transition-opacity hover:bg-white z-10
+  ${isTouchDevice ? "opacity-100" : "opacity-0 group-hover:opacity-100"}
+`}
+
           aria-label="Next image"
         >
           <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-deep-blue" />
@@ -195,6 +213,10 @@ console.log(isHovered);
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
             <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground truncate">{location.name}</h3>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
+  1 bedroom apartment
+</p>
+
             {location.distance && (
               <div className="flex items-center gap-2 mt-1.5 sm:mt-2 text-muted-foreground text-xs sm:text-sm">
                 <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-secondary flex-shrink-0" />

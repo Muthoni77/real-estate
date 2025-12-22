@@ -7,21 +7,32 @@ import { amenityGalleries } from "../data/amenityimages";
 import heroImage from "../assets/hero-dubai.webp";
 
 // Optimized image component with lazy loading
-const OptimizedImage = memo(({ src, alt, className, onClick }: { 
-  src: string; 
-  alt: string; 
+const OptimizedImage = memo(({
+  src,
+  alt,
+  className,
+  onClick,
+  loading = "lazy",
+  fetchPriority
+}: {
+  src: string;
+  alt: string;
   className?: string;
   onClick?: () => void;
+  loading?: "lazy" | "eager";
+  fetchPriority?: "high" | "low";
 }) => (
   <img
     src={src}
     alt={alt}
-    loading="lazy"
+    loading={loading}
     decoding="async"
+    fetchPriority={fetchPriority}
     className={className}
     onClick={onClick}
   />
 ));
+
 
 OptimizedImage.displayName = "OptimizedImage";
 
@@ -130,9 +141,12 @@ export default function Amenities() {
       {/* Hero Section */}
       <section className="relative h-[50vh] sm:h-[60vh] min-h-[350px] sm:min-h-[400px] flex items-center justify-center">
         <div className="absolute inset-0">
+        
           <OptimizedImage
             src={amenityGalleries.pool[0]}
             alt="Premium Amenities"
+            loading="eager"
+            fetchPriority="high"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
@@ -193,6 +207,8 @@ export default function Amenities() {
                 src={amenityGalleries.cleaning[0]}
                 alt="Apartment interior"
                 className="rounded-xl sm:rounded-2xl w-full h-36 sm:h-48 object-cover cursor-pointer hover:opacity-90 transition"
+                loading="eager"
+                fetchPriority="high"
                 onClick={() => handleAmenityClick("Living Room", amenityGalleries.cleaning)}
               />
               <OptimizedImage
@@ -200,6 +216,7 @@ export default function Amenities() {
                 alt="Apartment living room"
                 className="rounded-xl sm:rounded-2xl w-full h-36 sm:h-48 object-cover mt-4 sm:mt-8 cursor-pointer hover:opacity-90 transition"
                 onClick={() => handleAmenityClick("Kitchen", amenityGalleries.laundry)}
+             
               />
             </div>
           </div>
@@ -229,6 +246,8 @@ export default function Amenities() {
                   <OptimizedImage
                     src={amenity.image}
                     alt={amenity.name}
+                    loading="eager"
+                    fetchPriority="high"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

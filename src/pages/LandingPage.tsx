@@ -290,8 +290,8 @@ export default function LandingPage() {
 
           <div className="mt-12 grid md:grid-cols-4 gap-6">
             {[
-              { occupancy: "1 Bedroom 4 beds/ 4 students", price: "3,000", popular: false, students: "4" },
-              { occupancy: "1 Bedroom 3 beds/ 3 students", price: "3,900", popular: true, students: "3" },
+              { occupancy: "1 Bedroom 4 beds/ 4 students", price: "3,000", popular: true, students: "4" },
+              { occupancy: "1 Bedroom 3 beds/ 3 students", price: "3,900", popular: false, students: "3" },
               { occupancy: "1 Bedroom 2 beds/ 2 students", price: "4,900", popular: false, students: "2" },
               { occupancy: "1 Bedroom 1 bed/ 1 student", price: "6,950", popular: false, students: "1" },
             ].map((plan) => (
