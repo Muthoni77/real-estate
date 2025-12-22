@@ -23,10 +23,10 @@ const isTouchDevice =
   ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
 const locationPricing: Record<string, { beds4: string; beds3: string; beds2: string; liveAlone: string }> = {
-  "Al Barsha Heights": { beds4: "3,000", beds3: "3,900", beds2: "4,950", liveAlone: "6,950" },
+  "Al Barsha Heights (Tecom)": { beds4: "3,000", beds3: "3,900", beds2: "4,950", liveAlone: "6,950" },
   "Dubai Marina": { beds4: "3,400", beds3: "4,300", beds2: "5,350", liveAlone: "7,350" },
-  "JLT": { beds4: "3,000", beds3: "3,900", beds2: "4,950", liveAlone: "6,950" },
-  "IBN Battuta": { beds4: "2,500", beds3: "3,400", beds2: "4,550", liveAlone: "6,550" },
+  "JLT (Jumeirah Lake Towers)": { beds4: "3,000", beds3: "3,900", beds2: "4,950", liveAlone: "6,950" },
+  "Ibn Battuta": { beds4: "2,500", beds3: "3,400", beds2: "4,550", liveAlone: "6,550" },
   "Production City": { beds4: "2,500", beds3: "3,400", beds2: "4,550", liveAlone: "6,550" },
   "Academic City": { beds4: "2,500", beds3: "3,400", beds2: "4,550", liveAlone: "6,550" },
 };
