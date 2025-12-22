@@ -43,10 +43,10 @@ const universities = [
    
 
 const pricingInfo = [
-  { students: "4 shared", price: "3,000K/month" },
-  { students: "3 shared", price: "3,900K/month" },
-  { students: "2 shared", price: "4,950K/month" },
-  { students: "Live alone", price: "6,950K/month" },
+  { students: "4 shared", price: "AED 3,000/month" },
+  { students: "3 shared", price: "AED 3,900/month" },
+  { students: "2 shared", price: "AED 4,950/month" },
+  { students: "Live alone", price: "AED 6,950/month" },
 ];
 
 export default function RequestForm() {
@@ -253,10 +253,10 @@ console.log("LEAD_CAPTURE", formData);
                       required
                     >
                       <option value="">Number of Students *</option>
-                      <option value="1">live alone - 6,950K/month</option>
-                      <option value="2">Shared 2(students)- 4,950K/student</option>
-                      <option value="3"> Shared 3 (students)- 3,900K/student</option>
-                      <option value="4">Shared 4 (students) - 3,000K/student</option>
+                      <option value="1">live alone -AED 6,950/month</option>
+                      <option value="2">Shared 2(students)- AED 4,950/student</option>
+                      <option value="3"> Shared 3 (students)- AED 3,900/student</option>
+                      <option value="4">Shared 4 (students) - AED 3,000/student</option>
                     </select>
                   </div>
 
@@ -265,7 +265,7 @@ console.log("LEAD_CAPTURE", formData);
                       <div className="flex items-center gap-2 text-secondary">
                         <CheckCircle className="w-5 h-5" />
                         <span className="font-medium">
-                          Price: {selectedPricing.price} K/student per month
+                          Price: AED {selectedPricing.price} /student per month
                         </span>
                       </div>
                       <p className="text-sm text-muted-foreground mt-1">

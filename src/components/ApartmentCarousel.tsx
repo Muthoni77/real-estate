@@ -238,7 +238,7 @@ console.log(isHovered);
 
               <Bed className={`w-3 h-3 sm:w-4 sm:h-4 mb-0.5 sm:mb-1 ${activeBedOption === index ? "text-secondary" : "text-muted-foreground"}`} />
               <span className="text-[10px] sm:text-xs font-medium text-foreground">{option.beds} bed</span>
-              <span className="text-[10px] sm:text-xs text-secondary font-semibold"> {option.price}K</span>
+              <span className="text-[10px] sm:text-xs text-secondary font-semibold">AED {option.price}</span>
             </button>
           ))}
         </div>

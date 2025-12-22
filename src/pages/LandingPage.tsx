@@ -64,7 +64,7 @@ export default function LandingPage() {
 
           <p className="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-white/85 font-body animate-fade-up" style={{ animationDelay: '0.2s' }}>
             Fully furnished one-bedroom apartments near metro stations and universities.
-            Starting from <span className="text-secondary font-semibold">2500 K/month</span> — all bills included.
+            Starting from <span className="text-secondary font-semibold">AED 2500 /month</span> — all bills included.
           </p>
 
        <div
@@ -284,7 +284,7 @@ export default function LandingPage() {
             Transparent Student Pricing
           </h2>
           <p className="mt-6 text-muted-foreground text-lg max-w-2xl mx-auto">
-            Pricing ranges from <span className="text-secondary font-semibold">2500 K</span> to <span className="text-secondary font-semibold">AED 9,000</span> per student depending on
+            Pricing ranges from <span className="text-secondary font-semibold">AED 2500 </span> to <span className="text-secondary font-semibold">AED 9,000</span> per student depending on
             occupancy. All bills included — no hidden costs.
           </p>
 
@@ -311,7 +311,7 @@ export default function LandingPage() {
                   {plan.occupancy}
                 </p>
                 <p className="mt-4">
-                  <span className="text-3xl font-display font-bold">{plan.price}K</span>
+                  <span className="text-3xl font-display font-bold">AED {plan.price}</span>
                   <span className={`text-sm ${plan.popular ? 'text-white/70' : 'text-muted-foreground'}`}>/month</span>
                 </p>
                 <ul className={`mt-6 space-y-3 text-sm text-left ${plan.popular ? 'text-white/90' : 'text-muted-foreground'}`}>
