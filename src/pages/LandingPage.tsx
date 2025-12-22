@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 const locations = [
   { name: "Al Barsha Heights (Tecom)", distance: "5 min to metro", image: apartment1 },
   { name: "Dubai Marina", distance: "2 min to metro", image: dubaiMarina },
-  { name: "JLT", distance: "Walking distance to JLT metro", image: apartment2 },
+  { name: "JLT (Jumeirah Lake Towers)", distance: "Walking distance to JLT metro", image: apartment2 },
   { name: "Mall of the Emirates", distance: "3 min to metro", image: apartment3 },
   { name: "Ibn Battuta", distance: "3 min to metro", image: apartment4 },
   { name: "Academic City", distance: "4 min to metro", image: apartment5 },
@@ -64,7 +64,7 @@ export default function LandingPage() {
 
           <p className="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-white/85 font-body animate-fade-up" style={{ animationDelay: '0.2s' }}>
             Fully furnished one-bedroom apartments near metro stations and universities.
-            Starting from <span className="text-secondary font-semibold">AED 2,700/month</span> — all bills included.
+            Starting from <span className="text-secondary font-semibold">2500 K/month</span> — all bills included.
           </p>
 
        <div
@@ -84,12 +84,12 @@ export default function LandingPage() {
   </Link>
 
   <Link
-    to="/request"
+    to="/virtual-tours"
     className="w-full sm:w-auto px-8 py-4 rounded-xl border-2 border-white/30
                text-white font-medium text-lg hover:bg-white/10
                transition-all duration-300 flex items-center justify-center gap-2"
   >
-    Book a Virtual Tour
+     Virtual Tour
     <ChevronRight className="w-5 h-5" />
   </Link>
 </div>
@@ -101,7 +101,7 @@ export default function LandingPage() {
               <p className="text-white/70 text-sm mt-1">Happy Students</p>
             </div>
             <div className="text-center border-x border-white/20">
-              <p className="text-3xl md:text-4xl font-display font-bold text-secondary">9</p>
+              <p className="text-3xl md:text-4xl font-display font-bold text-secondary">6</p>
               <p className="text-white/70 text-sm mt-1">Prime Locations</p>
             </div>
             <div className="text-center">
@@ -284,7 +284,7 @@ export default function LandingPage() {
             Transparent Student Pricing
           </h2>
           <p className="mt-6 text-muted-foreground text-lg max-w-2xl mx-auto">
-            Pricing ranges from <span className="text-secondary font-semibold">AED 2,700</span> to <span className="text-secondary font-semibold">AED 9,000</span> per student depending on
+            Pricing ranges from <span className="text-secondary font-semibold">2500 K</span> to <span className="text-secondary font-semibold">AED 9,000</span> per student depending on
             occupancy. All bills included — no hidden costs.
           </p>
 

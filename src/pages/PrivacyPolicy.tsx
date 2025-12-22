@@ -1,18 +1,22 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+
 
 export default function PrivacyPolicy() {
+   useEffect(() => {
+    document.title = "Privacy Policy | Student Hostel Accommodation";
+
+    const meta = document.querySelector("meta[name='description']");
+    if (meta) {
+      meta.setAttribute(
+        "content",
+        "Learn how we collect, use, and protect your personal information when booking student hostel accommodation."
+      );
+    }
+  }, []);
   return (
     <>
-      {/* SEO */}
-      <Helmet>
-        <title>Privacy Policy | Student Hostel Accommodation</title>
-        <meta
-          name="description"
-          content="Learn how we collect, use, and protect your personal information when booking student hostel accommodation."
-        />
-      </Helmet>
-
+ 
       <div className="max-w-4xl mx-auto px-6 py-20 text-gray-800">
         <Link
           to="/"
@@ -21,7 +25,7 @@ export default function PrivacyPolicy() {
           ← Back to Home
         </Link>
 
-        <h1 className="text-3xl font-bold mb-10">Privacy Policy</h1>
+        <h1 className="text-3xl text black font-bold mb-10">Privacy Policy</h1>
 
         <p className="mb-4">
           Your privacy is important to us. This Privacy Policy explains how we
