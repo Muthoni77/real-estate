@@ -15,8 +15,6 @@ import jltVideo from "../assets/JLT.mp4";
 import marinaVideo from "../assets/marina.mp4";
 import barsharVideo from "../assets/barshar.mp4";
 import ibnVideo from "../assets/ibn.mp4";
-import video1 from "../assets/hostelVideo.mp4";
-import video2 from "../assets/videoHostel2.mp4";
 import { useModal } from "../components/context/ModalContext";
 import { useState } from "react";
 import VideoModal from "../components/Forms/VideoModal";
