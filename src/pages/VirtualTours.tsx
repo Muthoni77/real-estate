@@ -11,10 +11,12 @@ import interiorBalcony from "../assets/interior-balcony.webp";
 import interiorWashroom from "../assets/interior-washroom.webp";
 import poolImage from "../assets/amenity-pool.webp";
 import gymImage from "../assets/amenities/gym-1.webp";
-import jltVideo from "../assets/JLT.mp4";
-import marinaVideo from "../assets/marina.mp4";
-import barsharVideo from "../assets/barshar.mp4";
-import ibnVideo from "../assets/ibn.mp4";
+import jltVideo from "../assets/videos/JLT.mp4";
+import marinaVideo from "../assets/videos/marina.mp4";
+import barshaVideo from "../assets/videos/Barsha.mp4";
+import ibnVideo from "../assets/videos/ibn.mp4";
+import academicVideo from "../assets/videos/Academic.mp4";
+import productionVideo from "../assets/videos/Production.mp4";
 import { useModal } from "../components/context/ModalContext";
 import { useState } from "react";
 import VideoModal from "../components/Forms/VideoModal";
@@ -25,7 +27,7 @@ const tourLocations = [
     name: "Al Barsha Heights (Tecom)",
     image: apartment1,
     videoPlaceholder: true,
-    video: barsharVideo,
+    video: barshaVideo,
     features: ["1 Bedroom", "4 Beds Max", "Near Metro"],
   },
   {
@@ -46,7 +48,21 @@ const tourLocations = [
     name: "Academic City",
     image: apartment5,
     videoPlaceholder: true,
+    video: academicVideo,
+    features: ["University Hub", "Student Community", "Modern Facilities"],
+  },
+   {
+    name: "IBN Battuta",
+    image: apartment2,
+    videoPlaceholder: true,
     video: ibnVideo,
+    features: ["Lake View", "Metro Access", "Parks Nearby"],
+  },
+  {
+    name: "Production City",
+    image: apartment5,
+    videoPlaceholder: true,
+    video: productionVideo,
     features: ["University Hub", "Student Community", "Modern Facilities"],
   },
 ];
