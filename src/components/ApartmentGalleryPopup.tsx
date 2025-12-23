@@ -180,34 +180,25 @@ export function ApartmentGalleryPopup({ isOpen, onClose, title, images, videoUrl
 
           {/* Main Image or Video */}
           <div className="relative aspect-[16/10] bg-muted overflow-hidden flex-shrink-0">
-            {isShowingVideo ? (
-              <iframe
-                src={videoUrl}
-                className="w-full h-full"
-                  loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="Virtual Tour"
-              />
-            ) : (
-              <>
-                {/* Loading skeleton */}
-                {!isImageLoaded && (
-                  <div className="absolute inset-0 bg-muted animate-pulse" />
-                )}
+           {isShowingVideo ? (
+  <video
+    src={videoUrl}
+    controls
+    playsInline
+    preload="metadata"
+    className="w-full h-full object-cover bg-black"
+  />
+) : (
+  <img
+    key={currentImage?.src}
+    src={currentImage?.src}
+    alt={`${title} - ${currentImage?.label}`}
+    loading="eager"
+    decoding="async"
+    className="w-full h-full object-cover"
+  />
+)}
 
-                  <img
-                    key={currentIndex}
-                    src={currentImage?.src || ""}
-                    alt={`${title} - ${currentImage?.label}`}
-                    loading={currentIndex === 0 ? "eager" : "lazy"}
-                    decoding="async"
-                    onLoad={() => setIsImageLoaded(true)}
-                    className={`w-full h-full object-cover transition-opacity duration-300 ${isImageLoaded ? "opacity-100" : "opacity-0"
-                      }`}
-                  />
-              </>
-            )}
 
             {/* Navigation Arrows */}
            {totalItems > 1 && !isShowingVideo && (

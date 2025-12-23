@@ -1,17 +1,13 @@
 import { useState, useMemo } from "react";
 import { MapPin, Users, Wifi, Home, ChevronRight, CheckCircle, GraduationCap, Bed, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
-
 import locationMarina from "../assets/location-marina.webp";
 import locationBarsha from "../assets/location-barsha.webp";
 import locationJlt from "../assets/location-jlt.webp";
-
 import locationIbn from "../assets/location-ibn.webp";
 import locationAcademic from "../assets/location-academic.webp";
 import locationProduction from "../assets/location-production.webp";
-
 import heroImage from "../assets/dubai-marina.webp";
-
 import { ApartmentCarousel } from "../components/ApartmentCarousel";
 
 

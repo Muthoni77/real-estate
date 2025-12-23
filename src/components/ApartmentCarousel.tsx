@@ -8,6 +8,22 @@ import interior4beds from "../assets/interior-4beds.webp";
 import interior3beds from "../assets/interior-3beds.webp";
 import interior2beds from "../assets/interior-2beds.webp";
 import interior1bed from "../assets/interior-1bed.webp";
+import jltVideo from "../assets/videos/JLT.mp4";
+import marinaVideo from "../assets/videos/marina.mp4";
+import barshaVideo from "../assets/videos/Barsha.mp4";
+import ibnVideo from "../assets/videos/ibn.mp4";
+import academicVideo from "../assets/videos/Academic.mp4";
+import productionVideo from "../assets/videos/Production.mp4";
+
+const locationVideos: Record<string, string> = {
+  "JLT (Jumeirah Lake Towers)": jltVideo,
+  "Dubai Marina": marinaVideo,
+  "Al Barsha Heights (Tecom)": barshaVideo,
+  "Ibn Battuta": ibnVideo,
+  "Academic City": academicVideo,
+  "Production City": productionVideo,
+};
+
 
 interface ApartmentCarouselProps {
   location: {
@@ -72,7 +88,8 @@ export function ApartmentCarousel({ location, variant = "landing" }: ApartmentCa
   // Get location-specific pricing and interior images
   const bedOptions = getBedOptions(location.name);
   const interiors: ApartmentInteriorImages | undefined = apartmentInteriors[location.name];
-  
+  const videoUrl = locationVideos[location.name];
+
   // Build carousel images using location-specific interiors
   const carouselImages = [
     { src: location.image, label: "Exterior" },
@@ -271,6 +288,7 @@ const prevImage = () => {
         onClose={handleCloseGallery}
         title={location.name}
         images={carouselImages}
+        videoUrl={videoUrl}
       />
     </>
   );
