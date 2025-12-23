@@ -229,7 +229,7 @@ const prevImage = () => {
               <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">1 bedroom apartment</p>
               {location.distance && (
                 <div className="flex items-center gap-2 mt-1.5 sm:mt-2 text-muted-foreground text-xs sm:text-sm">
-                  <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-soft-green flex-shrink-0" />
+                  <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-secondary flex-shrink-0" />
                   <span className="truncate">{location.distance}</span>
                 </div>
               )}
@@ -237,7 +237,7 @@ const prevImage = () => {
             <Link
               to="/request"
               onClick={(e) => e.stopPropagation()}
-              className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-soft-green text-white text-xs sm:text-sm font-medium hover:bg-soft-green/90 transition flex-shrink-0"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-secondary text-white text-xs sm:text-sm font-medium hover:bg-secondary/90 transition flex-shrink-0"
             >
               Request
             </Link>
@@ -263,19 +263,19 @@ const prevImage = () => {
                 }}
                 className={`flex flex-col items-center p-1.5 sm:p-2 rounded-md sm:rounded-lg border transition-all text-center ${
                   activeBedOption === index
-                    ? "border-soft-green bg-soft-green/10"
-                    : "border-border hover:border-soft-green/50"
+                    ? "border-secondary bg-secondary/10"
+                    : "border-border hover:border-secondary/50"
                 }`}
               >
-                <Bed className={`w-3 h-3 sm:w-4 sm:h-4 mb-0.5 sm:mb-1 ${activeBedOption === index ? "text-soft-green" : "text-muted-foreground"}`} />
+                <Bed className={`w-3 h-3 sm:w-4 sm:h-4 mb-0.5 sm:mb-1 ${activeBedOption === index ? "text-secondary" : "text-muted-foreground"}`} />
                 <span className="text-[10px] sm:text-xs font-medium text-foreground">{option.label}</span>
-                <span className="text-[10px] sm:text-xs text-soft-green font-semibold">AED {option.price}</span>
+                <span className="text-[10px] sm:text-xs text-secondary font-semibold">AED {option.price}</span>
               </button>
             ))}
           </div>
           
           <p className="mt-2 sm:mt-3 text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1">
-            <Users className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-soft-green" />
+            <Users className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-secondary" />
             <span className="hidden sm:inline">Click card for gallery • Hover bed options to preview</span>
             <span className="sm:hidden">Tap card for gallery • Tap beds to preview</span>
           </p>
