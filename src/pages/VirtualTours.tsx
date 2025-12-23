@@ -11,7 +11,15 @@ import interiorBalcony from "../assets/interior-balcony.webp";
 import interiorWashroom from "../assets/interior-washroom.webp";
 import poolImage from "../assets/amenity-pool.webp";
 import gymImage from "../assets/amenities/gym-1.webp";
+import jltVideo from "../assets/JLT.mp4";
+import marinaVideo from "../assets/marina.mp4";
+import barsharVideo from "../assets/barshar.mp4";
+import ibnVideo from "../assets/ibn.mp4";
+import video1 from "../assets/hostelVideo.mp4";
+import video2 from "../assets/videoHostel2.mp4";
 import { useModal } from "../components/context/ModalContext";
+import { useState } from "react";
+import VideoModal from "../components/Forms/VideoModal";
 
 
 const tourLocations = [
@@ -19,24 +27,28 @@ const tourLocations = [
     name: "Al Barsha Heights (Tecom)",
     image: apartment1,
     videoPlaceholder: true,
+    video: barsharVideo,
     features: ["1 Bedroom", "4 Beds Max", "Near Metro"],
   },
   {
     name: "Dubai Marina",
     image: heroImage,
     videoPlaceholder: true,
+    video: marinaVideo,
     features: ["Waterfront View", "Premium Location", "Modern Design"],
   },
   {
     name: "JLT",
     image: apartment2,
     videoPlaceholder: true,
+    video: jltVideo,
     features: ["Lake View", "Metro Access", "Parks Nearby"],
   },
   {
     name: "Academic City",
     image: apartment5,
     videoPlaceholder: true,
+    video: ibnVideo,
     features: ["University Hub", "Student Community", "Modern Facilities"],
   },
 ];
@@ -50,7 +62,25 @@ const interiorGallery = [
   { image: gymImage, label: "Fitness Center" },
 ];
 
+
+
 export default function VirtualTours() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+const [activeVideo, setActiveVideo] = useState<string | null>(null);
+const [poster, setPoster] = useState<string | undefined>(undefined);
+
+const openVideo = (video: string, posterImg?: string) => {
+  setActiveVideo(video);
+  setPoster(posterImg);
+  setIsVideoOpen(true);
+};
+
+const closeVideo = () => {
+  setIsVideoOpen(false);
+  setActiveVideo(null);
+  setPoster(undefined);
+};
+
     // callback
     const { openCallback } = useModal();
   return (
@@ -142,7 +172,10 @@ export default function VirtualTours() {
             {tourLocations.map((location) => (
               <div
                 key={location.name}
-                className="group relative overflow-hidden rounded-3xl cursor-pointer hover-lift"
+                 className="group relative overflow-hidden rounded-3xl cursor-pointer hover-lift"
+  onClick={() => openVideo(location.video, location.image)}
+  aria-label={`Play ${location.name} virtual tour`}
+                
               >
                 <div className="aspect-video">
                   <img
@@ -292,10 +325,15 @@ export default function VirtualTours() {
             </button>
           
           </div>
-
-        
         </div>
       </section>
+        {/* Video modal (mounted once) */}
+      <VideoModal
+        isOpen={isVideoOpen}
+        videoSrc={activeVideo}
+        poster={poster}
+        onClose={closeVideo}
+      />
     </main>
   );
 }
