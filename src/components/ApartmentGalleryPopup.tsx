@@ -92,7 +92,7 @@ export function ApartmentGalleryPopup({ isOpen, onClose, title, images, videoUrl
     setIsImageLoaded(false);
     setCurrentIndex((prev) => (prev + 1) % totalItems);
   }, [totalItems]);
-
+console.log(isImageLoaded);
   const prevImage = useCallback(() => {
     setIsImageLoaded(false);
     setCurrentIndex((prev) => (prev - 1 + totalItems) % totalItems);

@@ -1,128 +1,13 @@
 import { useState, useMemo } from "react";
 import { MapPin, Users, Wifi, Home, ChevronRight, CheckCircle, GraduationCap, Bed, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
-import locationMarina from "../assets/location-marina.webp";
-import locationBarsha from "../assets/location-barsha.webp";
-import locationJlt from "../assets/location-jlt.webp";
-import locationIbn from "../assets/location-ibn.webp";
-import locationAcademic from "../assets/location-academic.webp";
-import locationProduction from "../assets/location-production.webp";
 import heroImage from "../assets/dubai-marina.webp";
 import { ApartmentCarousel } from "../components/ApartmentCarousel";
+import { APARTMENTS } from "../data/apartment";
+import { ALL_UNIVERSITIES } from "../data/university";
+import { filterApartmentsByUniversity  } from "../utils/filterApartmentsByUniversity";
 
 
-const apartmentLocations = [
-  {
-    name: "Al Barsha Heights (Tecom)",
-    image: locationBarsha,
-    description: "Spacious one-bedroom apartment with balcony, fully equipped kitchen, and two washrooms. Ideal for up to 4 students.",
-    features: ["Near Metro", "City View", "Recommended"],
-    area: "Al Barsha",
-    nearbyUniversities: [
-      // This is the RECOMMENDED location for most universities
-      "Middlesex University Dubai", "University of Wollongong in Dubai (UOWD)", "Heriot-Watt University Dubai",
-      "University of Manchester – Dubai", "SAE Institute Dubai", "SP Jain School of Global Management",
-      "Manipal Academy of Higher Education – Dubai", "British University in Dubai (BUiD)", "Murdoch University Dubai",
-      "American University in Dubai (AUD)", "Dubai College of Tourism", "Canadian University Dubai",
-      "Skyline University College", "University of Birmingham Dubai", "Curtin University Dubai",
-      "University of the People – Dubai", "Amity University Dubai", "Rochester Institute of Technology (RIT Dubai)",
-      "Al Ghurair University", "Astrolabs Academy", "Informa Middle East Training", "Meirc Training & Consulting",
-      "Learners Point Academy", "Morgan International", "Time Training Center", "London Business Training & Consulting",
-      "General Assembly Dubai", "Digital Marketing Institute Dubai", "Udemy Business Dubai",
-      "Eton Institute", "Berlitz Language Center", "Speak English Institute Dubai", "British Council Dubai",
-      "ES Dubai (English Studies Dubai)", "Kaplan International Languages"
-    ],
-    distance: "5 mins walk to metro",
-    isRecommended: true,
-  },
-  {
-    name: "Dubai Marina",
-    image: locationMarina,
-    description: "Modern interiors, high-speed WiFi, and premium facilities in one of Dubai's most vibrant areas.",
-    features: ["Waterfront", "Premium Location", "Nearby"],
-    area: "Dubai Marina",
-    nearbyUniversities: [
-      "Middlesex University Dubai", "University of Wollongong in Dubai (UOWD)", "Heriot-Watt University Dubai",
-      "University of Manchester – Dubai", "SAE Institute Dubai", "SP Jain School of Global Management",
-      "Manipal Academy of Higher Education – Dubai", "British University in Dubai (BUiD)", "Murdoch University Dubai",
-      "American University in Dubai (AUD)", "Dubai College of Tourism", "Canadian University Dubai",
-      "Skyline University College", "University of Birmingham Dubai", "Curtin University Dubai",
-      "University of the People – Dubai", "Amity University Dubai", "Rochester Institute of Technology (RIT Dubai)",
-      "Al Ghurair University"
-    ],
-    distance: "12 mins walk to metro",
-  },
-  {
-    name: "JLT (Jumeirah Lake Towers)",
-    image: locationJlt,
-    description: "Bright, fully furnished apartments near metro stations and universities.",
-    features: ["Lake View", "Metro Access", "Nearby"],
-    area: "JLT",
-    nearbyUniversities: [
-      "Middlesex University Dubai", "University of Wollongong in Dubai (UOWD)", "Heriot-Watt University Dubai",
-      "University of Manchester – Dubai", "SAE Institute Dubai", "SP Jain School of Global Management",
-      "Manipal Academy of Higher Education – Dubai", "British University in Dubai (BUiD)", "Murdoch University Dubai",
-      "American University in Dubai (AUD)", "Dubai College of Tourism", "Canadian University Dubai",
-      "Skyline University College", "University of Birmingham Dubai", "Curtin University Dubai",
-      "University of the People – Dubai", "Amity University Dubai", "Rochester Institute of Technology (RIT Dubai)",
-      "Al Ghurair University"
-    ],
-    distance: "13 mins walk to metro",
-  },
-  {
-    name: "Ibn Battuta",
-    image: locationIbn,
-    description: "Fully furnished apartments designed for focused and peaceful student life.",
-    features: ["Quiet Area", "Near Mall", "Nearby"],
-    area: "Jebel Ali",
-    nearbyUniversities: [
-      "Middlesex University Dubai", "University of Wollongong in Dubai (UOWD)", "Heriot-Watt University Dubai",
-      "University of Manchester – Dubai", "SAE Institute Dubai", "SP Jain School of Global Management",
-      "Manipal Academy of Higher Education – Dubai", "British University in Dubai (BUiD)", "Murdoch University Dubai",
-      "American University in Dubai (AUD)", "Dubai College of Tourism", "Canadian University Dubai",
-      "Skyline University College", "University of Birmingham Dubai", "Curtin University Dubai",
-      "University of the People – Dubai", "Amity University Dubai", "Rochester Institute of Technology (RIT Dubai)",
-      "Al Ghurair University"
-    ],
-    distance: "Recommended for bus transport to university",
-  },
-  {
-    name: "Production City",
-    image: locationProduction,
-    description: "Affordable student apartments in a growing community with excellent connectivity.",
-    features: ["Affordable", "Growing Area", "Nearby"],
-    area: "Production City",
-    nearbyUniversities: [
-      "Middlesex University Dubai", "University of Wollongong in Dubai (UOWD)", "Heriot-Watt University Dubai",
-      "University of Manchester – Dubai", "SAE Institute Dubai", "SP Jain School of Global Management",
-      "Manipal Academy of Higher Education – Dubai", "British University in Dubai (BUiD)", "Murdoch University Dubai",
-      "American University in Dubai (AUD)", "Dubai College of Tourism", "Canadian University Dubai",
-      "Skyline University College", "University of Birmingham Dubai", "Curtin University Dubai",
-      "University of the People – Dubai", "Amity University Dubai", "Rochester Institute of Technology (RIT Dubai)",
-      "Al Ghurair University"
-    ],
-    distance: "Recommended for bus transport to university",
-  },
-  {
-    name: "Academic City",
-    image: locationAcademic,
-    description: "Close to major universities with flexible sharing options and modern design.",
-    features: ["Near Universities", "Student Hub", "Other"],
-    area: "Academic City",
-    nearbyUniversities: [
-      "Middlesex University Dubai", "University of Wollongong in Dubai (UOWD)", "Heriot-Watt University Dubai",
-      "University of Manchester – Dubai", "SAE Institute Dubai", "SP Jain School of Global Management",
-      "Manipal Academy of Higher Education – Dubai", "British University in Dubai (BUiD)", "Murdoch University Dubai",
-      "American University in Dubai (AUD)", "Dubai College of Tourism", "Canadian University Dubai",
-      "Skyline University College", "University of Birmingham Dubai", "Curtin University Dubai",
-      "University of the People – Dubai", "Amity University Dubai", "Rochester Institute of Technology (RIT Dubai)",
-      "Al Ghurair University"
-    ],
-    distance: "Recommended for bus transport to university",
-  },
- 
-  
-];
 
 const livingPreferences = [
   { id: "all", label: "All Options", beds: null },
@@ -139,48 +24,6 @@ const priceRanges = [
   { id: "premium", label: "Above AED 5,000", min: 5000, max: Infinity },
 ];
 
-const allUniversities = [
-  "All Universities & Colleges",
-  // Universities
-  "Middlesex University Dubai",
-  "University of Wollongong in Dubai (UOWD)",
-  "Heriot-Watt University Dubai",
-  "University of Manchester – Dubai",
-  "SAE Institute Dubai",
-  "SP Jain School of Global Management",
-  "Manipal Academy of Higher Education – Dubai",
-  "British University in Dubai (BUiD)",
-  "Murdoch University Dubai",
-  "American University in Dubai (AUD)",
-  "Dubai College of Tourism",
-  "Canadian University Dubai",
-  "Skyline University College",
-  "University of Birmingham Dubai",
-  "Curtin University Dubai",
-  "University of the People – Dubai",
-  "Amity University Dubai",
-  "Rochester Institute of Technology (RIT Dubai)",
-  "Al Ghurair University",
-  // Training Institutes
-  "Astrolabs Academy",
-  "Informa Middle East Training",
-  "Meirc Training & Consulting",
-  "Learners Point Academy",
-  "Morgan International",
-  "Time Training Center",
-  "London Business Training & Consulting",
-  "General Assembly Dubai",
-  "Digital Marketing Institute Dubai",
-  "Udemy Business Dubai",
-  // Language Schools
-  "Eton Institute",
-  "Berlitz Language Center",
-  "Speak English Institute Dubai",
-  "British Council Dubai",
-  "ES Dubai (English Studies Dubai)",
-  "Kaplan International Languages",
-];
-
 // Price per bed count (for filtering)
 const priceByBeds: Record<number, number> = {
   1: 9000,
@@ -194,36 +37,9 @@ export default function Apartments() {
   const [selectedPrice, setSelectedPrice] = useState("all");
   const [selectedUniversity, setSelectedUniversity] = useState("All Universities");
 
-  const filteredLocations = useMemo(() => {
-    let results = apartmentLocations.filter((apt) => {
-      const matchesUniversity = 
-        selectedUniversity === "All Universities & Colleges" || 
-        apt.nearbyUniversities.some((uni) => 
-          uni.toLowerCase().includes(selectedUniversity.toLowerCase()) ||
-          selectedUniversity.toLowerCase().includes(uni.toLowerCase())
-        );
-      return matchesUniversity;
-    });
+const filteredLocations = useMemo(() => filterApartmentsByUniversity(selectedUniversity), [selectedUniversity]);
 
-    // If no results, show all (nearby suggestion)
-    if (results.length === 0) {
-      results = apartmentLocations;
-    }
-
-    // Sort to show recommended location first (Al Barsha Heights)
-    if (selectedUniversity !== "All Universities & Colleges") {
-      results.sort((a, b) => {
-        if ((a as any).isRecommended) return -1;
-        if ((b as any).isRecommended) return 1;
-        // Academic City goes to "Other" - show last
-        if (a.name.includes("Academic City")) return 1;
-        if (b.name.includes("Academic City")) return -1;
-        return 0;
-      });
-    }
-
-    return results;
-  }, [selectedUniversity]);
+  
 
   // Check if selected price range matches any bed option
   const matchesPriceFilter = (priceRangeId: string) => {
@@ -242,6 +58,20 @@ export default function Apartments() {
   };
 
   const hasActiveFilters = selectedLiving !== "all" || selectedPrice !== "all" || selectedUniversity !== "All Universities";
+  // group apartments by type
+const groupedApartments = useMemo(() => {
+  if (selectedUniversity === "All Universities & Colleges") {
+    return { all: filteredLocations, recommended: [], nearby: [], other: [] };
+  }
+
+  const recommended = filteredLocations.filter(apt => apt.areaType === "RECOMMENDED");
+  const nearby = filteredLocations.filter(
+    apt => apt.areaType !== "RECOMMENDED" && apt.areaType !== "ACADEMIC_CITY"
+  );
+  const other = filteredLocations.filter(apt => apt.areaType === "ACADEMIC_CITY");
+
+  return { recommended, nearby, other, all: [] };
+}, [filteredLocations, selectedUniversity]);
 
   return (
     <main className="bg-background text-foreground">
@@ -266,13 +96,13 @@ export default function Apartments() {
             <span className="text-white font-medium">Apartments</span>
           </nav>
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 backdrop-blur-sm border border-secondary/30 mb-6">
             <CheckCircle className="w-4 h-4 text-secondary" />
-            <span className="text-white/90 text-sm font-medium">{apartmentLocations.length} Prime Locations</span>
+            <span className="text-white/90 text-sm font-medium">{APARTMENTS.length} Prime Locations</span>
           </div>
 
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight">
-            Explore Our Student Apartments
+            Explore Our <span className="text-secondary">Student Apartments</span>
           </h1>
           <p className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
             Fully furnished, secure one-bedroom apartments across Dubai — designed exclusively for students.
@@ -281,7 +111,7 @@ export default function Apartments() {
       </section>
 
       {/* Simplified Filter Section */}
-      <section className="py-8 bg-card border-b border-border sticky top-0 z-40 shadow-sm">
+      <section className="py-8 bg-card border-b border-border shadow-sm">
         <div className="max-w-7xl mx-auto px-6">
           {/* Filter Header */}
           <div className="text-center mb-6">
@@ -351,7 +181,7 @@ export default function Apartments() {
                   onChange={(e) => setSelectedUniversity(e.target.value)}
                   className="w-full appearance-none px-4 py-2.5 pr-10 rounded-xl border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary cursor-pointer"
                 >
-                  {allUniversities.map((uni) => (
+                  {ALL_UNIVERSITIES.map((uni) => (
                     <option key={uni} value={uni}>
                       {uni}
                     </option>
@@ -409,30 +239,74 @@ export default function Apartments() {
       </section>
 
       {/* Apartments Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-2xl md:text-3xl font-semibold">
-              {filteredLocations.length === apartmentLocations.length
-                ? "Choose Your Location"
-                : `${filteredLocations.length} Location${filteredLocations.length !== 1 ? "s" : ""} Found`}
-            </h2>
-            <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-              Each location offers the same premium amenities. Hover on bed options to see pricing and interiors.
-            </p>
-          </div>
+   <section className="py-20">
+     
+   
+  <div className="max-w-7xl mx-auto px-6">
+     <div className="text-center mb-12">
+      {/* <-- This is where your h2 goes */}
+     <h2 className="font-display text-2xl md:text-3xl font-semibold mb-6">
+  {selectedUniversity === "All Universities & Colleges"
+    ? "Choose Your Location"
+    : `${filteredLocations.length} Apartment${filteredLocations.length !== 1 ? "s" : ""} Near ${selectedUniversity.length > 25 ? selectedUniversity.slice(0, 25) + "…" : selectedUniversity}`}
+</h2>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {filteredLocations.map((apt) => (
-              <ApartmentCarousel
-                key={apt.name}
-                location={apt}
-                variant="apartments"
-              />
-            ))}
-          </div>
+
+      <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
+        Each location offers the same premium amenities. Hover on bed options to see pricing and interiors.
+      </p>
+    </div>
+
+    {selectedUniversity === "All Universities & Colleges" ? (
+      <>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {groupedApartments.all.map(apt => (
+            <ApartmentCarousel key={apt.name} location={apt} variant="apartments" />
+          ))}
         </div>
-      </section>
+      </>
+    ) : (
+      <>
+        {/* Recommended */}
+        {groupedApartments.recommended.length > 0 && (
+          <>
+            <h3 className="text-xl md:text-2xl font-semibold mb-6">Recommended</h3>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
+              {groupedApartments.recommended.map(apt => (
+                <ApartmentCarousel key={apt.name} location={apt} variant="apartments" />
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Near You */}
+        {groupedApartments.nearby.length > 0 && (
+          <>
+            <h3 className="text-xl md:text-2xl font-semibold mb-6">Near You</h3>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
+              {groupedApartments.nearby.map(apt => (
+                <ApartmentCarousel key={apt.name} location={apt} variant="apartments" />
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Other */}
+        {groupedApartments.other.length > 0 && (
+          <>
+            <h3 className="text-xl md:text-2xl font-semibold mb-6">Other Locations</h3>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {groupedApartments.other.map(apt => (
+                <ApartmentCarousel key={apt.name} location={apt} variant="apartments" />
+              ))}
+            </div>
+          </>
+        )}
+      </>
+    )}
+  </div>
+</section>
+
 
       {/* CTA */}
        <section className="py-24 bg-primary text-white relative overflow-hidden">
