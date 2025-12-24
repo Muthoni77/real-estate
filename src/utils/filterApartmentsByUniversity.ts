@@ -1,27 +1,36 @@
 import type { ApartmentLocation } from "../data/apartment";
 import { APARTMENTS } from "../data/apartment";
+import { UNIVERSITIES } from "../data/university";
 
-export const filterApartmentsByUniversity = (university: string): ApartmentLocation[] => {
-  if (university === "All Universities & Colleges") return APARTMENTS;
+const CITY_TO_AREA_MAP = {
+  "Media City": "MEDIA_CITY",
+  "Academic City": "ACADEMIC_CITY",
+} as const;
 
-  // Recommended apartment always first
-  const recommended = APARTMENTS.filter((apt) => apt.areaType === "RECOMMENDED");
+export const filterApartmentsByUniversity = (
+  universityId: string
+): ApartmentLocation[] => {
+  if (universityId === "all") return APARTMENTS;
 
-  // Apartments that are nearby or in media city
-  const nearby = APARTMENTS.filter(
-    (apt) =>
-      apt.areaType !== "RECOMMENDED" &&
-      (apt.features.includes("Nearby") || apt.features.includes("Student Hub"))
+  const university = UNIVERSITIES.find((u) => u.id === universityId);
+  if (!university) return APARTMENTS;
+
+  const targetArea = CITY_TO_AREA_MAP[university.city];
+
+  const recommended = APARTMENTS.filter(
+    (apt) => apt.areaType === "RECOMMENDED"
   );
 
-  // Academic city apartments as "other"
-  const academic = APARTMENTS.filter((apt) => apt.areaType === "ACADEMIC_CITY");
+  const nearby = APARTMENTS.filter(
+    (apt) => apt.areaType === targetArea
+  );
 
-  // Combine arrays
-  const allApartments = [...recommended, ...nearby, ...academic];
+  const others = APARTMENTS.filter(
+    (apt) =>
+      apt.areaType !== "RECOMMENDED" &&
+      apt.areaType !== targetArea
+  );
 
-  // Remove duplicates by name
-  const uniqueApartments = [...new Map(allApartments.map(a => [a.name, a])).values()];
-
-  return uniqueApartments;
+  return [...recommended, ...nearby, ...others];
 };
+

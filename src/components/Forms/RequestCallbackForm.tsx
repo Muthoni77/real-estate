@@ -21,7 +21,7 @@ Looking for:
 ${formData.message}`
     );
 
-    window.location.href = `mailto:Fredrick1peace@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:fredrick1peace@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (

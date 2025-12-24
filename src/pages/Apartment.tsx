@@ -1,13 +1,13 @@
 import { useState, useMemo } from "react";
 import { MapPin, Users, Wifi, Home, ChevronRight, CheckCircle, GraduationCap, Bed, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
+
 import heroImage from "../assets/dubai-marina.webp";
 import { ApartmentCarousel } from "../components/ApartmentCarousel";
 import { APARTMENTS } from "../data/apartment";
-import { ALL_UNIVERSITIES } from "../data/university";
-import { filterApartmentsByUniversity  } from "../utils/filterApartmentsByUniversity";
-
-
+import { UNIVERSITY_DROPDOWN_OPTIONS } from "../data/university";
+import { filterApartmentsByUniversity } from "../utils/filterApartmentsByUniversity";
+import { useGroupedApartments } from "../hooks/UseGroupApartment";
 
 const livingPreferences = [
   { id: "all", label: "All Options", beds: null },
@@ -24,7 +24,6 @@ const priceRanges = [
   { id: "premium", label: "Above AED 5,000", min: 5000, max: Infinity },
 ];
 
-// Price per bed count (for filtering)
 const priceByBeds: Record<number, number> = {
   1: 9000,
   2: 4750,
@@ -35,62 +34,37 @@ const priceByBeds: Record<number, number> = {
 export default function Apartments() {
   const [selectedLiving, setSelectedLiving] = useState("all");
   const [selectedPrice, setSelectedPrice] = useState("all");
-  const [selectedUniversity, setSelectedUniversity] = useState("All Universities");
+  const [selectedUniversity, setSelectedUniversity] = useState("all"); // lowercase for consistency
 
-const filteredLocations = useMemo(() => filterApartmentsByUniversity(selectedUniversity), [selectedUniversity]);
+  const filteredLocations = useMemo(
+    () => filterApartmentsByUniversity(selectedUniversity),
+    [selectedUniversity]
+  );
 
-  
+  const groupedApartments = useGroupedApartments(filteredLocations, selectedUniversity);
 
-  // Check if selected price range matches any bed option
-  const matchesPriceFilter = (priceRangeId: string) => {
-    if (priceRangeId === "all") return true;
-    const range = priceRanges.find(p => p.id === priceRangeId);
-    if (!range) return true;
-     console.log(matchesPriceFilter);
-    // Check if any bed price falls in range
-    return Object.values(priceByBeds).some(price => price >= range.min && price < range.max);
-  };
+  const hasActiveFilters =
+    selectedLiving !== "all" || selectedPrice !== "all" || selectedUniversity !== "all";
 
   const clearFilters = () => {
     setSelectedLiving("all");
     setSelectedPrice("all");
-    setSelectedUniversity("All Universities");
+    setSelectedUniversity("all");
   };
-
-  const hasActiveFilters = selectedLiving !== "all" || selectedPrice !== "all" || selectedUniversity !== "All Universities";
-  // group apartments by type
-const groupedApartments = useMemo(() => {
-  if (selectedUniversity === "All Universities & Colleges") {
-    return { all: filteredLocations, recommended: [], nearby: [], other: [] };
-  }
-
-  const recommended = filteredLocations.filter(apt => apt.areaType === "RECOMMENDED");
-  const nearby = filteredLocations.filter(
-    apt => apt.areaType !== "RECOMMENDED" && apt.areaType !== "ACADEMIC_CITY"
-  );
-  const other = filteredLocations.filter(apt => apt.areaType === "ACADEMIC_CITY");
-
-  return { recommended, nearby, other, all: [] };
-}, [filteredLocations, selectedUniversity]);
 
   return (
     <main className="bg-background text-foreground">
       {/* Hero Section */}
       <section className="relative h-[50vh] min-h-[350px] flex items-center justify-center">
         <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt="Dubai Marina Apartments"
-            className="w-full h-full object-cover"
-          />
+          <img src={heroImage} alt="Dubai Marina Apartments" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
           <nav className="flex items-center justify-center gap-2 text-white/70 text-sm mb-8">
             <Link to="/" className="flex items-center gap-1 hover:text-white transition-colors">
-              <Home className="w-4 h-4" />
-              <span>Home</span>
+              <Home className="w-4 h-4" /> <span>Home</span>
             </Link>
             <ChevronRight className="w-4 h-4" />
             <span className="text-white font-medium">Apartments</span>
@@ -110,7 +84,7 @@ const groupedApartments = useMemo(() => {
         </div>
       </section>
 
-      {/* Simplified Filter Section */}
+      {/* Filter Section */}
       <section className="py-8 bg-card border-b border-border shadow-sm">
         <div className="max-w-7xl mx-auto px-6">
           {/* Filter Header */}
@@ -118,7 +92,7 @@ const groupedApartments = useMemo(() => {
             <p className="text-sm text-muted-foreground">Find your perfect student accommodation</p>
           </div>
 
-          {/* Living Preference Filter */}
+          {/* Living Preference */}
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-3">
               <Bed className="w-4 h-4 text-secondary" />
@@ -130,9 +104,7 @@ const groupedApartments = useMemo(() => {
                   key={pref.id}
                   onClick={() => setSelectedLiving(pref.id)}
                   className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                    selectedLiving === pref.id
-                      ? "bg-secondary text-white shadow-md"
-                      : "bg-muted hover:bg-muted/80 text-foreground"
+                    selectedLiving === pref.id ? "bg-secondary text-white shadow-md" : "bg-muted hover:bg-muted/80 text-foreground"
                   }`}
                 >
                   <span>{pref.label}</span>
@@ -144,7 +116,7 @@ const groupedApartments = useMemo(() => {
             </div>
           </div>
 
-          {/* Price Range & University Row */}
+          {/* Price & University */}
           <div className="flex flex-wrap gap-4 items-end">
             {/* Price Range */}
             <div className="flex-1 min-w-[200px]">
@@ -158,9 +130,7 @@ const groupedApartments = useMemo(() => {
                     key={range.id}
                     onClick={() => setSelectedPrice(range.id)}
                     className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                      selectedPrice === range.id
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted hover:bg-muted/80 text-foreground"
+                      selectedPrice === range.id ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80 text-foreground"
                     }`}
                   >
                     {range.label}
@@ -169,7 +139,7 @@ const groupedApartments = useMemo(() => {
               </div>
             </div>
 
-            {/* University Filter */}
+            {/* University */}
             <div className="min-w-[220px]">
               <div className="flex items-center gap-2 mb-3">
                 <GraduationCap className="w-4 h-4 text-secondary" />
@@ -181,9 +151,9 @@ const groupedApartments = useMemo(() => {
                   onChange={(e) => setSelectedUniversity(e.target.value)}
                   className="w-full appearance-none px-4 py-2.5 pr-10 rounded-xl border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary cursor-pointer"
                 >
-                  {ALL_UNIVERSITIES.map((uni) => (
-                    <option key={uni} value={uni}>
-                      {uni}
+                  {UNIVERSITY_DROPDOWN_OPTIONS.map((uni) => (
+                    <option key={uni.value} value={uni.value}>
+                      {uni.label}
                     </option>
                   ))}
                 </select>
@@ -191,7 +161,6 @@ const groupedApartments = useMemo(() => {
               </div>
             </div>
 
-            {/* Clear Filters */}
             {hasActiveFilters && (
               <button
                 onClick={clearFilters}
@@ -203,16 +172,15 @@ const groupedApartments = useMemo(() => {
           </div>
 
           {/* Results Count */}
-          <div className="mt-6 pt-4 border-t border-border">
+          <div className="mt-6 pt-4 border-t border-border text-center">
             <span className="text-sm text-muted-foreground">
               {filteredLocations.length} apartments available
-              {selectedUniversity !== "All Universities" && ` near ${selectedUniversity}`}
+              {selectedUniversity !== "all" && ` near ${selectedUniversity}`}
             </span>
           </div>
         </div>
       </section>
-
-      {/* Features Bar */}
+       {/* Features Bar */}
       <section className="py-8 bg-background border-b border-border">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-wrap justify-center gap-8 md:gap-16">
@@ -239,109 +207,64 @@ const groupedApartments = useMemo(() => {
       </section>
 
       {/* Apartments Grid */}
-   <section className="py-20">
-     
-   
-  <div className="max-w-7xl mx-auto px-6">
-     <div className="text-center mb-12">
-      {/* <-- This is where your h2 goes */}
-     <h2 className="font-display text-2xl md:text-3xl font-semibold mb-6">
-  {selectedUniversity === "All Universities & Colleges"
-    ? "Choose Your Location"
-    : `${filteredLocations.length} Apartment${filteredLocations.length !== 1 ? "s" : ""} Near ${selectedUniversity.length > 25 ? selectedUniversity.slice(0, 25) + "…" : selectedUniversity}`}
-</h2>
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-2xl md:text-3xl font-semibold">
+              {selectedUniversity === "all"
+                ? "Choose your location"
+                : `${filteredLocations.length} apartments near your university`}
+            </h2>
+            <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
+              Each location offers the same premium amenities. Hover on bed options to see pricing and interiors.
+            </p>
+          </div>
 
-
-      <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
-        Each location offers the same premium amenities. Hover on bed options to see pricing and interiors.
-      </p>
-    </div>
-
-    {selectedUniversity === "All Universities & Colleges" ? (
-      <>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {groupedApartments.all.map(apt => (
-            <ApartmentCarousel key={apt.name} location={apt} variant="apartments" />
-          ))}
-        </div>
-      </>
-    ) : (
-      <>
-        {/* Recommended */}
-        {groupedApartments.recommended.length > 0 && (
-          <>
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">Recommended</h3>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
-              {groupedApartments.recommended.map(apt => (
-                <ApartmentCarousel key={apt.name} location={apt} variant="apartments" />
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* Near You */}
-        {groupedApartments.nearby.length > 0 && (
-          <>
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">Near You</h3>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
-              {groupedApartments.nearby.map(apt => (
-                <ApartmentCarousel key={apt.name} location={apt} variant="apartments" />
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* Other */}
-        {groupedApartments.other.length > 0 && (
-          <>
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">Other Locations</h3>
+          {selectedUniversity === "all" ? (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {groupedApartments.other.map(apt => (
+              {filteredLocations.map((apt) => (
                 <ApartmentCarousel key={apt.name} location={apt} variant="apartments" />
               ))}
             </div>
-          </>
-        )}
-      </>
-    )}
-  </div>
-</section>
+          ) : (
+            <>
+              {groupedApartments.recommended.length > 0 && (
+                <>
+                  <h3 className="text-xl md:text-2xl font-semibold mb-6">Recommended for you</h3>
+                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
+                    {groupedApartments.recommended.map((apt) => (
+                      <ApartmentCarousel key={apt.name} location={apt} variant="apartments" />
+                    ))}
+                  </div>
+                </>
+              )}
 
+              {groupedApartments.nearby.length > 0 && (
+                <>
+                  <h3 className="text-xl md:text-2xl font-semibold mb-6">Near your university</h3>
+                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
+                    {groupedApartments.nearby.map((apt) => (
+                      <ApartmentCarousel key={apt.name} location={apt} variant="apartments" />
+                    ))}
+                  </div>
+                </>
+              )}
 
-      {/* CTA */}
-       <section className="py-24 bg-primary text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <img src={heroImage} alt="" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute inset-0  bg-gradient-to-b from-primary-dark/80 via-primary/60 to-primary-dark/90" />
-        
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-display text-3xl md:text-5xl font-semibold">
-            Find the Right Apartment Near 
-            <span className="block text-secondary">Your Campus</span>
-          </h2>
-          <p className="mt-6 text-white/70 text-lg max-w-xl mx-auto">
-            Request a hostel and we'll assign the most convenient option based on your university location.
-          </p>
-          
-         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/request"
-              className="px-8 py-3 rounded-xl bg-background text-secondary font-medium hover:bg-primary/90 transition"
-            >
-              Request a Hostel
-            </Link>
-            <Link
-              to="/virtual-tours"
-              className="px-8 py-3 rounded-xl border-2 border-white/40 text-white font-medium hover:bg-white/10 transition"
-            >
-              Virtual Tours
-            </Link>
-          </div>         
+              {groupedApartments.other.length > 0 && (
+                <>
+                  <h3 className="text-xl md:text-2xl font-semibold mb-6">Other locations</h3>
+                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {groupedApartments.other.map((apt) => (
+                      <ApartmentCarousel key={apt.name} location={apt} variant="apartments" />
+                    ))}
+                  </div>
+                </>
+              )}
+            </>
+          )}
         </div>
       </section>
-
-      
     </main>
   );
 }
+

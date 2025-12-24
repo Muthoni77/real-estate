@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Home, ChevronRight, CheckCircle, Phone, Mail, MapPin, Users } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import heroImage from "../assets/apartment-2.webp";
+import { UNIVERSITY_DROPDOWN_OPTIONS } from "../data/university";
 
 
 interface RequestFormData {
@@ -83,7 +84,7 @@ export default function RequestForm() {
   const handleSubmit = (e: React.FormEvent) => {
   e.preventDefault();
 
-  const emailTo = "Fredrick1peace@gmail.com";
+  const emailTo = "fredrick1peace@gmail.com";
   const subject = "New Student Apartment Request";
 
   const body = `
@@ -229,22 +230,23 @@ console.log("LEAD_CAPTURE", formData);
 
                 {/* Accommodation Details */}
                 <div className="rounded-2xl border border-border bg-card p-6">
-                  <h3 className="font-semibold text-lg mb-4">Accommodation Details</h3>
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <select
-                      name="university"
-                      value={formData.university}
-                      onChange={handleChange}
-                      className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
-                      required
-                    >
-                      <option value="">Select University / College *</option>
-                      {universities.map((uni) => (
-                        <option key={uni} value={uni}>
-                          {uni}
-                        </option>
-                      ))}
-                    </select>
+                 <h3 className="font-semibold text-lg mb-4">Accommodation Details</h3>
+<div className="grid gap-4 md:grid-cols-2">
+  <select
+    name="university"
+    value={formData.university}
+    onChange={handleChange}
+    className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
+    required
+  >
+    {UNIVERSITY_DROPDOWN_OPTIONS.map((uni) => (
+      <option key={uni.value} value={uni.value}>
+        {uni.label}
+      </option>
+    ))}
+  </select>
+
+
                     <select
                       name="numberOfStudents"
                       value={formData.numberOfStudents}

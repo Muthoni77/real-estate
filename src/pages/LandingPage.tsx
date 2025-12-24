@@ -335,7 +335,7 @@ export default function LandingPage() {
                       : 'bg-secondary text-white hover:shadow-secondary'
                     }`}
                 >
-                  Get Started
+                  Reserve
                 </Link>
               </div>
             ))}
