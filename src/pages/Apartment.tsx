@@ -24,12 +24,12 @@ const priceRanges = [
   { id: "premium", label: "Above AED 5,000", min: 5000, max: Infinity },
 ];
 
-const priceByBeds: Record<number, number> = {
-  1: 9000,
-  2: 4750,
-  3: 3600,
-  4: 2700,
-};
+// const priceByBeds: Record<number, number> = {
+//   1: 9000,
+//   2: 4750,
+//   3: 3600,
+//   4: 2700,
+// };
 
 export default function Apartments() {
   const [selectedLiving, setSelectedLiving] = useState("all");
