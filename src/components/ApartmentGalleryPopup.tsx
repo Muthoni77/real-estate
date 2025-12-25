@@ -186,7 +186,7 @@ console.log(isImageLoaded);
     controls
     playsInline
     preload="metadata"
-    className="w-full h-full object-cover bg-black"
+    className="w-full h-full  bg-black"
   />
 ) : (
   <img
@@ -245,7 +245,7 @@ console.log(isImageLoaded);
               ))}
               {videoUrl && (
                 <Thumbnail
-                  src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+               src={images[0]?.src}
                   label="Virtual Tour"
                   index={images.length}
                   isActive={currentIndex === images.length}
