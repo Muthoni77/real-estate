@@ -315,7 +315,7 @@ export default function LandingPage() {
             Pricing ranges from <span className="text-secondary font-semibold">AED 2500 </span> to <span className="text-secondary font-semibold">AED 9,000</span> per student depending on
             occupancy. All bills included — no hidden costs.
           </p>
-          <div className="mt-12 grid md:grid-cols-4 gap-6">
+          <div id="pricing" className="mt-12 grid md:grid-cols-4 gap-6">
             {plans.map((plans) => (
               <div
                 key={plans.occupancy}

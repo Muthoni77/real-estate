@@ -306,17 +306,18 @@ console.log("LEAD_CAPTURE", formData);
            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
              <button
               type="submit"
-              className="px-8 py-3 rounded-xl bg-primary text-white font-medium hover:bg-background/90 transition"
+              className="px-8 py-3 rounded-xl bg-secondary text-white font-medium hover:bg-secondary/90 transition"
             >
               Submit request
             </button>
             {/* lead to payment  */}
-            <button
-            //  onClick={openCallback}
-              className="px-8 py-3 rounded-xl bg-secondary text-primary font-medium hover:bg-secondary/90 transition"
-            >
-              Reserve Now
-            </button>
+            <Link
+  to="/#pricing"
+  className="px-8 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition inline-block"
+>
+  Pay Now
+</Link>
+
           
           </div>
                
