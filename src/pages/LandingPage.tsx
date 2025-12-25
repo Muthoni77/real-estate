@@ -40,6 +40,34 @@ const testimonials = [
   { name: "Mohammed S.", university: "Academic City", text: "The virtual tour helped me choose my apartment confidently. Everything promised was delivered — clean, fully equipped, and all bills included. Great experience!" },
 ];
 
+const plans = [
+  {
+    occupancy: "1 Bedroom 4 beds/ 4 students",
+    price: "3,000",
+    students: "4",
+    popular: true,
+    stripeLink: "https://buy.stripe.com/4gM3cufNk6N7d2I7Yq0Ba05",
+  },
+  {
+    occupancy: "1 Bedroom 3 beds/ 3 students",
+    price: "3,900",
+    students: "3",
+    stripeLink: "https://buy.stripe.com/7sY9AS6cK8Vfe6Ma6y0Ba04",
+  },
+  {
+    occupancy: "1 Bedroom 2 beds/ 2 students",
+    price: "4,900",
+    students: "2",
+    stripeLink: "https://buy.stripe.com/fZudR8dFcdbvgeU1A20Ba06",
+  },
+  {
+    occupancy: "1 Bedroom 1 bed/ 1 student",
+    price: "6,950",
+    students: "1",
+    stripeLink: "https://buy.stripe.com/28EbJ00Sq3AVgeU6Um0Ba07",
+  },
+];
+
 export default function LandingPage() {
   return (
     <main className="bg-background text-foreground">
@@ -287,56 +315,53 @@ export default function LandingPage() {
             Pricing ranges from <span className="text-secondary font-semibold">AED 2500 </span> to <span className="text-secondary font-semibold">AED 9,000</span> per student depending on
             occupancy. All bills included — no hidden costs.
           </p>
-
           <div className="mt-12 grid md:grid-cols-4 gap-6">
-            {[
-              { occupancy: "1 Bedroom 4 beds/ 4 students", price: "3,000", popular: true, students: "4" },
-              { occupancy: "1 Bedroom 3 beds/ 3 students", price: "3,900", popular: false, students: "3" },
-              { occupancy: "1 Bedroom 2 beds/ 2 students", price: "4,900", popular: false, students: "2" },
-              { occupancy: "1 Bedroom 1 bed/ 1 student", price: "6,950", popular: false, students: "1" },
-            ].map((plan) => (
+            {plans.map((plans) => (
               <div
-                key={plan.occupancy}
-                className={`relative rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 ${plan.popular
+                key={plans.occupancy}
+                className={`relative rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 ${plans.popular
                     ? 'bg-primary text-white shadow-primary'
                     : 'bg-card shadow-card border border-border'
                   }`}
               >
-                {plan.popular && (
+                {plans.popular && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary text-white text-xs font-semibold px-4 py-1 rounded-full">
                     Most Popular
                   </span>
                 )}
-                <p className={`text-sm font-medium ${plan.popular ? 'text-white/80' : 'text-muted-foreground'}`}>
-                  {plan.occupancy}
+                <p className={`text-sm font-medium ${plans.popular ? 'text-white/80' : 'text-muted-foreground'}`}>
+                  {plans.occupancy}
                 </p>
                 <p className="mt-4">
-                  <span className="text-3xl font-display font-bold">AED {plan.price}</span>
-                  <span className={`text-sm ${plan.popular ? 'text-white/70' : 'text-muted-foreground'}`}>/month</span>
+                  <span className="text-3xl font-display font-bold">AED {plans.price}</span>
+                  <span className={`text-sm ${plans.popular ? 'text-white/70' : 'text-muted-foreground'}`}>/month</span>
                 </p>
-                <ul className={`mt-6 space-y-3 text-sm text-left ${plan.popular ? 'text-white/90' : 'text-muted-foreground'}`}>
+                <ul className={`mt-6 space-y-3 text-sm text-left ${plans.popular ? 'text-white/90' : 'text-muted-foreground'}`}>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 className={`w-4 h-4 ${plan.popular ? 'text-white' : 'text-secondary'}`} />
+                    <CheckCircle2 className={`w-4 h-4 ${plans.popular ? 'text-white' : 'text-secondary'}`} />
                     All utilities included
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 className={`w-4 h-4 ${plan.popular ? 'text-white' : 'text-secondary'}`} />
+                    <CheckCircle2 className={`w-4 h-4 ${plans.popular ? 'text-white' : 'text-secondary'}`} />
                     Fully furnished
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle2 className={`w-4 h-4 ${plan.popular ? 'text-white' : 'text-secondary'}`} />
+                    <CheckCircle2 className={`w-4 h-4 ${plans.popular ? 'text-white' : 'text-secondary'}`} />
                     Cleaning included
                   </li>
                 </ul>
-                <Link
-                  to={`/request?students=${plan.students}`}
-                  className={`mt-6 w-full py-3 rounded-xl font-medium transition-all block text-center ${plan.popular
-                      ? 'bg-white text-secondary hover:bg-white/90'
-                      : 'bg-secondary text-white hover:shadow-secondary'
-                    }`}
-                >
-                  Reserve
-                </Link>
+               <a
+  href={plans.stripeLink}
+  target="_blank"
+  rel="noopener noreferrer"
+  className={`mt-6 w-full py-3 rounded-xl font-medium transition-all block text-center ${
+    plans.popular
+      ? 'bg-white text-secondary hover:bg-white/90'
+      : 'bg-secondary text-white hover:shadow-secondary'
+  }`}
+>
+  Reserve
+</a>
               </div>
             ))}
           </div>
