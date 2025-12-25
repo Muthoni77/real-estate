@@ -31,8 +31,8 @@ import washroom1 from "../assets/apartments/academic/washroom.webp";
 import washroom2 from "../assets/apartments/remraam/washroom.webp";
 import security from "../assets/security-monitoring.webp";
 import security2 from "../assets/amenities/security.webp";
-import wifi1 from "../assets/amenities/wifi 2.webp"
-import wifi2 from "../assets/amenities/high-speed-internet.webp"
+import wifi1 from "../assets/amenities/router.webp"
+import wifi2 from "../assets/amenities/wifi1.webp"
 
 export const amenityGalleries = {
   security: [security, security2],

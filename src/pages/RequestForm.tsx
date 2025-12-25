@@ -28,19 +28,6 @@ const initialState: RequestFormData = {
   contactMethod: "",
   message: "",
 };
-
-const universities = [
-  "University of Dubai",
-  "American University in Dubai",
-  "Heriot-Watt University Dubai",
-  "Middlesex University Dubai",
-  "University of Wollongong Dubai",
-  "Murdoch University Dubai",
-  "Canadian University Dubai",
-  "BITS Pilani Dubai",
-  "Other",
-];
-
    
 
 const pricingInfo = [
@@ -316,14 +303,23 @@ console.log("LEAD_CAPTURE", formData);
                     className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary resize-none"
                   />
                 </div>
-
-                {/* Submit */}
-                <button
-                  type="submit"
-                  className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition text-lg"
-                >
-                  Submit Request
-                </button>
+           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+             <button
+              type="submit"
+              className="px-8 py-3 rounded-xl bg-secondary text-white font-medium hover:bg-background/90 transition"
+            >
+              Submit request
+            </button>
+            {/* lead to payment  */}
+            <button
+            //  onClick={openCallback}
+              className="px-8 py-3 rounded-xl bg-background text-secondary font-medium hover:bg-primary/90 transition"
+            >
+              Reserve Now
+            </button>
+          
+          </div>
+               
               </form>
             </div>
 
