@@ -36,10 +36,14 @@ export default function Apartments() {
   const [selectedPrice, setSelectedPrice] = useState("all");
   const [selectedUniversity, setSelectedUniversity] = useState("all"); // lowercase for consistency
 
-  const filteredLocations = useMemo(
-    () => filterApartmentsByUniversity(selectedUniversity),
-    [selectedUniversity]
-  );
+  const effectiveUniversity =
+  selectedUniversity === "other" ? "all" : selectedUniversity;
+
+const filteredLocations = useMemo(
+  () => filterApartmentsByUniversity(effectiveUniversity),
+  [effectiveUniversity]
+);
+
 
   const groupedApartments = useGroupedApartments(filteredLocations, selectedUniversity);
 
@@ -175,7 +179,10 @@ export default function Apartments() {
           <div className="mt-6 pt-4 border-t border-border text-center">
             <span className="text-sm text-muted-foreground">
               {filteredLocations.length} apartments available
-              {selectedUniversity !== "all" && ` near ${selectedUniversity}`}
+          {selectedUniversity !== "all" &&
+ selectedUniversity !== "other" &&
+ ` near ${selectedUniversity}`}
+
             </span>
           </div>
         </div>
@@ -211,9 +218,10 @@ export default function Apartments() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="font-display text-2xl md:text-3xl font-semibold">
-              {selectedUniversity === "all"
-                ? "Choose your location"
-                : `${filteredLocations.length} apartments near your university`}
+            {selectedUniversity === "all" || selectedUniversity === "other"
+  ? "Choose your location"
+  : `${filteredLocations.length} apartments near your university`}
+
             </h2>
             <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
               Each location offers the same premium amenities. Hover on bed options to see pricing and interiors.

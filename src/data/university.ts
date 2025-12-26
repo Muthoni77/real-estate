@@ -308,6 +308,7 @@ export const UNIVERSITY_DROPDOWN_OPTIONS = [
     label: u.name,
     value: u.id,
   })),
+    { label: "Other (not listed)", value: "other" },
 ];
 
 

@@ -3,13 +3,15 @@ import { Home, ChevronRight, CheckCircle, Phone, Mail, MapPin, Users } from "luc
 import { Link, useSearchParams } from "react-router-dom";
 import heroImage from "../assets/apartment-2.webp";
 import { UNIVERSITY_DROPDOWN_OPTIONS } from "../data/university";
+import emailjs from "@emailjs/browser";
 
 
 interface RequestFormData {
   fullName: string;
   email: string;
   phone: string;
-  university: string;
+  university: string;      // dropdown value (id | "other")
+  otherUniversity: string; 
   numberOfStudents: string;
   transportRequest: boolean;
   virtualTourRequest: boolean;
@@ -21,7 +23,8 @@ const initialState: RequestFormData = {
   fullName: "",
   email: "",
   phone: "",
-  university: "",
+  university: "",       // dropdown value (id | "other")
+  otherUniversity: "",
   numberOfStudents: "",
   transportRequest: false,
   virtualTourRequest: false,
@@ -49,6 +52,15 @@ export default function RequestForm() {
       setFormData((prev) => ({ ...prev, numberOfStudents: studentsParam }));
     }
   }, [searchParams]);
+const studentLabelMap: Record<string, string> = {
+  "1": "Single occupancy (private room)",
+  "2": "Shared room (2 students)",
+  "3": "Shared room (3 students)",
+  "4": "Shared room (4 students)",
+};
+
+const studentLabel =
+  studentLabelMap[formData.numberOfStudents] || "Not specified";
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -61,50 +73,53 @@ export default function RequestForm() {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
-
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   // In a real app, this would send the data to a backend
-  //   console.log("Form submitted:", formData);
-  //   setSubmitted(true);
-  // };
-  const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-
-  const emailTo = "fredrick1peace@gmail.com";
-  const subject = "New Student Apartment Request";
-
-  const body = `
-NEW HOSTEL REQUEST
-
-Name: ${formData.fullName}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Preferred Contact: ${formData.contactMethod}
-
-University: ${formData.university}
-Students: ${formData.numberOfStudents}
-
-Transport Needed: ${formData.transportRequest ? "Yes" : "No"}
-Virtual Tour: ${formData.virtualTourRequest ? "Yes" : "No"}
-
-Message:
-${formData.message || "—"}
-  `;
-console.log("LEAD_CAPTURE", formData);
-
-  const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(
-    subject
-  )}&body=${encodeURIComponent(body)}`;
-
-  window.location.href = mailtoLink;
-  setSubmitted(true);
-};
-
-
-  const selectedPricing = pricingInfo.find(
+ const selectedPricing = pricingInfo.find(
     (p) => p.students === formData.numberOfStudents
   );
+  
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const universityName =
+      formData.university === "other"
+        ? formData.otherUniversity
+        : formData.university;
+    const formattedMessage = `
+New booking request from ${formData.fullName}
+University: ${universityName}
+ Accommodation Type: ${studentLabel}
+Transport Request: ${formData.transportRequest ? "Yes" : "No"}
+Virtual Tour Request: ${formData.virtualTourRequest ? "Yes" : "No"}
+Preferred Contact Method: ${formData.contactMethod}
+
+Phone: ${formData.phone}
+Email: ${formData.email}
+
+Message from client:
+${formData.message || "—"}
+
+Selected Price: ${selectedPricing?.price || "N/A"}
+    `.trim();
+
+    const templateParams = {
+      formattedMessage,
+    };
+
+    emailjs
+      .send(
+  import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  "template_booking_request",               // ✅ template ID
+  templateParams,
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY     // ✅ public key
+      )
+      .then(() => {
+        setSubmitted(true);
+      })
+      .catch((error: Error) => {
+        console.error("EmailJS error:", error);
+        alert("Something went wrong. Please try again.");
+      });
+  };
+ 
 
   if (submitted) {
     return (
@@ -232,6 +247,17 @@ console.log("LEAD_CAPTURE", formData);
       </option>
     ))}
   </select>
+  {formData.university === "other" && (
+  <input
+    type="text"
+    name="otherUniversity"
+    placeholder="Please enter your university *"
+    value={formData.otherUniversity}
+    onChange={handleChange}
+    className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
+    required
+  />
+)}
 
 
                     <select
@@ -313,7 +339,7 @@ console.log("LEAD_CAPTURE", formData);
             {/* lead to payment  */}
             <Link
   to="/#pricing"
-  className="px-8 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition inline-block"
+  className="px-8 py-3 rounded-xl bg-primary text-white text-center font-medium hover:bg-primary/90 transition inline-block"
 >
   Pay Now
 </Link>

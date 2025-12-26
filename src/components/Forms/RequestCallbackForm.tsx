@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import emailjs from "@emailjs/browser";
 export default function RequestCallbackForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -8,21 +8,35 @@ export default function RequestCallbackForm() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+ const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
 
-    const subject = encodeURIComponent("Student Apartment Call Back Request");
-    const body = encodeURIComponent(
-      `Name: ${formData.name}
+  const formattedMessage = `
+Call-back request received
+
+Name: ${formData.name}
 Phone: ${formData.phone}
 Email: ${formData.email}
 
-Looking for:
-${formData.message}`
-    );
+Request:
+${formData.message || "—"}
+  `.trim();
 
-    window.location.href = `mailto:fredrick1peace@gmail.com?subject=${subject}&body=${body}`;
-  };
+  emailjs
+    .send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      "template_callback",
+      { formattedMessage },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+    .then(() => {
+      alert("Thank you. We will call you shortly.");
+    })
+    .catch(() => {
+      alert("Something went wrong. Please try again.");
+    });
+};
+
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
