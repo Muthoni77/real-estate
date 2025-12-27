@@ -25,7 +25,6 @@ function App() {
       <ScrollToTop />
   <div className="min-h-screen flex flex-col">
     <Navbar />
-
     {/* Main content grows */}
     <main className="flex-1">
       <Routes>

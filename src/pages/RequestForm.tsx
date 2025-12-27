@@ -45,6 +45,12 @@ export default function RequestForm() {
   const [formData, setFormData] = useState<RequestFormData>(initialState);
   const [submitted, setSubmitted] = useState(false);
 
+  // scroll to top on submit
+    useEffect(() => {
+    if (submitted) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [submitted]);
   // Prefill from URL params (e.g., from pricing section)
   useEffect(() => {
     const studentsParam = searchParams.get("students");
